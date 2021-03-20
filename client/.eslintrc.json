@@ -18,7 +18,6 @@
         "react"
     ],
     "rules": {
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "no-param-reassign": ["error", { "props": false }],
         "no-unused-vars": "warn",
         "arrow-body-style": "warn",
