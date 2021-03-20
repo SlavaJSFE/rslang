@@ -1,0 +1,4 @@
+{
+  "port": 5000,
+  "mongoDB": "mongodb+srv://rslangteam:rslangteam2021@cluster0.tzegj.mongodb.net/rsLang?retryWrites=true&w=majority"
+}
