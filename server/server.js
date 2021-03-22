@@ -1,8 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const config = require('config');
+const path = require('path');
 
 const app = express();
+
+app.use('/files', express.static(path.join(__dirname, './files')))
 
 const PORT = config.get('port') || 5000;
 
