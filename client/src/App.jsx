@@ -1,10 +1,16 @@
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import useRoutes from './routes';
 import './App.scss';
 
 function App() {
+  const routes = useRoutes();
+
   return (
     <div className="App">
-      <h1>RS Lang</h1>
+      <Router>
+        {routes}
+      </Router>
     </div>
   );
 }
