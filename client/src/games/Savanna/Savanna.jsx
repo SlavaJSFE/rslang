@@ -3,7 +3,9 @@ import React, {
 } from 'react';
 
 import { Container } from '@material-ui/core';
-import GameButton from './Button';
+
+import ActiveWord from './ActiveWord';
+import SetWords from './WordsSet';
 
 import getRandomWords from './utils';
 
@@ -44,8 +46,8 @@ export default function Savanna() {
 
   return (
     <Container>
-      <div>{activeWord ? activeWord.wordTranslate : null}</div>
-      {randomWords.map((el) => <GameButton key={el.id} text={el.word} handleClick={handleClick} />)}
+      <ActiveWord text={activeWord ? activeWord.wordTranslate : null} />
+      <SetWords handleClick={handleClick} words={randomWords} />
     </Container>
   );
 }
