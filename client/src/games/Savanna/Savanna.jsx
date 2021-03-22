@@ -1,5 +1,5 @@
 import React, {
-  useState, useEffect, useCallback, useMemo,
+  useState, useEffect, useCallback, useMemo, useRef,
 } from 'react';
 
 import useSound from 'use-sound';
@@ -16,6 +16,9 @@ export default function Savanna() {
   const [data, setData] = useState([]);
   const [activeWord, setActiveWord] = useState('');
   const [randomWords, setRandomWords] = useState([]);
+  const [clientY, setClientY] = useState(0);
+
+  const wordsContainer = useRef();
 
   useEffect(() => {
     async function fetchData() {
@@ -29,6 +32,7 @@ export default function Savanna() {
 
   useEffect(() => {
     console.log('from useEffect start checking');
+    console.log(wordsContainer);
     if (data.length && !randomWords.length) {
       setRandomWords(getRandomWords(data));
     }
@@ -47,14 +51,19 @@ export default function Savanna() {
     }
   };
 
+  useEffect(() => {
+    const containerY = wordsContainer ? wordsContainer.current.getBoundingClientRect().y
+      : null;
+
+    setClientY(+containerY.toFixed(2));
+  }, [wordsContainer]);
+
   console.log(activeWord);
 
   return (
-    <Container>
-      <ActiveWord text={activeWord ? activeWord.wordTranslate : null} />
-      <SetWords handleClick={handleClick} words={randomWords} />
-      <SoundBtn audioSrc={activeWord ? activeWord.audio : null} />
-      <img src={activeWord ? `https://github.com/rolling-scopes-school/react-rslang-be/tree/main/${activeWord.image}` : null} alt="word" />
-    </Container>
+    <div className="game__savanna">
+      <ActiveWord text={activeWord ? activeWord.wordTranslate : null} breakPoint={clientY} />
+      <SetWords handleClick={handleClick} words={randomWords} uu={wordsContainer} />
+    </div>
   );
 }

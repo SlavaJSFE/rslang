@@ -1,4 +1,15 @@
-.word__set {
+.words__set {
     position: absolute;
-    transform: translate(-50%);
+    top: 50%;
+}
+
+.game {
+    &__savanna {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 80%;
+        min-height: 500px;
+    }
 }

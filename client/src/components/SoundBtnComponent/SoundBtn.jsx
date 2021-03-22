@@ -6,11 +6,11 @@ import { Button } from '@material-ui/core';
 import VolumeUp from '@material-ui/icons/VolumeUp';
 
 export default function SoundBtn({ audioSrc }) {
-  const src = `https://github.com/rolling-scopes-school/react-rslang-be/tree/main/${audioSrc}`;
-  const [play] = useSound(src);
+  const url = `https://slavajsfe.github.io/rslang-assets/${audioSrc}`;
+  const [play] = useSound(url);
 
   const handleSoundBtnClick = () => {
-    console.log('playing', src);
+    console.log('playing', url);
     play();
   };
 

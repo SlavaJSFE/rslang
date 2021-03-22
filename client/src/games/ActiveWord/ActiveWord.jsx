@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 import { useTransition, animated } from 'react-spring';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
+import { Keyframes } from 'react-spring/renderprops-universal';
 
 const useStyles = makeStyles({
   word: {
@@ -19,11 +20,30 @@ const useStyles = makeStyles({
   },
 
 });
-export default function ActiveWord({ text }) {
+export default function ActiveWord({ text, breakPoint }) {
   const classes = useStyles();
+  const [progress, setProgress] = useState(0);
+  const btn = useRef();
+
+  useEffect(() => {
+    const word = btn ? btn.current.getBoundingClientRect().y : null;
+    console.log(breakPoint, word);
+    if (word <= breakPoint - 15 && breakPoint) {
+      console.log(progress);
+      setProgress(progress + 0.03);
+    }
+  }, [progress, btn, breakPoint]);
 
   return (
-    <div className="activeWord">
+    <div
+      className="activeWord"
+      style={{
+        position: 'absolute',
+        top: `${progress}%`,
+        // transform: `translateY(${progress}%)`,
+      }}
+      ref={btn}
+    >
       {text}
     </div>
   );
