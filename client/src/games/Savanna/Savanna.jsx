@@ -2,10 +2,13 @@ import React, {
   useState, useEffect, useCallback, useMemo,
 } from 'react';
 
+import useSound from 'use-sound';
+
 import { Container } from '@material-ui/core';
 
-import ActiveWord from './ActiveWord';
+import ActiveWord from '../ActiveWord/ActiveWord';
 import SetWords from './WordsSet';
+import SoundBtn from '../../components/SoundBtnComponent/SoundBtn';
 
 import getRandomWords from './utils';
 
@@ -44,10 +47,14 @@ export default function Savanna() {
     }
   };
 
+  console.log(activeWord);
+
   return (
     <Container>
       <ActiveWord text={activeWord ? activeWord.wordTranslate : null} />
       <SetWords handleClick={handleClick} words={randomWords} />
+      <SoundBtn audioSrc={activeWord ? activeWord.audio : null} />
+      <img src={activeWord ? `https://github.com/rolling-scopes-school/react-rslang-be/tree/main/${activeWord.image}` : null} alt="word" />
     </Container>
   );
 }
