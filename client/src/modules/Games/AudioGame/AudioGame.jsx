@@ -21,13 +21,17 @@ export default function AudioGame({ data }) {
   const [playCorrect] = useSound(correctSound);
 
   useEffect(() => {
-    if (data.length && !randomWords.length) {
-      setRandomWords(getRandomWords(data));
+    if (data.length && activeWord !== '') {
+      setRandomWords(getRandomWords(data, activeWord));
     }
+  }, [data, activeWord]);
 
-    const word = randomWords[Math.round(Math.random() * (randomWords.length - 1))];
-    setActiveWord(word);
-  }, [data, randomWords]);
+  useEffect(() => {
+    if (data.length) {
+      const word = data[0];
+      setActiveWord(word);
+    }
+  }, [data]);
 
   const handleClick = (e, word) => {
     e.preventDefault();
@@ -42,7 +46,10 @@ export default function AudioGame({ data }) {
 
   const turnNext = (e, idx) => {
     e.preventDefault();
-    setRandomWords(getRandomWords(data));
+
+    const word = data.find((el) => el.id === idx);
+    const wordIdx = data.indexOf(word);
+    setActiveWord(data[wordIdx + 1]);
     setIsCorrect(false);
   };
 
@@ -51,7 +58,7 @@ export default function AudioGame({ data }) {
       {isCorrect ? <ImageComponent image={activeWord.image} />
         : <SoundBtn audioSrc={activeWord ? activeWord.audio : null} /> }
       <SetWords handleClick={handleClick} words={randomWords} game="audio-game" />
-      <NextBtn turnNext={turnNext} idx={3} />
+      <NextBtn turnNext={turnNext} id={activeWord ? activeWord.id : null} />
     </div>
   );
 }
