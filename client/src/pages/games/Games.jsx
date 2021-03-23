@@ -5,7 +5,7 @@ import '../../styles/common.scss';
 import Navigation from '../../components/Navigation/Navigation';
 import AuthButtons from '../../components/AuthButtons/AuthButtons';
 import Footer from '../../components/Footer/Footer';
-import Savanna from '../../games/Savanna/Savanna';
+import GamesModule from '../../modules/Games/Games-module';
 
 export default function GamesPage() {
   return (
@@ -18,8 +18,7 @@ export default function GamesPage() {
           <AuthButtons />
         </div>
         <Navigation />
-        <h2>Games Page</h2>
-        <Savanna />
+        <GamesModule />
       </Container>
       <Footer />
     </div>

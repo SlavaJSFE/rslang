@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container } from '@material-ui/core';
+import StatisticsModule from '../../modules/Statistics/Statistics-module';
 import '../../styles/common.scss';
 import Navigation from '../../components/Navigation/Navigation';
 import AuthButtons from '../../components/AuthButtons/AuthButtons';
@@ -17,7 +18,7 @@ export default function StatisticsPage() {
           <AuthButtons />
         </div>
         <Navigation />
-        <h2>Statistics Page</h2>
+        <StatisticsModule />
       </Container>
       <Footer />
     </div>
