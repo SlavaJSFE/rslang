@@ -11,19 +11,21 @@ import Footer from '../../components/Footer/Footer';
 import '../../styles/common.scss';
 import Word from '../../components/Word/Word';
 import { setWords, setPage } from '../../redux/textBook/actions';
+import NavTabs from '../../components/NavTabs/NavTabs';
 
 const TextbookPage = ({
   words,
   setWordsConnect,
   currentPage,
   setPageConnect,
+  currentGroup,
 }) => {
-  const { urlPage } = useParams('/textbook/:page');
+  const { urlPage } = useParams('/textbook/:group/:page');
 
   const fetchWords = () => {
     axios
       .get(
-        `https://react-learnwords-example.herokuapp.com/words?group=${1}&page=${currentPage}`,
+        `https://react-learnwords-example.herokuapp.com/words?group=${currentGroup}&page=${currentPage}`,
       )
       .then(({ data }) => {
         setWordsConnect(data);
@@ -39,7 +41,7 @@ const TextbookPage = ({
 
   useEffect(() => {
     fetchWords();
-  }, [currentPage]);
+  }, [currentPage, currentGroup]);
 
   const onPageChange = (event, page) => {
     setPageConnect(page - 1);
@@ -57,21 +59,26 @@ const TextbookPage = ({
         <Navigation />
         <h2>Textbook Page</h2>
         <div className="textbook-content">
-          {words.length ? (
-            words.map((word) => <Word word={word} key={word.id} />)
-          ) : (
-            <div>Loading......</div>
-          )}
+          <NavTabs />
+          <div
+            className="textbook-list"
+            style={{ display: 'flex', flexWrap: 'wrap' }}
+          >
+            {words.length ? (
+              words.map((word) => <Word word={word} key={word.id} />)
+            ) : (
+              <div>Loading......</div>
+            )}
+          </div>
           <Pagination
             count={30}
             color="primary"
-            page={Number(currentPage + 1)}
+            page={currentPage + 1}
             onChange={onPageChange}
             renderItem={(item) => (
               <PaginationItem
                 component={Link}
-                to={`/textbook${item.page === 1 ? '/1' : `/${item.page}`}`}
-                // eslint-disable-next-line react/jsx-props-no-spreading
+                to={`/textbook/${currentGroup + 1}/${item.page}`}
                 {...item}
               />
             )}
@@ -98,6 +105,7 @@ const TextbookPage = ({
 const mapStateToProps = (state) => ({
   words: state.textBookPage.words,
   currentPage: state.textBookPage.currentPage,
+  currentGroup: state.textBookPage.currentGroup,
 });
 
 export default connect(mapStateToProps, {

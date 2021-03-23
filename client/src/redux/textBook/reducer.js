@@ -1,8 +1,9 @@
-import { SET_WORDS, SET_PAGE } from './constants';
+import { SET_WORDS, SET_PAGE, SET_GROUP } from './constants';
 
 const initialState = {
   words: [],
   currentPage: 0,
+  currentGroup: 0,
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -16,6 +17,11 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         currentPage: payload,
+      };
+    case SET_GROUP:
+      return {
+        ...state,
+        currentGroup: payload,
       };
 
     default:

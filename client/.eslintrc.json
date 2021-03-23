@@ -28,6 +28,6 @@
         "react/prop-types": "off",
         "max-len": "warn",
         "indent": "warn",
-        "linebreak-style": ["error", "windows"]
+        "react/jsx-props-no-spreading": "off"
     }
 }

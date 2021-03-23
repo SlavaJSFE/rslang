@@ -15,7 +15,7 @@ export default function useRoutes() {
         <Route path="/" exact>
           <MainPage />
         </Route>
-        <Route path="/textbook/:urlPage?">
+        <Route path="/textbook/:group?/:urlPage?">
           <TextbookPage />
         </Route>
         <Route path="/games" exact>
