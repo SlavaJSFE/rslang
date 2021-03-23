@@ -5,7 +5,7 @@ import { Button } from '@material-ui/core';
 export default function Navigation() {
   return (
     <nav className="nav">
-      <Link to="/textbook">
+      <Link to="/textbook/1">
         <Button variant="contained">Учебник</Button>
       </Link>
       <Link to="/games">

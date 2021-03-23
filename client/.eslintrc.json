@@ -27,6 +27,7 @@
         "react/destructuring-assignment": "warn",
         "react/prop-types": "off",
         "max-len": "warn",
-        "indent": "warn"
+        "indent": "warn",
+        "linebreak-style": ["error", "windows"]
     }
 }

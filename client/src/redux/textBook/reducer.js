@@ -2,7 +2,7 @@ import { SET_WORDS, SET_PAGE } from './constants';
 
 const initialState = {
   words: [],
-  page: 0,
+  currentPage: 0,
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -15,7 +15,7 @@ export default (state = initialState, { type, payload }) => {
     case SET_PAGE:
       return {
         ...state,
-        page: payload,
+        currentPage: payload,
       };
 
     default:

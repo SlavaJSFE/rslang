@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Container } from '@material-ui/core';
-import Pagination from '@material-ui/lab/Pagination';
+import { Pagination, PaginationItem } from '@material-ui/lab';
 import * as axios from 'axios';
 import { connect } from 'react-redux';
 
@@ -12,11 +12,18 @@ import '../../styles/common.scss';
 import Word from '../../components/Word/Word';
 import { setWords, setPage } from '../../redux/textBook/actions';
 
-const TextbookPage = ({ words, setWordsConnect, page, setPageConnect }) => {
+const TextbookPage = ({
+  words,
+  setWordsConnect,
+  currentPage,
+  setPageConnect,
+}) => {
+  const { urlPage } = useParams('/textbook/:page');
+
   const fetchWords = () => {
     axios
       .get(
-        `https://react-learnwords-example.herokuapp.com/words?group=${1}&page=${page}`,
+        `https://react-learnwords-example.herokuapp.com/words?group=${1}&page=${currentPage}`,
       )
       .then(({ data }) => {
         setWordsConnect(data);
@@ -27,12 +34,15 @@ const TextbookPage = ({ words, setWordsConnect, page, setPageConnect }) => {
   };
 
   useEffect(() => {
-    fetchWords();
+    setPageConnect(urlPage - 1);
   }, []);
 
-  const onPageChange = (event, newPage) => {
-    setPageConnect(newPage);
+  useEffect(() => {
     fetchWords();
+  }, [currentPage]);
+
+  const onPageChange = (event, page) => {
+    setPageConnect(page - 1);
   };
 
   return (
@@ -46,12 +56,27 @@ const TextbookPage = ({ words, setWordsConnect, page, setPageConnect }) => {
         </div>
         <Navigation />
         <h2>Textbook Page</h2>
-        {words.length ? (
-          words.map((word) => <Word word={word} />)
-        ) : (
-          <div>Loading......</div>
-        )}
-        <Pagination count={20} color="primary" onChange={onPageChange} />
+        <div className="textbook-content">
+          {words.length ? (
+            words.map((word) => <Word word={word} key={word.id} />)
+          ) : (
+            <div>Loading......</div>
+          )}
+          <Pagination
+            count={30}
+            color="primary"
+            page={Number(currentPage + 1)}
+            onChange={onPageChange}
+            renderItem={(item) => (
+              <PaginationItem
+                component={Link}
+                to={`/textbook${item.page === 1 ? '/1' : `/${item.page}`}`}
+                // eslint-disable-next-line react/jsx-props-no-spreading
+                {...item}
+              />
+            )}
+          />
+        </div>
         <p>
           Где-то здесь на этой странице должна быть ещё кнопка настроек. Также
           здесь будет навигация по 6 разделам учебника, например в виде табов
@@ -72,7 +97,7 @@ const TextbookPage = ({ words, setWordsConnect, page, setPageConnect }) => {
 
 const mapStateToProps = (state) => ({
   words: state.textBookPage.words,
-  page: state.textBookPage.page,
+  currentPage: state.textBookPage.currentPage,
 });
 
 export default connect(mapStateToProps, {
