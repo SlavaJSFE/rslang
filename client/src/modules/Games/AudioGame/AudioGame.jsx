@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from 'react';
 
+import useSound from 'use-sound';
+
 import SetWords from '../components/WordsSet/WordsSet';
 import SoundBtn from '../../../components/SoundBtnComponent/SoundBtn';
+import NextBtn from '../components/NextBtn/NextBtn';
 
 import getRandomWords from '../utils/utils';
+import ImageComponent from '../../../components/ImageComponent/ImageComponent';
 
-export default function AudioGame() {
-  const [data, setData] = useState([]);
+import correctSound from '../../../assets/sounds/correct.mp3';
+import errorSound from '../../../assets/sounds/error.mp3';
+
+export default function AudioGame({ data }) {
   const [activeWord, setActiveWord] = useState('');
   const [randomWords, setRandomWords] = useState([]);
+  const [isCorrect, setIsCorrect] = useState(false);
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch('https://react-learnwords-example.herokuapp.com/words?group=1&page=1');
-      const json = await response.json();
-      setData([...json]);
-    }
-
-    if (data.length === 0) fetchData();
-  }, []);
+  const [playError] = useSound(errorSound);
+  const [playCorrect] = useSound(correctSound);
 
   useEffect(() => {
     if (data.length && !randomWords.length) {
@@ -33,17 +33,25 @@ export default function AudioGame() {
     e.preventDefault();
 
     if (word === activeWord.word) {
-      console.log('win');
+      playCorrect();
+      setIsCorrect(true);
     } else {
-      console.log('false');
+      playError();
     }
   };
 
-  console.log(activeWord);
+  const turnNext = (e, idx) => {
+    e.preventDefault();
+    setRandomWords(getRandomWords(data));
+    setIsCorrect(false);
+  };
+
   return (
     <div className="game__audio-game">
-      <SoundBtn audioSrc={activeWord.audio} />
+      {isCorrect ? <ImageComponent image={activeWord.image} />
+        : <SoundBtn audioSrc={activeWord ? activeWord.audio : null} /> }
       <SetWords handleClick={handleClick} words={randomWords} game="audio-game" />
+      <NextBtn turnNext={turnNext} idx={3} />
     </div>
   );
 }

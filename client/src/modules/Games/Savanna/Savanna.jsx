@@ -11,8 +11,8 @@ import SetWords from '../components/WordsSet/WordsSet';
 
 import getRandomWords from '../utils/utils';
 
-export default function Savanna() {
-  const [data, setData] = useState([]);
+export default function Savanna({ data }) {
+  // const [data, setData] = useState([]);
   const [activeWord, setActiveWord] = useState('');
   const [randomWords, setRandomWords] = useState([]);
   const [clientY, setClientY] = useState(0);
@@ -20,18 +20,6 @@ export default function Savanna() {
   const wordsContainer = useRef();
 
   useEffect(() => {
-    async function fetchData() {
-      const response = await fetch('https://react-learnwords-example.herokuapp.com/words?group=1&page=1');
-      const json = await response.json();
-      setData([...json]);
-    }
-
-    if (data.length === 0) fetchData();
-  }, []);
-
-  useEffect(() => {
-    console.log('from useEffect start checking');
-    console.log(wordsContainer);
     if (data.length && !randomWords.length) {
       setRandomWords(getRandomWords(data));
     }
@@ -56,8 +44,6 @@ export default function Savanna() {
 
     setClientY(+containerY.toFixed(2));
   }, [wordsContainer]);
-
-  console.log(activeWord);
 
   return (
     <div className="game__savanna">
