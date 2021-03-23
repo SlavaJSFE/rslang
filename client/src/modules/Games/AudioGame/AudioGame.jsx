@@ -5,9 +5,10 @@ import useSound from 'use-sound';
 import SetWords from '../components/WordsSet/WordsSet';
 import SoundBtn from '../../../components/SoundBtnComponent/SoundBtn';
 import NextBtn from '../components/NextBtn/NextBtn';
+import ImageComponent from '../../../components/ImageComponent/ImageComponent';
 
 import getRandomWords from '../utils/utils';
-import ImageComponent from '../../../components/ImageComponent/ImageComponent';
+import server from '../../../constants/constants';
 
 import correctSound from '../../../assets/sounds/correct.mp3';
 import errorSound from '../../../assets/sounds/error.mp3';
@@ -15,14 +16,18 @@ import errorSound from '../../../assets/sounds/error.mp3';
 export default function AudioGame({ data }) {
   const [activeWord, setActiveWord] = useState('');
   const [randomWords, setRandomWords] = useState([]);
-  const [isCorrect, setIsCorrect] = useState(false);
+  const [shouldOpen, setShouldOpen] = useState(false);
+
+  const url = `${server}${activeWord ? activeWord.audio : null}`;
 
   const [playError] = useSound(errorSound);
   const [playCorrect] = useSound(correctSound);
+  const [playWord] = useSound(url);
 
   useEffect(() => {
     if (data.length && activeWord !== '') {
       setRandomWords(getRandomWords(data, activeWord));
+      console.log(url);
     }
   }, [data, activeWord]);
 
@@ -36,9 +41,9 @@ export default function AudioGame({ data }) {
   const handleClick = (e, word) => {
     e.preventDefault();
 
-    if (word === activeWord.word) {
+    if (word === activeWord.wordTranslate) {
       playCorrect();
-      setIsCorrect(true);
+      setShouldOpen(true);
     } else {
       playError();
     }
@@ -50,15 +55,27 @@ export default function AudioGame({ data }) {
     const word = data.find((el) => el.id === idx);
     const wordIdx = data.indexOf(word);
     setActiveWord(data[wordIdx + 1]);
-    setIsCorrect(false);
+    setShouldOpen(false);
+  };
+
+  const checkCorrect = (e) => {
+    setShouldOpen(true);
   };
 
   return (
     <div className="game__audio-game">
-      {isCorrect ? <ImageComponent image={activeWord.image} />
+      {shouldOpen
+        ? (
+          <>
+            <ImageComponent image={activeWord.image} />
+            <SoundBtn audioSrc={activeWord ? activeWord.audio : null} />
+            <h2>{activeWord.word}</h2>
+          </>
+        )
         : <SoundBtn audioSrc={activeWord ? activeWord.audio : null} /> }
       <SetWords handleClick={handleClick} words={randomWords} game="audio-game" />
-      <NextBtn turnNext={turnNext} id={activeWord ? activeWord.id : null} />
+      {shouldOpen ? <NextBtn handleClick={turnNext} id={activeWord ? activeWord.id : null} text="Далее" />
+        : <NextBtn handleClick={checkCorrect} text="Не знаю" /> }
     </div>
   );
 }

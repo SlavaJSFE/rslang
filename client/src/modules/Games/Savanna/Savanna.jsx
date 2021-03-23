@@ -48,7 +48,7 @@ export default function Savanna({ data }) {
   return (
     <div className="game__savanna">
       <ActiveWord text={activeWord ? activeWord.wordTranslate : null} breakPoint={clientY} />
-      <SetWords handleClick={handleClick} words={randomWords} uu={wordsContainer} game="savanna" />
+      <SetWords handleClick={handleClick} words={randomWords} container={wordsContainer} game="savanna" />
     </div>
   );
 }
