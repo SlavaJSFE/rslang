@@ -16,7 +16,9 @@
     "react-scripts": "4.0.3",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "prop-types": "^15.7.2",
+    "prop-types-exact": "^1.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
