@@ -5,7 +5,7 @@ import './Navigation.scss';
 export default function Navigation() {
   return (
     <nav className="navigation">
-      <Link to="/textbook">
+      <Link to="/textbook/1/1">
         <div className="menu-item">УЧЕБНИК</div>
       </Link>
       <Link to="/games">
