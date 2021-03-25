@@ -1,21 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from '@material-ui/core';
+import './Navigation.scss';
 
 export default function Navigation() {
   return (
-    <nav className="nav">
+    <nav className="navigation">
       <Link to="/textbook">
-        <Button variant="contained">Учебник</Button>
+        <div className="menu-item">УЧЕБНИК</div>
       </Link>
       <Link to="/games">
-        <Button variant="contained">Игры</Button>
+        <div className="menu-item">ИГРЫ</div>
       </Link>
       <Link to="/statistics">
-        <Button variant="contained">Статистика</Button>
+        <div className="menu-item">СТАТИСТИКА</div>
       </Link>
       <Link to="/team">
-        <Button variant="contained">О команде</Button>
+        <div className="menu-item">О КОМАНДЕ</div>
       </Link>
     </nav>
   );

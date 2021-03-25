@@ -1,0 +1,26 @@
+@import '../../styles/common.scss';
+
+.game-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  margin: 30px auto;
+  width: 70%;
+}
+.game-card {
+  justify-self: center;
+  height: max-content;
+  background-color: $tertiary-color;
+  border-radius: 10px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+}
+.card-title {
+  color: $secondary-color;
+  font-size: 30px;
+}
