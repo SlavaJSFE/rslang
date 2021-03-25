@@ -8,7 +8,7 @@ export default function useRoutes(path) {
   return (
     <>
       <Switch>
-        <Route exact path={path}>
+        <Route path={`${path}/:group?/:urlPage?`}>
           <TextbookModule />
         </Route>
         <Route exact path={`${path}/vocabulary`}>
