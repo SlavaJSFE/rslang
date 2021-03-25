@@ -1,51 +1,15 @@
-import React, { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { Container } from '@material-ui/core';
-import { Pagination, PaginationItem } from '@material-ui/lab';
-import * as axios from 'axios';
-import { connect } from 'react-redux';
-
+import React from 'react';
+import { Link, useRouteMatch } from 'react-router-dom';
+import { Container, Button } from '@material-ui/core';
 import Navigation from '../../components/Navigation/Navigation';
 import AuthButtons from '../../components/AuthButtons/AuthButtons';
 import Footer from '../../components/Footer/Footer';
 import '../../styles/common.scss';
-import Word from '../../components/Word/Word';
-import { setWords, setPage } from '../../redux/textBook/actions';
-import NavTabs from '../../components/NavTabs/NavTabs';
+import useRoutes from './routes';
 
-const TextbookPage = ({
-  words,
-  setWordsConnect,
-  currentPage,
-  setPageConnect,
-  currentGroup,
-}) => {
-  const { urlPage } = useParams('/textbook/:group/:page');
-
-  const fetchWords = () => {
-    axios
-      .get(
-        `https://react-learnwords-example.herokuapp.com/words?group=${currentGroup}&page=${currentPage}`,
-      )
-      .then(({ data }) => {
-        setWordsConnect(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  useEffect(() => {
-    setPageConnect(urlPage - 1);
-  }, []);
-
-  useEffect(() => {
-    fetchWords();
-  }, [currentPage, currentGroup]);
-
-  const onPageChange = (event, page) => {
-    setPageConnect(page - 1);
-  };
+export default function TextbookPage() {
+  const { path, url } = useRouteMatch();
+  const textbookRoutes = useRoutes(path);
 
   return (
     <div className="textbook-page page">
@@ -57,53 +21,17 @@ const TextbookPage = ({
           <AuthButtons />
         </div>
         <Navigation />
-        <h2>Textbook Page</h2>
-        <div className="textbook-content">
-          <NavTabs />
-          <div
-            className="textbook-list"
-            style={{ display: 'flex', flexWrap: 'wrap' }}
-          >
-            {words.length ? (
-              words.map((word) => <Word word={word} key={word.id} />)
-            ) : (
-              <div>Loading......</div>
-            )}
-          </div>
-          <Pagination
-            count={30}
-            color="primary"
-            page={currentPage + 1}
-            onChange={onPageChange}
-            renderItem={(item) => (
-              <PaginationItem
-                component={Link}
-                to={`/textbook/${currentGroup + 1}/${item.page}`}
-                {...item}
-              />
-            )}
-          />
+        <div className="textbook-nav-buttons">
+          <Link to={`${url}/vocabulary`}>
+            <Button type="button">Словарь</Button>
+          </Link>
+          <Link to={`${url}/settings`}>
+            <Button type="button">Настройки</Button>
+          </Link>
         </div>
-        <p>Где-то здесь на этой странице должна быть ещё кнопка настроек.</p>
-        <p>под вот этим вот всем бедут ссылки (карточки?) на 4 игры</p>
-        <p>
-          А также где-то ещё должен быть словарь. Я пока не сильно представляю
-          как он должен быть прикручен к этому учебнику. Может тоже
-          дополнительная кнопка как и настройки, которая переключает на словарь?
-        </p>
+        {textbookRoutes}
       </Container>
       <Footer />
     </div>
   );
-};
-
-const mapStateToProps = (state) => ({
-  words: state.textBookPage.words,
-  currentPage: state.textBookPage.currentPage,
-  currentGroup: state.textBookPage.currentGroup,
-});
-
-export default connect(mapStateToProps, {
-  setWordsConnect: setWords,
-  setPageConnect: setPage,
-})(TextbookPage);
+}
