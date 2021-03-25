@@ -3,12 +3,13 @@ import { Link, useParams } from 'react-router-dom';
 import { Container } from '@material-ui/core';
 import { Pagination, PaginationItem } from '@material-ui/lab';
 import { connect } from 'react-redux';
-
+import './Textbook-module.scss';
 import '../../styles/common.scss';
 import Word from '../../components/Word/Word';
 import { setPage, fetchWords } from '../../redux/textBook/actions';
 import NavTabs from '../../components/NavTabs/NavTabs';
 import Preloader from '../../components/Preloader/Preloader';
+import GameCards from '../../components/GameCards/GameCards';
 
 const TextbookModule = ({
   words,
@@ -35,7 +36,6 @@ const TextbookModule = ({
   return (
     <div className="textbook-module">
       <Container>
-        <h2>Textbook Module</h2>
         <div className="textbook-content">
           <NavTabs />
           <div
@@ -62,13 +62,7 @@ const TextbookModule = ({
             )}
           />
         </div>
-        <p>Где-то здесь на этой странице должна быть ещё кнопка настроек.</p>
-        <p>под вот этим вот всем бедут ссылки (карточки?) на 4 игры</p>
-        <p>
-          А также где-то ещё должен быть словарь. Я пока не сильно представляю
-          как он должен быть прикручен к этому учебнику. Может тоже
-          дополнительная кнопка как и настройки, которая переключает на словарь?
-        </p>
+        <GameCards />
       </Container>
     </div>
   );
