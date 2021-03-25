@@ -8,33 +8,64 @@ import { Container } from '@material-ui/core';
 
 import ActiveWord from './ActiveWord/ActiveWord';
 import SetWords from '../components/WordsSet/WordsSet';
+import NextBtn from '../components/NextBtn/NextBtn';
 
-import getRandomWords from '../utils/utils';
+import { getRandomWords } from '../utils';
+
+import correctSound from '../../../assets/sounds/correct.mp3';
+import errorSound from '../../../assets/sounds/error.mp3';
 
 export default function Savanna({ data }) {
   // const [data, setData] = useState([]);
   const [activeWord, setActiveWord] = useState('');
   const [randomWords, setRandomWords] = useState([]);
   const [clientY, setClientY] = useState(0);
+  const [isFail, setIsFail] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
 
   const wordsContainer = useRef();
 
-  useEffect(() => {
-    if (data.length && !randomWords.length) {
-      setRandomWords(getRandomWords(data));
-    }
+  const [playError] = useSound(errorSound);
+  const [playCorrect] = useSound(correctSound);
 
-    const word = randomWords[Math.round(Math.random() * (randomWords.length - 1))];
-    setActiveWord(word);
-  }, [data, randomWords]);
+  const turnNext = (e, idx) => {
+    e.preventDefault();
+
+    const word = data.find((el) => el.id === idx);
+    const wordIdx = data.indexOf(word);
+    setActiveWord(data[wordIdx + 1]);
+  };
+
+  useEffect(() => {
+    if (data.length && activeWord !== '') {
+      setRandomWords(getRandomWords(data, activeWord));
+    }
+  }, [data, activeWord]);
+
+  useEffect(() => {
+    if (data.length) {
+      const word = data[0];
+      setActiveWord(word);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (isFail) playError();
+  }, [isFail]);
 
   const handleClick = (e, word) => {
     e.preventDefault();
+    setIsClicked(true);
 
-    if (word === activeWord.word) {
-      console.log('win');
+    const clickedword = data.find((el) => el.wordTranslate === word);
+    console.log(clickedword);
+    const wordIdx = data.indexOf(clickedword);
+    setActiveWord(data[wordIdx + 1]);
+
+    if (word === activeWord.wordTranslate) {
+      playCorrect();
     } else {
-      console.log('false');
+      playError();
     }
   };
 
@@ -47,8 +78,14 @@ export default function Savanna({ data }) {
 
   return (
     <div className="game__savanna">
-      <ActiveWord text={activeWord ? activeWord.wordTranslate : null} breakPoint={clientY} />
+      <ActiveWord
+        text={activeWord ? activeWord.word : null}
+        breakPoint={clientY}
+        setIsFail={setIsFail}
+        isClicked={isClicked}
+      />
       <SetWords handleClick={handleClick} words={randomWords} container={wordsContainer} game="savanna" />
+      {isFail ? <NextBtn handleClick={turnNext} id={activeWord ? activeWord.id : null} text="Далее" /> : null}
     </div>
   );
 }

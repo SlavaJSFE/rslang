@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import Savanna from './Savanna/Savanna';
 import AudioGame from './AudioGame/AudioGame';
+import Sprint from './Sprint/Sprint';
 
 export default function GamesModule() {
   const [data, setData] = useState([]);
@@ -19,7 +20,8 @@ export default function GamesModule() {
   return (
     <div className="games-module">
       <h2>Games Module</h2>
-      <AudioGame data={data} />
+      <Sprint data={data} />
+      {/* <AudioGame data={data} /> */}
       {/* <Savanna data={data} /> */}
     </div>
   );

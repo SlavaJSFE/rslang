@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
 import useSound from 'use-sound';
 
@@ -7,7 +7,7 @@ import SoundBtn from '../../../components/SoundBtnComponent/SoundBtn';
 import NextBtn from '../components/NextBtn/NextBtn';
 import ImageComponent from '../../../components/ImageComponent/ImageComponent';
 
-import getRandomWords from '../utils/utils';
+import { getRandomWords } from '../utils';
 import server from '../../../constants/constants';
 
 import correctSound from '../../../assets/sounds/correct.mp3';
@@ -27,7 +27,6 @@ export default function AudioGame({ data }) {
   useEffect(() => {
     if (data.length && activeWord !== '') {
       setRandomWords(getRandomWords(data, activeWord));
-      console.log(url);
     }
   }, [data, activeWord]);
 
@@ -46,6 +45,7 @@ export default function AudioGame({ data }) {
       setShouldOpen(true);
     } else {
       playError();
+      setShouldOpen(true);
     }
   };
 
@@ -59,6 +59,7 @@ export default function AudioGame({ data }) {
   };
 
   const checkCorrect = (e) => {
+    e.preventDefault();
     setShouldOpen(true);
   };
 
