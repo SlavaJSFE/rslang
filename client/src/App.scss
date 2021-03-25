@@ -1,6 +1,35 @@
+@import './styles/common.scss';
+
 .App {
   text-align: center;
+  // background-color: $main-color;
+  
+  // background-image: url('./assets/images/bee-705412_1280.png');
+  // background-image: url('./assets/images/636182.jpg');
+  // background-image: url('./assets/images/1428303.jpg');
+  // background-image: url('./assets/images/1428321.jpg');
+  // background-image: url('./assets/images/1428376.jpg');
+  
+  // background-image: url('./assets/images/grey/534657.jpg');
+  // background-image: url('./assets/images/grey/spring.jpg');
+  background-size: cover;
 }
 h1 {
-  color: blue;
+  color: $primary-color;
+}
+a {
+  text-decoration: none;
+}
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+.logo-and-auth-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+.MuiButton-outlinedPrimary:hover {
+  border: 2px solid #885980 !important;
 }
