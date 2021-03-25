@@ -35,35 +35,35 @@ const NavTabs = ({ currentGroup, setGroupConnect, currentPage }) => {
       textColor="primary"
       variant="scrollable"
       scrollButtons="auto"
-      aria-label="scrollable auto tabs example"
+      aria-label="scrollable auto tabs"
     >
       <LinkTab
-        label="Item 1"
+        label="Unit 1"
         {...a11yProps(0)}
         to={`/textbook/1/${currentPage + 1}`}
       />
       <LinkTab
-        label="Item 2"
+        label="Unit 2"
         {...a11yProps(1)}
         to={`/textbook/2/${currentPage + 1}`}
       />
       <LinkTab
-        label="Item 3"
+        label="Unit 3"
         {...a11yProps(2)}
         to={`/textbook/3/${currentPage + 1}`}
       />
       <LinkTab
-        label="Item 4"
+        label="Unit 4"
         {...a11yProps(3)}
         to={`/textbook/4/${currentPage + 1}`}
       />
       <LinkTab
-        label="Item 5"
+        label="Unit 5"
         {...a11yProps(4)}
         to={`/textbook/5/${currentPage + 1}`}
       />
       <LinkTab
-        label="Item 6"
+        label="Unit 6"
         {...a11yProps(5)}
         to={`/textbook/6/${currentPage + 1}`}
       />
