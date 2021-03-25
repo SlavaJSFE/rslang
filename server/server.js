@@ -5,7 +5,7 @@ const path = require('path');
 
 const app = express();
 
-app.use('/files', express.static(path.join(__dirname, './files')))
+app.use('/files', express.static(path.join(__dirname, './files')));
 
 const PORT = config.get('port') || 5000;
 
@@ -16,7 +16,9 @@ async function start() {
       useUnifiedTopology: true,
       useCreateIndex: true
     });
-    app.listen(PORT, () => console.log(`App has been started on port ${PORT}...`));
+    app.listen(PORT, () =>
+      console.log(`App has been started on port ${PORT}...`)
+    );
   } catch (error) {
     console.log('Server error', error.message);
     process.exit(1);

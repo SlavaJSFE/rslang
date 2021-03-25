@@ -26,11 +26,6 @@
   "engines": {
     "node": "12.16.x"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "*.js": [
       "npm run lint",
