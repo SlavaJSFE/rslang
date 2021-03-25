@@ -29,14 +29,6 @@ export default function MainPage() {
             <img className="image" src={mainImage} alt="" />
           </Box>
         </Box>
-        <div className="blocks">
-          <div>
-            <div className="block">Block 1</div>
-            <div className="block">Block 2</div>
-            <div className="block">Block 3</div>
-            <Button variant="contained" color="secondary">Button</Button>
-          </div>
-        </div>
       </Container>
       <Footer />
     </div>

@@ -5,22 +5,6 @@
   grid-template-columns: 35% 65%;
   align-items: center;
 }
-.blocks {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-.block {
-  background-color: $tertiary-color;
-  color: $secondary-color;
-  font-size: 20px;
-  font-weight: bold;
-  padding: 30px;
-  margin: 30px;
-  border: 10px;
-  border: 2px solid $secondary-color;
-  border-radius: 10px;
-}
 .image {
   width: 100%;
 }

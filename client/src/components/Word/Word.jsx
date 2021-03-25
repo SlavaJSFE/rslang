@@ -1,6 +1,6 @@
 import React from 'react';
 
-import server from '../../constants/constants';
+import { server } from '../../constants/constants';
 
 const Word = ({ word }) => (
   <div>

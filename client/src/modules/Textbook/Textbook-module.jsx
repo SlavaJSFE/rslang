@@ -36,7 +36,6 @@ const TextbookModule = ({
   return (
     <div className="textbook-module">
       <Container>
-        <h2>Textbook Module</h2>
         <div className="textbook-content">
           <NavTabs />
           <div
@@ -64,13 +63,6 @@ const TextbookModule = ({
           />
         </div>
         <GameCards />
-        <p>Где-то здесь на этой странице должна быть ещё кнопка настроек.</p>
-        <p>под вот этим вот всем бедут ссылки (карточки?) на 4 игры</p>
-        <p>
-          А также где-то ещё должен быть словарь. Я пока не сильно представляю
-          как он должен быть прикручен к этому учебнику. Может тоже
-          дополнительная кнопка как и настройки, которая переключает на словарь?
-        </p>
       </Container>
     </div>
   );
