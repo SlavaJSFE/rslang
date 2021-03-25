@@ -9,7 +9,9 @@ export default function AuthButtons() {
         <Button variant="contained">Войти</Button>
       </Link>
       <Link to="/registration">
-        <Button variant="contained" color="primary">Регистрация</Button>
+        <Button variant="contained" color="primary">
+          Регистрация
+        </Button>
       </Link>
     </div>
   );
