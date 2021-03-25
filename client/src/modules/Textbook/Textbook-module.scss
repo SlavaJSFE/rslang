@@ -1,0 +1,15 @@
+.textbook {
+  &-list {
+    // display: flex;
+
+    &__item {
+
+    }
+  }
+
+  &-pagination {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}

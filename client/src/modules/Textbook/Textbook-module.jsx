@@ -5,6 +5,7 @@ import { Pagination, PaginationItem } from '@material-ui/lab';
 import { connect } from 'react-redux';
 import './Textbook-module.scss';
 import '../../styles/common.scss';
+import './Textbook-module.scss';
 import Word from '../../components/Word/Word';
 import { setPage, fetchWords } from '../../redux/textBook/actions';
 import NavTabs from '../../components/NavTabs/NavTabs';
@@ -38,17 +39,21 @@ const TextbookModule = ({
       <Container>
         <div className="textbook-content">
           <NavTabs />
-          <div
-            className="textbook-list"
-            style={{ display: 'flex', flexWrap: 'wrap' }}
-          >
+          <div className="textbook-list">
             {loading ? (
               <Preloader />
             ) : (
-              words.map((word) => <Word word={word} key={word.id} />)
+              words.map((word) => (
+                <Word
+                  word={word}
+                  key={word.id}
+                  className="textbook-list__item"
+                />
+              ))
             )}
           </div>
           <Pagination
+            className="textbook-pagination"
             count={30}
             color="primary"
             page={currentPage + 1}
