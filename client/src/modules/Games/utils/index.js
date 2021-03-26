@@ -1,4 +1,4 @@
-import { NUMBER_OF_WORDS } from '../constants/constants';
+import { NUMBER_OF_WORDS, NUMBER_OF_PAIRS } from '../constants';
 
 function getRandom(arr) {
   return Math.round(Math.random() * (arr.length - 1));
@@ -51,4 +51,41 @@ function getRandomWords(words, word) {
   return randomWords;
 }
 
-export { shuffle, getRandom, getRandomWords, makeRandomSprintData };
+function getMemoryWords(arrData) {
+  if (!arrData.length) return [];
+
+  let randomWords = [];
+  for (let i = randomWords.length; i < NUMBER_OF_PAIRS; i += 1) {
+    const random = getRandom(arrData);
+
+    if (randomWords.includes(arrData[random])) {
+      i -= 1;
+    } else {
+      randomWords.push(arrData[random]);
+    }
+  }
+
+  randomWords = randomWords.map((el) => {
+    const item = { ...el, card: 1 };
+    return item;
+  });
+
+  let cards = [...randomWords, ...randomWords];
+  const { length } = cards;
+
+  cards = cards.map((el, idx) => {
+    const newEl = { ...el, card: idx >= length / 2 ? 2 : 1 };
+    return newEl;
+  });
+  cards = shuffle(cards);
+  cards = cards.map((el, idx) => {
+    const newEl = { ...el, idx: idx + 1, isFlipped: false };
+    return newEl;
+  });
+
+  return cards;
+}
+
+export {
+  shuffle, getRandom, getRandomWords, makeRandomSprintData, getMemoryWords,
+};

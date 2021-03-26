@@ -1,5 +1,5 @@
 import React, {
-  useEffect, useState, useMemo, useCallback,
+  useEffect, useState, useMemo,
 } from 'react';
 
 import useSound from 'use-sound';
@@ -7,7 +7,6 @@ import useSound from 'use-sound';
 import NextBtn from '../components/NextBtn/NextBtn';
 import ImageComponent from '../../../components/ImageComponent/ImageComponent';
 
-import server from '../../../constants/constants';
 import { makeRandomSprintData } from '../utils';
 
 import correctSound from '../../../assets/sounds/correct.mp3';
@@ -39,14 +38,6 @@ export default function AudioGame({ data }) {
     }
   };
 
-  const turnNext = (e, idx) => {
-    e.preventDefault();
-
-    const word = mixedData.find((el) => el.id === idx);
-    const wordIdx = mixedData.indexOf(word);
-    setActiveWord(mixedData[wordIdx + 1]);
-  };
-
   const checkCorrect = (e, idx) => {
     e.preventDefault();
 
@@ -55,8 +46,6 @@ export default function AudioGame({ data }) {
 
     const word = mixedData.find((el) => el.id === idx);
     const wordfromData = data.find((el) => el.id === idx);
-
-    console.log(word, wordfromData);
 
     const isCorrect = word.wordTranslate === wordfromData.wordTranslate;
 
