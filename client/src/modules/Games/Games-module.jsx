@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
-import Savanna from './Savanna/Savanna';
-import AudioGame from './AudioGame/AudioGame';
+import Savannah from './Savannah/Savannah';
+import AudioCall from './AudioCall/AudioCall';
 import Sprint from './Sprint/Sprint';
-import MemoryGame from './MemoryGame';
+import Memory from './MemoryGame';
+
+import GameCards from '../../components/GameCards/GameCards';
 
 export default function GamesModule() {
   const [data, setData] = useState([]);
@@ -22,14 +25,22 @@ export default function GamesModule() {
 
   return (
     <div className="games-module">
-      {
-      loading ? <h2>loading</h2> : <MemoryGame data={data} />
-    }
-      {/* <h2>Games Module</h2>
-      <MemoryGame data={data} /> */}
-      {/* <Sprint data={data} /> */}
-      {/* <AudioGame data={data} /> */}
-      {/* <Savanna data={data} /> */}
+      <GameCards />
+      <Switch>
+        <Route path="'/games/savannah'" exact>
+          <Savannah data={data} />
+        </Route>
+        <Route path="/games/audiocall" exact>
+          <AudioCall data={data} />
+        </Route>
+        <Route path="/games/sprint" exact>
+          <Sprint data={data} />
+        </Route>
+        <Route path="/games/memory" exact>
+          <Memory data={data} />
+        </Route>
+      </Switch>
+
     </div>
   );
 }

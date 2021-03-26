@@ -1,10 +1,14 @@
-.page {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100vh;
-}
-.logo-and-auth-buttons {
-  display: flex;
-  justify-content: space-between;
-}
+$main-color: #F6B12B;
+$primary-color: #885980;
+$secondary-color: #8AB94F;
+$tertiary-color: #FAF1DA;
+
+// $main-color: #3b3b3b;
+// $primary-color: #ff6600;
+// $secondary-color: #885980;
+// $tertiary-color: #FAF1DA;
+
+// $main-color: #6d6dff;
+// $primary-color: #ff0404;
+// $secondary-color: #885980;
+// $tertiary-color: #FAF1DA;

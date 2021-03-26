@@ -4,7 +4,6 @@
         "es2021": true
     },
     "extends": [
-        "react-app",
         "plugin:react/recommended",
         "airbnb"
     ],
@@ -28,6 +27,7 @@
         "react/destructuring-assignment": "warn",
         "react/prop-types": "off",
         "max-len": "warn",
-        "indent": "warn"
+        "indent": "warn",
+        "react/jsx-props-no-spreading": "off"
     }
 }

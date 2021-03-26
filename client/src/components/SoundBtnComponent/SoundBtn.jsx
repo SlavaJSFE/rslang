@@ -5,7 +5,7 @@ import useSound from 'use-sound';
 import { Button } from '@material-ui/core';
 import VolumeUp from '@material-ui/icons/VolumeUp';
 
-import server from '../../constants/constants';
+import { server } from '../../constants/constants';
 
 export default function SoundBtn({ audioSrc }) {
   const url = `${server}${audioSrc}`;

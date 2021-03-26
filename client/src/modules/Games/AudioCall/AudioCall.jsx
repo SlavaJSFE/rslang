@@ -8,7 +8,7 @@ import NextBtn from '../components/NextBtn/NextBtn';
 import ImageComponent from '../../../components/ImageComponent/ImageComponent';
 
 import { getRandomWords } from '../utils';
-import server from '../../../constants/constants';
+import { server } from '../../../constants/constants';
 
 import correctSound from '../../../assets/sounds/correct.mp3';
 import errorSound from '../../../assets/sounds/error.mp3';

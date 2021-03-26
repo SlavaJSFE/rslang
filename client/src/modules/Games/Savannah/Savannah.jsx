@@ -4,8 +4,6 @@ import React, {
 
 import useSound from 'use-sound';
 
-import { Container } from '@material-ui/core';
-
 import ActiveWord from './ActiveWord/ActiveWord';
 import SetWords from '../components/WordsSet/WordsSet';
 import NextBtn from '../components/NextBtn/NextBtn';
@@ -15,7 +13,7 @@ import { getRandomWords } from '../utils';
 import correctSound from '../../../assets/sounds/correct.mp3';
 import errorSound from '../../../assets/sounds/error.mp3';
 
-export default function Savanna({ data }) {
+export default function Savannah({ data }) {
   // const [data, setData] = useState([]);
   const [activeWord, setActiveWord] = useState('');
   const [randomWords, setRandomWords] = useState([]);
@@ -77,7 +75,7 @@ export default function Savanna({ data }) {
   }, [wordsContainer]);
 
   return (
-    <div className="game__savanna">
+    <div className="game__savannah">
       <ActiveWord
         text={activeWord ? activeWord.word : null}
         breakPoint={clientY}
