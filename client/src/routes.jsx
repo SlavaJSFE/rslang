@@ -18,7 +18,7 @@ export default function useRoutes() {
         <Route path="/textbook">
           <TextbookPage />
         </Route>
-        <Route path="/games" exact>
+        <Route path="/games">
           <GamesPage />
         </Route>
         <Route path="/statistics" exact>
@@ -45,7 +45,7 @@ export default function useRoutes() {
         <Route path="/games/memory" exact>
           <RegistrationPage />
         </Route> */}
-        <Redirect to="/" />
+        {/* <Redirect to="/" /> */}
       </Switch>
     </>
   );

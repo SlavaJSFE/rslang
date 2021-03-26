@@ -9,24 +9,24 @@ import Memory from './MemoryGame';
 import GameCards from '../../components/GameCards/GameCards';
 
 export default function GamesModule() {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [data, setData] = useState([]);
+  // const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch('https://react-learnwords-example.herokuapp.com/words?group=1&page=1');
-      const json = await response.json();
-      setData([...json]);
-      setLoading(!loading);
-    }
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const response = await fetch('https://react-learnwords-example.herokuapp.com/words?group=1&page=1');
+  //     const json = await response.json();
+  //     setData([...json]);
+  //     setLoading(!loading);
+  //   }
 
-    if (data.length === 0) fetchData();
-  }, []);
+  //   if (data.length === 0) fetchData();
+  // }, []);
 
   return (
     <div className="games-module">
       <GameCards />
-      <Switch>
+      {/* <Switch>
         <Route path="'/games/savannah'" exact>
           <Savannah data={data} />
         </Route>
@@ -39,7 +39,8 @@ export default function GamesModule() {
         <Route path="/games/memory" exact>
           <Memory data={data} />
         </Route>
-      </Switch>
+        <Redirect to="/games" />
+      </Switch> */}
 
     </div>
   );

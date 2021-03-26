@@ -19,11 +19,11 @@ export default function MemoryGame({ data }) {
 
   return (
     <div className="game__memory-game">
-      <Field
+      {/* <Field
         cards={cards}
         isPlaying={isPlaying}
         setIsplaying={setIsplaying}
-      />
+      /> */}
     </div>
   );
 }
