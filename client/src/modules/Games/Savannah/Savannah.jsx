@@ -1,5 +1,5 @@
 import React, {
-  useState, useEffect, useCallback, useMemo, useRef,
+  useState, useEffect, useRef,
 } from 'react';
 
 import useSound from 'use-sound';
@@ -14,7 +14,6 @@ import correctSound from '../../../assets/sounds/correct.mp3';
 import errorSound from '../../../assets/sounds/error.mp3';
 
 export default function Savannah({ data }) {
-  // const [data, setData] = useState([]);
   const [activeWord, setActiveWord] = useState('');
   const [randomWords, setRandomWords] = useState([]);
   const [clientY, setClientY] = useState(0);
@@ -56,7 +55,7 @@ export default function Savannah({ data }) {
     setIsClicked(true);
 
     const clickedword = data.find((el) => el.wordTranslate === word);
-    console.log(clickedword);
+
     const wordIdx = data.indexOf(clickedword);
     setActiveWord(data[wordIdx + 1]);
 

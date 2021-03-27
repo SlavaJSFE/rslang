@@ -8,6 +8,8 @@ import TeamPage from './pages/team/Team';
 import LoginPage from './pages/login/Login';
 import RegistrationPage from './pages/registration/Registration';
 
+import Game from './modules/Games/Game';
+
 export default function useRoutes() {
   return (
     <>
@@ -18,8 +20,11 @@ export default function useRoutes() {
         <Route path="/textbook">
           <TextbookPage />
         </Route>
-        <Route path="/games">
+        <Route path="/games" exact>
           <GamesPage />
+        </Route>
+        <Route path="/games/:type" exact>
+          <Game />
         </Route>
         <Route path="/statistics" exact>
           <StatisticsPage />
@@ -33,19 +38,7 @@ export default function useRoutes() {
         <Route path="/registration" exact>
           <RegistrationPage />
         </Route>
-        {/* <Route path="'/games/savannah'" exact>
-          <RegistrationPage />
-        </Route>
-        <Route path="/games/audiocall" exact>
-          <RegistrationPage />
-        </Route>
-        <Route path="/games/sprint" exact>
-          <RegistrationPage />
-        </Route>
-        <Route path="/games/memory" exact>
-          <RegistrationPage />
-        </Route> */}
-        {/* <Redirect to="/" /> */}
+        <Redirect to="/" />
       </Switch>
     </>
   );

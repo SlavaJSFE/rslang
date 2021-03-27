@@ -9,7 +9,13 @@ export default function SetWords({
 }) {
   return (
     <div className={`words-set__${game}`} ref={container}>
-      {words.map((el) => <GameButton key={el.id} text={el.wordTranslate} handleClick={handleClick} />)}
+      {words.map((el) => (
+        <GameButton
+          key={el.id}
+          text={el.wordTranslate}
+          handleClick={handleClick}
+        />
+      ))}
     </div>
   );
 }

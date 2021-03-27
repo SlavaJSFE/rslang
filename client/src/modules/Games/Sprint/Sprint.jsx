@@ -28,15 +28,15 @@ export default function AudioGame({ data }) {
     }
   }, [data, mixedData]);
 
-  const handleClick = (e, word) => {
-    e.preventDefault();
+  // const handleClick = (e, word) => {
+  //   e.preventDefault();
 
-    if (word === activeWord.wordTranslate) {
-      playCorrect();
-    } else {
-      playError();
-    }
-  };
+  //   if (word === activeWord.wordTranslate) {
+  //     playCorrect();
+  //   } else {
+  //     playError();
+  //   }
+  // };
 
   const checkCorrect = (e, idx) => {
     e.preventDefault();
@@ -50,9 +50,9 @@ export default function AudioGame({ data }) {
     const isCorrect = word.wordTranslate === wordfromData.wordTranslate;
 
     if ((clickedCorrect && isCorrect) || (!clickedCorrect && !isCorrect)) {
-      console.log('correct');
+      playCorrect();
     } else {
-      console.log('incorrect');
+      playError();
     }
 
     const wordIdx = mixedData.indexOf(word);

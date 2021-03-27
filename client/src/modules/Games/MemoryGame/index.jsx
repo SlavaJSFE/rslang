@@ -1,8 +1,6 @@
-import React, {
-  useEffect, useState, useMemo,
-} from 'react';
+import React, { useState, useMemo } from 'react';
 
-import useSound from 'use-sound';
+// import useSound from 'use-sound';
 
 import Field from './Field';
 
@@ -19,11 +17,11 @@ export default function MemoryGame({ data }) {
 
   return (
     <div className="game__memory-game">
-      {/* <Field
+      <Field
         cards={cards}
         isPlaying={isPlaying}
         setIsplaying={setIsplaying}
-      /> */}
+      />
     </div>
   );
 }
