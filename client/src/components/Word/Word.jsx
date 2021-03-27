@@ -53,7 +53,7 @@ const Word = ({ word }) => {
         </Box>
         <Box>
           <Typography
-            color="textPrimery"
+            color="textPrimary"
             component="p"
             className={classes.wordTranslate}
           >
