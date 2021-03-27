@@ -5,13 +5,16 @@ import {
   CardContent,
   CardMedia,
   Box,
+  Button,
 } from '@material-ui/core';
 import VolumeUpRoundedIcon from '@material-ui/icons/VolumeUpRounded';
 
-import './Word.scss';
+import useStyles from './WordStyles';
 import { server } from '../../constants/constants';
 
 const Word = ({ word }) => {
+  const classes = useStyles();
+
   const playAudio = async (audioSrc) => {
     const audio = new Audio(audioSrc);
     return new Promise((resolve) => {
@@ -27,17 +30,16 @@ const Word = ({ word }) => {
   };
 
   return (
-    <Card className="word">
+    <Card className={classes.root}>
       <CardMedia
-        className="word__media"
-        style={{ width: '150px', height: '150px' }}
+        className={classes.media}
         component="img"
         alt={word.word}
         image={`${server}${word.image}`}
       />
-      <CardContent className="word-content">
-        <Box className="word-content__header">
-          <Box className="word-content__header-text">
+      <CardContent className={classes.content}>
+        <Box className={classes.header}>
+          <Box className={classes.headerText}>
             <Typography variant="h5" component="h3">
               {word.word}
             </Typography>
@@ -45,23 +47,52 @@ const Word = ({ word }) => {
               {word.transcription}
             </Typography>
           </Box>
-          <button
-            type="button"
-            className="word-content__header-btn"
-            onClick={onPlay}
-          >
+          <Button onClick={onPlay}>
             <VolumeUpRoundedIcon />
-          </button>
+          </Button>
         </Box>
         <Box>
-          <Typography color="textPrimery" component="p">
-            {word.textMeaning}
+          <Typography
+            color="textPrimery"
+            component="p"
+            className={classes.wordTranslate}
+          >
+            {word.wordTranslate}
           </Typography>
         </Box>
+        <Box className={classes.textMeaningTranslate}>
+          <Typography
+            color="textPrimary"
+            component="p"
+            dangerouslySetInnerHTML={{ __html: word.textMeaning }}
+          />
+          <Typography
+            color="textPrimary"
+            component="p"
+            variant="body2"
+            dangerouslySetInnerHTML={{ __html: word.textMeaningTranslate }}
+          />
+        </Box>
         <Box>
-          <Typography color="textPrimery" component="p">
-            {word.textExample}
-          </Typography>
+          <Typography
+            component="p"
+            color="textPrimary"
+            dangerouslySetInnerHTML={{ __html: word.textExample }}
+          />
+          <Typography
+            component="p"
+            color="textPrimary"
+            variant="body2"
+            dangerouslySetInnerHTML={{ __html: word.textExampleTranslate }}
+          />
+        </Box>
+        <Box className={classes.buttons}>
+          <Button variant="outlined" color="primary" className={classes.hardBtn}>
+            Сложно
+          </Button>
+          <Button variant="outlined" color="primary" className={classes.deleteBtn}>
+            Удалить
+          </Button>
         </Box>
       </CardContent>
     </Card>

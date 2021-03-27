@@ -65,18 +65,29 @@ export default function AudioGame({ data }) {
 
   return (
     <div className="game__audio-game">
-      {shouldOpen
-        ? (
-          <>
-            <ImageComponent image={activeWord.image} />
-            <SoundBtn audioSrc={activeWord ? activeWord.audio : null} />
-            <h2>{activeWord.word}</h2>
-          </>
-        )
-        : <SoundBtn audioSrc={activeWord ? activeWord.audio : null} /> }
-      <SetWords handleClick={handleClick} words={randomWords} game="audio-game" />
-      {shouldOpen ? <NextBtn handleClick={turnNext} id={activeWord ? activeWord.id : null} text="Далее" />
-        : <NextBtn handleClick={checkCorrect} text="Не знаю" /> }
+      {shouldOpen ? (
+        <>
+          <ImageComponent image={activeWord.image} />
+          <SoundBtn audioSrc={activeWord ? activeWord.audio : null} />
+          <h2>{activeWord.word}</h2>
+        </>
+      ) : (
+        <SoundBtn audioSrc={activeWord ? activeWord.audio : null} />
+      )}
+      <SetWords
+        handleClick={handleClick}
+        words={randomWords}
+        game="audio-game"
+      />
+      {shouldOpen ? (
+        <NextBtn
+          handleClick={turnNext}
+          id={activeWord ? activeWord.id : null}
+          text="Далее"
+        />
+      ) : (
+        <NextBtn handleClick={checkCorrect} text="Не знаю" />
+      )}
     </div>
   );
 }

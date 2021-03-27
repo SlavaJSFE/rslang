@@ -41,7 +41,7 @@ const TextbookModule = ({
           <NavTabs />
           <div className="textbook-list">
             {loading ? (
-              <Preloader />
+              <Preloader size={60} />
             ) : (
               words.map((word) => (
                 <Word
