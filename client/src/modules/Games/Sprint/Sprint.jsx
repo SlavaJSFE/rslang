@@ -19,7 +19,6 @@ export default function AudioGame({ data }) {
   const [playCorrect] = useSound(correctSound);
 
   const mixedData = useMemo(() => makeRandomSprintData(data), [data]);
-  console.log(mixedData);
 
   useEffect(() => {
     if (mixedData.length) {
