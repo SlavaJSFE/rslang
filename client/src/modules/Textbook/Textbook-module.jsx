@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Container } from '@material-ui/core';
 import { Pagination, PaginationItem } from '@material-ui/lab';
 import { connect } from 'react-redux';
-import './Textbook-module.scss';
+
 import '../../styles/common.scss';
 import './Textbook-module.scss';
 import Word from '../../components/Word/Word';
