@@ -33,3 +33,8 @@ a {
 .MuiButton-outlinedPrimary:hover {
   border: 2px solid #885980 !important;
 }
+.form-button {
+  display: grid;
+  justify-content: right;
+  margin-top: 15px;
+}
