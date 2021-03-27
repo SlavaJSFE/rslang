@@ -3,6 +3,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
+import { Container } from '@material-ui/core';
+
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
@@ -12,6 +14,7 @@ import Box from '@material-ui/core/Box';
 import DeletedWords from './DeletedWords/DeletedWords';
 import DifficultWords from './DifficultWords/DifficultWords';
 import StudiedWords from './StudiedWords/StudiedWords';
+import GameCards from '../../components/GameCards/GameCards';
 
 function TabPanel(props) {
   const {
@@ -70,30 +73,33 @@ export default function VerticalTabs() {
 
   return (
     <div className="vocabulary-module">
-      <h2>Vocabulary Module</h2>
-      <div className={classes.root}>
-        <Tabs
-          orientation="vertical"
-          variant="scrollable"
-          value={value}
-          onChange={handleChange}
-          aria-label="Vertical tabs example"
-          className={classes.tabs}
-        >
-          <Tab label="Изучаемые слова" {...a11yProps(0)} />
-          <Tab label="Сложные слова" {...a11yProps(1)} />
-          <Tab label="Удаленные слова" {...a11yProps(2)} />
-        </Tabs>
-        <TabPanel value={value} index={0}>
-          <StudiedWords />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <DifficultWords />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          <DeletedWords />
-        </TabPanel>
-      </div>
+      <Container>
+        <h2>Vocabulary Module</h2>
+        <div className={classes.root}>
+          <Tabs
+            orientation="vertical"
+            variant="scrollable"
+            value={value}
+            onChange={handleChange}
+            aria-label="Vertical tabs example"
+            className={classes.tabs}
+          >
+            <Tab label="Изучаемые слова" {...a11yProps(0)} />
+            <Tab label="Сложные слова" {...a11yProps(1)} />
+            <Tab label="Удаленные слова" {...a11yProps(2)} />
+          </Tabs>
+          <TabPanel value={value} index={0}>
+            <StudiedWords />
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            <DifficultWords />
+          </TabPanel>
+          <TabPanel value={value} index={2}>
+            <DeletedWords />
+          </TabPanel>
+        </div>
+        <GameCards />
+      </Container>
     </div>
   );
 }
