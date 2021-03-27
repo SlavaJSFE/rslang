@@ -16,6 +16,7 @@ import Header from '../../components/Header';
 import './Registration.scss';
 
 export default function RegistrationPage() {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -28,8 +29,16 @@ export default function RegistrationPage() {
     <div className="login-page page">
       <Container>
         <Header />
-        <form className="registration-form">
+        <form className="auth-form">
           <h2>Создать новый аккаунт</h2>
+          <TextField
+            id="name-input"
+            label="Ваше имя"
+            value={name}
+            type="text"
+            variant="outlined"
+            onChange={(e) => setName(e.target.value)}
+          />
           <TextField
             id="email-input"
             label="Электронная почта"

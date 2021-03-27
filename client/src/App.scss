@@ -33,6 +33,16 @@ a {
 .MuiButton-outlinedPrimary:hover {
   border: 2px solid #885980 !important;
 }
+.auth-form {
+  display: grid;
+  gap: 20px;
+  width: 400px;
+  margin: 30px auto;
+  padding: 10px 50px 30px;
+  background-color: $tertiary-color;
+  border: 2px solid $primary-color;
+  border-radius: 10px;
+}
 .form-button {
   display: grid;
   justify-content: right;

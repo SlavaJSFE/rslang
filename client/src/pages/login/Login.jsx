@@ -29,7 +29,7 @@ export default function LoginPage() {
       <Container>
         <Header />
         <form
-          className="login-form"
+          className="auth-form"
           onSubmit=""
         >
           <h2>Войти в аккаунт</h2>
