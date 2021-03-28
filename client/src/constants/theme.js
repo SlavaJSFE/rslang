@@ -12,7 +12,7 @@ const theme = createMuiTheme({
   overrides: {
     MuiButton: {
       root: {
-        borderRadius: '15px',
+        borderRadius: '10px',
       },
       outlinedPrimary: {
         border: '2px solid',
