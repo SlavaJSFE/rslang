@@ -30,10 +30,10 @@ const Word = ({ word }) => {
     await playAudio(`${server}${word.audioExample}`);
   };
 
-  const setHardWord = () => {
+  const setHardWord = async () => {
     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjA2YjhlNTU0N2VhMDAxNWFlODkzYyIsImlhdCI6MTYxNjk0MDcwNSwiZXhwIjoxNjE2OTU1MTA1fQ.BNqGk-xn7QZe52AQJCzDDoOaPatWOLO55zmDCAS7qLQ';
-    axios
-      .post(
+    try {
+      await axios.post(
         `https://rslang-server-slavajsfe.herokuapp.com/users/60606b8e5547ea0015ae893c/words/${word.id}`,
         {
           difficulty: 'hard',
@@ -43,8 +43,10 @@ const Word = ({ word }) => {
             Authorization: `Bearer ${token}`,
           },
         },
-      )
-      .then((res) => console.log(res));
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
