@@ -1,4 +1,4 @@
-import { LOGOUT, SET_USER } from './constants';
+import { LOGOUT, SET_LOADING, SET_USER, UNSET_LOADING } from './constants';
 
 export const setUser = (user) => ({
   type: SET_USER,
@@ -7,4 +7,12 @@ export const setUser = (user) => ({
 
 export const logout = () => ({
   type: LOGOUT,
+});
+
+export const setLoading = () => ({
+  type: SET_LOADING,
+});
+
+export const unsetLoading = () => ({
+  type: UNSET_LOADING,
 });

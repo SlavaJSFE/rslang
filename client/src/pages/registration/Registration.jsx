@@ -14,15 +14,32 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header';
 import './Registration.scss';
+import useHttp from '../../hooks/http.hook';
 
 export default function RegistrationPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const { loading, request } = useHttp();
 
   function handleClickShowPassword() {
     setShowPassword(!showPassword);
+  }
+
+  async function handleSubmit() {
+    const body = {
+      name,
+      email,
+      password,
+    };
+
+    try {
+      const data = await request('https://rslang-server-slavajsfe.herokuapp.com/users', 'POST', body);
+      console.log(data);
+    } catch (err) {
+      throw new Error(err);
+    }
   }
 
   return (
@@ -74,8 +91,10 @@ export default function RegistrationPage() {
               type="submit"
               variant="contained"
               color="primary"
+              disabled={loading}
               onClick={(e) => {
                 e.preventDefault();
+                handleSubmit();
               }}
             >
               Зарегистрироваться
