@@ -1,0 +1,4 @@
+const NUMBER_OF_WORDS = 5;
+const NUMBER_OF_PAIRS = 8;
+
+export { NUMBER_OF_WORDS, NUMBER_OF_PAIRS };
