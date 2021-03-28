@@ -16,6 +16,8 @@ import DifficultWords from './DifficultWords/DifficultWords';
 import StudiedWords from './StudiedWords/StudiedWords';
 import GameCards from '../../components/GameCards/GameCards';
 
+import './Vocabulary-module.scss';
+
 function TabPanel(props) {
   const {
     children, value, index, ...other

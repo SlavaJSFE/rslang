@@ -3,11 +3,11 @@ import { useSelector } from 'react-redux';
 import Word from '../../../components/Word/Word';
 
 export default function StudiedWords() {
-  const words = useSelector((state) => state.vocabularyDifficultWordsPage.words);
+  // const words = useSelector((state) => state.vocabularyDifficultWordsPage.words);
 
-  useEffect(() => {
+  // useEffect(() => {
 
-  }, [words]);
+  // }, [words]);
 
   return (
     <div
@@ -15,7 +15,7 @@ export default function StudiedWords() {
       style={{ display: 'flex', flexWrap: 'wrap' }}
     >
       изучаемые слова
-      {words.map((word) => (
+      {/* {words.map((word) => (
         <div>
           <Word word={word} key={word.id} />
           <span>
@@ -27,7 +27,7 @@ export default function StudiedWords() {
           <p>кол-во правильных ответов</p>
           <p>кол-во ошибок</p>
         </div>
-      ))}
+      ))} */}
     </div>
   );
 }

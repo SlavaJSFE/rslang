@@ -31,10 +31,11 @@ const Word = ({ word }) => {
   };
 
   const setHardWord = () => {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjA2YjhlNTU0N2VhMDAxNWFlODkzYyIsImlhdCI6MTYxNjk0MDcwNSwiZXhwIjoxNjE2OTU1MTA1fQ.BNqGk-xn7QZe52AQJCzDDoOaPatWOLO55zmDCAS7qLQ';
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjA2YjhlNTU0N2VhMDAxNWFlODkzYyIsImlhdCI6MTYxNjk2MDUzNSwiZXhwIjoxNjE2OTc0OTM1fQ.JBb34cePrZVXG-lGRaWwb7bStxGWurOqubQxIKRJelo';
+    const idUser = '60606b8e5547ea0015ae893c';
     axios
       .post(
-        `https://rslang-server-slavajsfe.herokuapp.com/users/60606b8e5547ea0015ae893c/words/${word.id}`,
+        `https://rslang-server-slavajsfe.herokuapp.com/users/${idUser}/words/${word.id}`,
         {
           difficulty: 'hard',
         },

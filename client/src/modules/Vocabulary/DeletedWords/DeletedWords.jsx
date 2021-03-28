@@ -3,11 +3,11 @@ import { useSelector } from 'react-redux';
 import Word from '../../../components/Word/Word';
 
 export default function DeletedWords() {
-  const words = useSelector((state) => state.vocabularyDifficultWordsPage.words);
+  // const words = useSelector((state) => state.vocabularyDifficultWordsPage.words);
 
-  useEffect(() => {
+  // useEffect(() => {
 
-  }, [words]);
+  // }, [words]);
 
   return (
     <div
@@ -15,7 +15,7 @@ export default function DeletedWords() {
       style={{ display: 'flex', flexWrap: 'wrap' }}
     >
       удаленные слова
-      {words.map((word) => (
+      {/* {words.map((word) => (
         <div>
           <Word word={word} key={word.id} />
           <span>
@@ -25,7 +25,7 @@ export default function DeletedWords() {
           </span>
           <button type="button">восстановить</button>
         </div>
-      ))}
+      ))} */}
     </div>
   );
 }
