@@ -8,6 +8,7 @@ import {
   Button,
 } from '@material-ui/core';
 import VolumeUpRoundedIcon from '@material-ui/icons/VolumeUpRounded';
+import axios from 'axios';
 
 import useStyles from './WordStyles';
 import { server } from '../../constants/constants';
@@ -27,6 +28,23 @@ const Word = ({ word }) => {
     await playAudio(`${server}${word.audio}`);
     await playAudio(`${server}${word.audioMeaning}`);
     await playAudio(`${server}${word.audioExample}`);
+  };
+
+  const setHardWord = () => {
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjA2YjhlNTU0N2VhMDAxNWFlODkzYyIsImlhdCI6MTYxNjk0MDcwNSwiZXhwIjoxNjE2OTU1MTA1fQ.BNqGk-xn7QZe52AQJCzDDoOaPatWOLO55zmDCAS7qLQ';
+    axios
+      .post(
+        `https://rslang-server-slavajsfe.herokuapp.com/users/60606b8e5547ea0015ae893c/words/${word.id}`,
+        {
+          difficulty: 'hard',
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      )
+      .then((res) => console.log(res));
   };
 
   return (
@@ -87,10 +105,19 @@ const Word = ({ word }) => {
           />
         </Box>
         <Box className={classes.buttons}>
-          <Button variant="outlined" color="primary" className={classes.hardBtn}>
+          <Button
+            variant="outlined"
+            color="primary"
+            className={classes.hardBtn}
+            onClick={setHardWord}
+          >
             Сложно
           </Button>
-          <Button variant="outlined" color="primary" className={classes.deleteBtn}>
+          <Button
+            variant="outlined"
+            color="primary"
+            className={classes.deleteBtn}
+          >
             Удалить
           </Button>
         </Box>
