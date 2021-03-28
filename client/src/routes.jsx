@@ -10,6 +10,8 @@ import LoginPage from './pages/login/Login';
 import RegistrationPage from './pages/registration/Registration';
 import UserProfile from './pages/user/UserProfile';
 
+import Game from './modules/Games/Game';
+
 export default function useRoutes() {
   const isAuth = useSelector((state) => state.user.isAuth);
 
@@ -52,6 +54,9 @@ export default function useRoutes() {
         </Route>
         <Route path="/games" exact>
           <GamesPage />
+        </Route>
+        <Route path="/games/:type" exact>
+          <Game />
         </Route>
         <Route path="/statistics" exact>
           <StatisticsPage />
