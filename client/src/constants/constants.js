@@ -3,7 +3,8 @@ import audioCallImage from '../assets/images/audiocall.jpg';
 import sprintImage from '../assets/images/sprint.jpg';
 import memoryImage from '../assets/images/memory.jpg';
 
-const server = 'http://localhost:5000/';
+// const server = 'http://localhost:5000/';
+const server = 'https://rslang-server-slavajsfe.herokuapp.com/';
 
 const games = [
   {
