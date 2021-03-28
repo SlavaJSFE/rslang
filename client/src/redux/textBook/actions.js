@@ -60,7 +60,10 @@ export const fetchSettings = () => async (dispatch) => {
   }
 };
 
-export const updateSettings = (field, value) => async (dispatch) => {
-  const data = await api.updateSettings(field, value);
+export const updateSettings = (field, value) => async (dispatch, getState) => {
+  const {
+    textBookPage: { settings },
+  } = getState();
+  const data = await api.updateSettings(settings.optional, field, value);
   dispatch(setSettings(data));
 };
