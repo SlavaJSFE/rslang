@@ -24,7 +24,7 @@ export default function GamesModule() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch('https://react-learnwords-example.herokuapp.com/words?group=1&page=1');
+      const response = await fetch('https://rslang-server-slavajsfe.herokuapp.com/words?group=2&page=1');
       const json = await response.json();
       setData([...json]);
     }
