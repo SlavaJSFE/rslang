@@ -1,0 +1,19 @@
+.textbook {
+  &-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 500px;
+
+    &__item {
+
+    }
+  }
+
+  &-pagination {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}

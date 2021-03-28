@@ -1,7 +1,7 @@
 @import './styles/common.scss';
 
 .App {
-  text-align: center;
+  // text-align: center;
   // background-color: $main-color;
   
   // background-image: url('./assets/images/bee-705412_1280.png');
@@ -32,4 +32,19 @@ a {
 }
 .MuiButton-outlinedPrimary:hover {
   border: 2px solid #885980 !important;
+}
+.auth-form {
+  display: grid;
+  gap: 20px;
+  width: 400px;
+  margin: 30px auto;
+  padding: 10px 50px 30px;
+  background-color: $tertiary-color;
+  border: 2px solid $primary-color;
+  border-radius: 10px;
+}
+.form-button {
+  display: grid;
+  justify-content: right;
+  margin-top: 15px;
 }
