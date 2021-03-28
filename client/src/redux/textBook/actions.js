@@ -5,7 +5,9 @@ import {
   SET_WORDS_STARTED,
   SET_PAGE,
   SET_GROUP,
+  SET_SETTINGS,
 } from './constants';
+import * as api from '../../api/api';
 
 export const setWordsStarted = () => ({
   type: SET_WORDS_STARTED,
@@ -42,4 +44,23 @@ export const fetchWords = (currentGroup, currentPage) => async (dispatch) => {
   } catch (error) {
     dispatch(setWordsFailure(error.message));
   }
+};
+
+export const setSettings = (settings) => ({
+  type: SET_SETTINGS,
+  payload: settings,
+});
+
+export const fetchSettings = () => async (dispatch) => {
+  try {
+    const data = await api.fetchSettings();
+    dispatch(setSettings(data.optional));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateSettings = (field, value) => async (dispatch) => {
+  const data = await api.updateSettings(field, value);
+  dispatch(setSettings(data));
 };

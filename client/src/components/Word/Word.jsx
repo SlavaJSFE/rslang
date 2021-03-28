@@ -9,11 +9,12 @@ import {
 } from '@material-ui/core';
 import VolumeUpRoundedIcon from '@material-ui/icons/VolumeUpRounded';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 import useStyles from './WordStyles';
 import { server } from '../../constants/constants';
 
-const Word = ({ word }) => {
+const Word = ({ word, isTranslation, isButtonsActive }) => {
   const classes = useStyles();
 
   const playAudio = async (audioSrc) => {
@@ -31,10 +32,10 @@ const Word = ({ word }) => {
   };
 
   const setHardWord = async () => {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjA2YjhlNTU0N2VhMDAxNWFlODkzYyIsImlhdCI6MTYxNjk0MDcwNSwiZXhwIjoxNjE2OTU1MTA1fQ.BNqGk-xn7QZe52AQJCzDDoOaPatWOLO55zmDCAS7qLQ';
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjBlMzdlMzNiM2M4MDAxNTAwZWYzZiIsImlhdCI6MTYxNjk2MjQ1NSwiZXhwIjoxNjE2OTc2ODU1fQ.Sv1roL2te5DRUsWi9ZjvLsc5ldmGJEVhwX_8wE_WFEs';
     try {
       await axios.post(
-        `https://rslang-server-slavajsfe.herokuapp.com/users/60606b8e5547ea0015ae893c/words/${word.id}`,
+        `https://rslang-server-slavajsfe.herokuapp.com/users/6060e37e33b3c8001500ef3f/words/${word.id}`,
         {
           difficulty: 'hard',
         },
@@ -71,27 +72,31 @@ const Word = ({ word }) => {
             <VolumeUpRoundedIcon />
           </Button>
         </Box>
-        <Box>
-          <Typography
-            color="textPrimary"
-            component="p"
-            className={classes.wordTranslate}
-          >
-            {word.wordTranslate}
-          </Typography>
-        </Box>
+        {isTranslation && (
+          <Box>
+            <Typography
+              color="textPrimary"
+              component="p"
+              className={classes.wordTranslate}
+            >
+              {word.wordTranslate}
+            </Typography>
+          </Box>
+        )}
         <Box className={classes.textMeaningTranslate}>
           <Typography
             color="textPrimary"
             component="p"
             dangerouslySetInnerHTML={{ __html: word.textMeaning }}
           />
-          <Typography
-            color="textPrimary"
-            component="p"
-            variant="body2"
-            dangerouslySetInnerHTML={{ __html: word.textMeaningTranslate }}
-          />
+          {isTranslation && (
+            <Typography
+              color="textPrimary"
+              component="p"
+              variant="body2"
+              dangerouslySetInnerHTML={{ __html: word.textMeaningTranslate }}
+            />
+          )}
         </Box>
         <Box>
           <Typography
@@ -99,33 +104,42 @@ const Word = ({ word }) => {
             color="textPrimary"
             dangerouslySetInnerHTML={{ __html: word.textExample }}
           />
-          <Typography
-            component="p"
-            color="textPrimary"
-            variant="body2"
-            dangerouslySetInnerHTML={{ __html: word.textExampleTranslate }}
-          />
+          {isTranslation && (
+            <Typography
+              component="p"
+              color="textPrimary"
+              variant="body2"
+              dangerouslySetInnerHTML={{ __html: word.textExampleTranslate }}
+            />
+          )}
         </Box>
-        <Box className={classes.buttons}>
-          <Button
-            variant="outlined"
-            color="primary"
-            className={classes.hardBtn}
-            onClick={setHardWord}
-          >
-            Сложно
-          </Button>
-          <Button
-            variant="outlined"
-            color="primary"
-            className={classes.deleteBtn}
-          >
-            Удалить
-          </Button>
-        </Box>
+        {isButtonsActive && (
+          <Box className={classes.buttons}>
+            <Button
+              variant="outlined"
+              color="primary"
+              className={classes.hardBtn}
+              onClick={setHardWord}
+            >
+              Сложно
+            </Button>
+            <Button
+              variant="outlined"
+              color="primary"
+              className={classes.deleteBtn}
+            >
+              Удалить
+            </Button>
+          </Box>
+        )}
       </CardContent>
     </Card>
   );
 };
 
-export default Word;
+const mapStateToProps = (state) => ({
+  isTranslation: state.textBookPage.settings.optional.isTranslation,
+  isButtonsActive: state.textBookPage.settings.optional.isButtonsActive,
+});
+
+export default connect(mapStateToProps)(Word);

@@ -4,6 +4,7 @@ import {
   SET_WORDS_STARTED,
   SET_PAGE,
   SET_GROUP,
+  SET_SETTINGS,
 } from './constants';
 
 const initialState = {
@@ -12,6 +13,12 @@ const initialState = {
   currentGroup: 0,
   error: null,
   loading: false,
+  settings: {
+    optional: {
+      isTranslation: true,
+      isButtonsActive: true,
+    },
+  },
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -42,6 +49,14 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         currentGroup: payload,
+      };
+    case SET_SETTINGS:
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          optional: { ...state.settings.optional, ...payload },
+        },
       };
 
     default:
