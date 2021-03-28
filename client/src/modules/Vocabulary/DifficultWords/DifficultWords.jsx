@@ -21,7 +21,17 @@ export default function DifficultWords() {
       style={{ display: 'flex', flexWrap: 'wrap' }}
     >
       сложные слова
-      {words.map((word) => <Word word={word} key={word.id} />)}
+      {words.map((word) => (
+        <div>
+          <Word word={word} key={word.id} />
+          <span>
+            unit
+            {' '}
+            {word.group}
+          </span>
+          <button type="button">восстановить</button>
+        </div>
+      ))}
     </div>
   );
 }

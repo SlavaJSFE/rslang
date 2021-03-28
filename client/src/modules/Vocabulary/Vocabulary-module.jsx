@@ -97,6 +97,9 @@ export default function VerticalTabs() {
           <TabPanel value={value} index={2}>
             <DeletedWords />
           </TabPanel>
+          <p>всего изучаемых слов: </p>
+          <p>кол-во изученных слов: </p>
+          <p>кол-во слов оставшихся для изучения</p>
         </div>
         <GameCards />
       </Container>
