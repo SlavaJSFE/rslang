@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import * as axios from 'axios';
 import {
   SET_DIF_WORDS_SUCCESS,
@@ -34,12 +35,35 @@ export const setGroup = (group) => ({
 
 export const fetchVocabularyWords = () => async (dispatch) => {
   dispatch(setWordsStarted());
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjA2YjhlNTU0N2VhMDAxNWFlODkzYyIsImlhdCI6MTYxNjk0MDcwNSwiZXhwIjoxNjE2OTU1MTA1fQ.BNqGk-xn7QZe52AQJCzDDoOaPatWOLO55zmDCAS7qLQ';
   try {
     const { data } = await axios.get(
-      'https://rslang-server-slavajsfe.herokuapp.com/users/1/aggregatedWords',
+      'https://rslang-server-slavajsfe.herokuapp.com/users/60606b8e5547ea0015ae893c/aggregatedWords',
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
     );
     dispatch(setWordsSuccess(data));
   } catch (error) {
     dispatch(setWordsFailure(error.message));
   }
 };
+
+// const getHardWord = () => {
+//   const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjA2YjhlNTU0N2VhMDAxNWFlODkzYyIsImlhdCI6MTYxNjk0MDcwNSwiZXhwIjoxNjE2OTU1MTA1fQ.BNqGk-xn7QZe52AQJCzDDoOaPatWOLO55zmDCAS7qLQ';
+//   axios
+//     .post(
+//       `https://rslang-server-slavajsfe.herokuapp.com/users/60606b8e5547ea0015ae893c/words/${word.id}`,
+//       {
+//         difficulty: 'hard',
+//       },
+//       {
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//         },
+//       },
+//     )
+//     .then((res) => console.log(res));
+// };

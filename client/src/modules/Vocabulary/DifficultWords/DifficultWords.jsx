@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Word from '../../../components/Word/Word';
+import { fetchVocabularyWords } from '../../../redux/vocabulary/actions';
 
 // import { setPage, fetchWords } from '../../../redux/vocabulary/actions';
 // const word = {
@@ -10,11 +11,12 @@ import Word from '../../../components/Word/Word';
 
 export default function DifficultWords() {
   const words = useSelector((state) => state.vocabularyDifficultWordsPage.words);
-
+  const dispatch = useDispatch();
   useEffect(() => {
-    // fetchWordsConnect(0, 0);
-  }, [words]);
-  // console.log(words);
+    dispatch(fetchVocabularyWords());
+  }, []);
+  console.log(words);
+
   return (
     <div
       className="textbook-list"
