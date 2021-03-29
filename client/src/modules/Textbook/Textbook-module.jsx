@@ -7,7 +7,11 @@ import { connect } from 'react-redux';
 import '../../styles/common.scss';
 import './Textbook-module.scss';
 import Word from '../../components/Word/Word';
-import { setPage, fetchWords } from '../../redux/textBook/actions';
+import {
+  setPage,
+  fetchWords,
+  fetchSettings,
+} from '../../redux/textBook/actions';
 import NavTabs from '../../components/NavTabs/NavTabs';
 import Preloader from '../../components/Preloader/Preloader';
 import GameCards from '../../components/GameCards/GameCards';
@@ -19,12 +23,19 @@ const TextbookModule = ({
   currentPage,
   setPageConnect,
   currentGroup,
+  fetchSettingsConnect,
+  userData,
 }) => {
   const { urlPage } = useParams('/textbook/:group/:urlPage');
 
   useEffect(() => {
     setPageConnect(urlPage - 1);
+    fetchSettingsConnect();
   }, []);
+
+  useEffect(() => {
+    fetchSettingsConnect(userData);
+  }, [userData]);
 
   useEffect(() => {
     fetchWordsConnect(currentGroup, currentPage);
@@ -78,9 +89,11 @@ const mapStateToProps = (state) => ({
   loading: state.textBookPage.loading,
   currentPage: state.textBookPage.currentPage,
   currentGroup: state.textBookPage.currentGroup,
+  userData: state.user.user,
 });
 
 export default connect(mapStateToProps, {
   fetchWordsConnect: fetchWords,
   setPageConnect: setPage,
+  fetchSettingsConnect: fetchSettings,
 })(TextbookModule);
