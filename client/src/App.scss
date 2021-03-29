@@ -1,9 +1,6 @@
 @import './styles/common.scss';
 
-.App {
-  // text-align: center;
-  // background-color: $main-color;
-  
+.App {  
   // background-image: url('./assets/images/bee-705412_1280.png');
   // background-image: url('./assets/images/636182.jpg');
   // background-image: url('./assets/images/1428303.jpg');
@@ -47,4 +44,7 @@ a {
   display: grid;
   justify-content: right;
   margin-top: 15px;
+}
+.center {
+  text-align: center;
 }
