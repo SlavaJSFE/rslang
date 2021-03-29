@@ -32,7 +32,7 @@ const Word = ({ word }) => {
   };
 
   const setHardWord = () => {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjE3NGQ5NDMyMzhhMDAxNWMyMGFiYSIsImlhdCI6MTYxNzAxOTE0NiwiZXhwIjoxNjE3MDMzNTQ2fQ.pg_swrIbRxtKX6XDphfzx3qUk6Jbmit9lgsHwsTj6Gs';
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjE3NGQ5NDMyMzhhMDAxNWMyMGFiYSIsImlhdCI6MTYxNzA0ODYxNSwiZXhwIjoxNjE3MDYzMDE1fQ.wIlfxKwN-EeloT8iAHTI32VEBOrziG17-2FfCmoLXJE';
     const idUser = '606174d943238a0015c20aba';
     axios
       .post(

@@ -33,7 +33,7 @@ export const setGroup = (group) => ({
   payload: group,
 });
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjE3NGQ5NDMyMzhhMDAxNWMyMGFiYSIsImlhdCI6MTYxNzAxOTE0NiwiZXhwIjoxNjE3MDMzNTQ2fQ.pg_swrIbRxtKX6XDphfzx3qUk6Jbmit9lgsHwsTj6Gs';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjE3NGQ5NDMyMzhhMDAxNWMyMGFiYSIsImlhdCI6MTYxNzA0ODYxNSwiZXhwIjoxNjE3MDYzMDE1fQ.wIlfxKwN-EeloT8iAHTI32VEBOrziG17-2FfCmoLXJE';
 
 export const fetchVocabularyWords = () => async (dispatch) => {
   dispatch(setWordsStarted());
@@ -41,7 +41,7 @@ export const fetchVocabularyWords = () => async (dispatch) => {
 
   try {
     await axios.get(
-      `https://rslang-server-slavajsfe.herokuapp.com/users/${idUser}/aggregatedWords?wordsPerPage=20&filter=%7B%22%24and%22%3A%5B%7B%22userWord.difficulty%22%3A%22hard%22%7D%5D%7D`,
+      `https://rslang-server-slavajsfe.herokuapp.com/users/${idUser}/aggregatedWords?wordsPerPage=3600&filter=%7B%22%24and%22%3A%5B%7B%22userWord.difficulty%22%3A%22hard%22%7D%5D%7D`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
