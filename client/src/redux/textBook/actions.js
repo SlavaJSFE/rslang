@@ -1,4 +1,3 @@
-import * as axios from 'axios';
 import {
   SET_WORDS_SUCCESS,
   SET_WORDS_FAILURE,
