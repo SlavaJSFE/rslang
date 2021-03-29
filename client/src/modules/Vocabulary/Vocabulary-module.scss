@@ -1,3 +1,36 @@
 .makeStyles-root-5 {
   height: auto !important;
+  background-color: #faebd700 !important;
 }
+
+
+.makeStyles-tabs-6 {
+  width: 30rem !important;
+}
+  
+.MuiTab-textColorInherit {
+background-color: white !important;
+}
+
+.vocabulary-module-results{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: 3rem;
+  align-items: center;
+  &__values{
+    background-color: antiquewhite;
+    padding: 0.7rem;
+    border-radius: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  &__valuesNumber{
+    color: red;
+  }
+}
+
+.MuiTab-textColorInherit {
+  border-top-left-radius: 1rem !important;
+}
+
+

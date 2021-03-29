@@ -12,6 +12,7 @@ import axios from 'axios';
 
 import useStyles from './WordStyles';
 import { server } from '../../constants/constants';
+import RestoreBtn from '../../modules/Vocabulary/RestoreBtn/RestoreBtn';
 
 const Word = ({ word }) => {
   const classes = useStyles();
@@ -31,8 +32,8 @@ const Word = ({ word }) => {
   };
 
   const setHardWord = () => {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjA2YjhlNTU0N2VhMDAxNWFlODkzYyIsImlhdCI6MTYxNjk2MDUzNSwiZXhwIjoxNjE2OTc0OTM1fQ.JBb34cePrZVXG-lGRaWwb7bStxGWurOqubQxIKRJelo';
-    const idUser = '60606b8e5547ea0015ae893c';
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjE3NGQ5NDMyMzhhMDAxNWMyMGFiYSIsImlhdCI6MTYxNzAxOTE0NiwiZXhwIjoxNjE3MDMzNTQ2fQ.pg_swrIbRxtKX6XDphfzx3qUk6Jbmit9lgsHwsTj6Gs';
+    const idUser = '606174d943238a0015c20aba';
     axios
       .post(
         `https://rslang-server-slavajsfe.herokuapp.com/users/${idUser}/words/${word.id}`,
@@ -121,6 +122,7 @@ const Word = ({ word }) => {
           >
             Удалить
           </Button>
+          <RestoreBtn />
         </Box>
       </CardContent>
     </Card>

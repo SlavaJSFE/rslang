@@ -2,9 +2,7 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-
 import { Container } from '@material-ui/core';
-
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
@@ -15,8 +13,8 @@ import DeletedWords from './DeletedWords/DeletedWords';
 import DifficultWords from './DifficultWords/DifficultWords';
 import StudiedWords from './StudiedWords/StudiedWords';
 import GameCards from '../../components/GameCards/GameCards';
-
 import './Vocabulary-module.scss';
+import CommonStudyResults from './CommonStudyResults/CommonStudyResults';
 
 function TabPanel(props) {
   const {
@@ -46,7 +44,7 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-function a11yProps(index) {
+function allProps(index) {
   return {
     id: `vertical-tab-${index}`,
     'aria-controls': `vertical-tabpanel-${index}`,
@@ -68,7 +66,6 @@ const useStyles = makeStyles((theme) => ({
 export default function VerticalTabs() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -76,7 +73,7 @@ export default function VerticalTabs() {
   return (
     <div className="vocabulary-module">
       <Container>
-        <h2>Vocabulary</h2>
+        <CommonStudyResults />
         <div className={classes.root}>
           <Tabs
             orientation="vertical"
@@ -86,9 +83,9 @@ export default function VerticalTabs() {
             aria-label="Vertical tabs example"
             className={classes.tabs}
           >
-            <Tab label="Изучаемые слова" {...a11yProps(0)} />
-            <Tab label="Сложные слова" {...a11yProps(1)} />
-            <Tab label="Удаленные слова" {...a11yProps(2)} />
+            <Tab label="Изучаемые слова" {...allProps(0)} />
+            <Tab label="Сложные слова" {...allProps(1)} />
+            <Tab label="Удаленные слова" {...allProps(2)} />
           </Tabs>
           <TabPanel value={value} index={0}>
             <StudiedWords />
@@ -99,9 +96,6 @@ export default function VerticalTabs() {
           <TabPanel value={value} index={2}>
             <DeletedWords />
           </TabPanel>
-          <p>всего изучаемых слов: </p>
-          <p>кол-во изученных слов: </p>
-          <p>кол-во слов оставшихся для изучения</p>
         </div>
         <GameCards />
       </Container>
