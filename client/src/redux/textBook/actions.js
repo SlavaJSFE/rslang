@@ -37,9 +37,7 @@ export const setGroup = (group) => ({
 export const fetchWords = (currentGroup, currentPage) => async (dispatch) => {
   dispatch(setWordsStarted());
   try {
-    const { data } = await axios.get(
-      `https://react-learnwords-example.herokuapp.com/words?group=${currentGroup}&page=${currentPage}`,
-    );
+    const data = await api.getWords(currentGroup, currentPage)
     dispatch(setWordsSuccess(data));
   } catch (error) {
     dispatch(setWordsFailure(error.message));
@@ -51,19 +49,49 @@ export const setSettings = (settings) => ({
   payload: settings,
 });
 
-export const fetchSettings = () => async (dispatch) => {
+export const fetchSettings = (userData) => async (dispatch) => {
   try {
-    const data = await api.fetchSettings();
+    const data = await api.fetchSettings(userData);
     dispatch(setSettings(data.optional));
   } catch (error) {
     console.log(error);
   }
 };
 
-export const updateSettings = (field, value) => async (dispatch, getState) => {
+export const updateSettings = (field, value, userData) => async (
+  dispatch,
+  getState,
+) => {
   const {
     textBookPage: { settings },
   } = getState();
-  const data = await api.updateSettings(settings.optional, field, value);
-  dispatch(setSettings(data));
+  try {
+    const data = await api.updateSettings(
+      settings.optional,
+      field,
+      value,
+      userData,
+    );
+    dispatch(setSettings(data));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const setHardWord = (wordId, userData) => async () => {
+  try {
+    await api.setHardWord(wordId, userData);
+    // логика пометки сложного слова
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const setEasyWord = (wordId, userData) => async () => {
+  try {
+    await api.setEasyWord(wordId, userData);
+    // логика пометки удаоенного слова
+  } catch (error) {
+    console.log(error);
+  }
 };

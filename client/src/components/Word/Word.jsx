@@ -8,13 +8,20 @@ import {
   Button,
 } from '@material-ui/core';
 import VolumeUpRoundedIcon from '@material-ui/icons/VolumeUpRounded';
-import axios from 'axios';
 import { connect } from 'react-redux';
 
 import useStyles from './WordStyles';
 import { server } from '../../constants/constants';
+import { setHardWord, setEasyWord } from '../../redux/textBook/actions';
 
-const Word = ({ word, isTranslation, isButtonsActive }) => {
+const Word = ({
+  word,
+  isTranslation,
+  isButtonsActive,
+  setHardWordConnect,
+  setEasyWordConnect,
+  userData,
+}) => {
   const classes = useStyles();
 
   const playAudio = async (audioSrc) => {
@@ -31,23 +38,12 @@ const Word = ({ word, isTranslation, isButtonsActive }) => {
     await playAudio(`${server}${word.audioExample}`);
   };
 
-  const setHardWord = async () => {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjBlMzdlMzNiM2M4MDAxNTAwZWYzZiIsImlhdCI6MTYxNjk2MjQ1NSwiZXhwIjoxNjE2OTc2ODU1fQ.Sv1roL2te5DRUsWi9ZjvLsc5ldmGJEVhwX_8wE_WFEs';
-    try {
-      await axios.post(
-        `https://rslang-server-slavajsfe.herokuapp.com/users/6060e37e33b3c8001500ef3f/words/${word.id}`,
-        {
-          difficulty: 'hard',
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-    } catch (error) {
-      console.log(error);
-    }
+  const onHardWord = async () => {
+    await setHardWordConnect(word.id, userData);
+  };
+
+  const onEasyWord = async () => {
+    await setEasyWordConnect(word.id, userData);
   };
 
   return (
@@ -119,7 +115,7 @@ const Word = ({ word, isTranslation, isButtonsActive }) => {
               variant="outlined"
               color="primary"
               className={classes.hardBtn}
-              onClick={setHardWord}
+              onClick={onHardWord}
             >
               Сложно
             </Button>
@@ -127,6 +123,7 @@ const Word = ({ word, isTranslation, isButtonsActive }) => {
               variant="outlined"
               color="primary"
               className={classes.deleteBtn}
+              onClick={onEasyWord}
             >
               Удалить
             </Button>
@@ -140,6 +137,10 @@ const Word = ({ word, isTranslation, isButtonsActive }) => {
 const mapStateToProps = (state) => ({
   isTranslation: state.textBookPage.settings.optional.isTranslation,
   isButtonsActive: state.textBookPage.settings.optional.isButtonsActive,
+  userData: state.user.user,
 });
 
-export default connect(mapStateToProps)(Word);
+export default connect(mapStateToProps, {
+  setHardWordConnect: setHardWord,
+  setEasyWordConnect: setEasyWord,
+})(Word);

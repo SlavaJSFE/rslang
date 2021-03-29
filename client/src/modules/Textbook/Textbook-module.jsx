@@ -24,13 +24,17 @@ const TextbookModule = ({
   setPageConnect,
   currentGroup,
   fetchSettingsConnect,
+  userData,
 }) => {
   const { urlPage } = useParams('/textbook/:group/:urlPage');
 
   useEffect(() => {
     setPageConnect(urlPage - 1);
-    fetchSettingsConnect();
   }, []);
+
+  useEffect(() => {
+    fetchSettingsConnect(userData);
+  }, [userData]);
 
   useEffect(() => {
     fetchWordsConnect(currentGroup, currentPage);
@@ -84,6 +88,7 @@ const mapStateToProps = (state) => ({
   loading: state.textBookPage.loading,
   currentPage: state.textBookPage.currentPage,
   currentGroup: state.textBookPage.currentGroup,
+  userData: state.user.user,
 });
 
 export default connect(mapStateToProps, {

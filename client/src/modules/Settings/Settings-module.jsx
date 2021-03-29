@@ -11,13 +11,14 @@ function SettingsModule({
   updateSettingsConnect,
   isTranslation,
   isButtonsActive,
+  userData,
 }) {
   const onSettingsChange = (event) => {
-    updateSettingsConnect(event.target.name, event.target.checked);
+    updateSettingsConnect(event.target.name, event.target.checked, userData);
   };
 
   useEffect(() => {
-    fetchSettingsConnect();
+    fetchSettingsConnect(userData);
   }, []);
 
   return (
@@ -60,6 +61,7 @@ function SettingsModule({
 const mapStateToProps = (state) => ({
   isTranslation: state.textBookPage.settings.optional.isTranslation,
   isButtonsActive: state.textBookPage.settings.optional.isButtonsActive,
+  userData: state.user.user,
 });
 
 export default connect(mapStateToProps, {

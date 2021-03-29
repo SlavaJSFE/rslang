@@ -1,41 +1,86 @@
-/* eslint-disable operator-linebreak */
 import * as axios from 'axios';
 import generateReqBody from './utils';
 
-const userId = '6060e37e33b3c8001500ef3f';
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjBlMzdlMzNiM2M4MDAxNTAwZWYzZiIsImlhdCI6MTYxNjk2MjQ1NSwiZXhwIjoxNjE2OTc2ODU1fQ.Sv1roL2te5DRUsWi9ZjvLsc5ldmGJEVhwX_8wE_WFEs';
+// const { userId } = JSON.parse(localStorage.getItem('usedData')) || '';
+// const { token } = JSON.parse(localStorage.getItem('usedData')) || '';
 
-export const updateSettings = async (optional, field, value) => {
+export const updateSettings = async (optional, field, value, userData) => {
   const reqBody = generateReqBody(optional, field, value);
   try {
     const { data } = await axios.put(
-      `https://rslang-server-slavajsfe.herokuapp.com/users/${userId}/settings`,
+      `https://rslang-server-slavajsfe.herokuapp.com/users/${userData.userId}/settings`,
       reqBody,
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${userData.token}`,
         },
       },
     );
     return data.optional;
   } catch (error) {
-    return error;
+    throw new Error(error);
   }
 };
 
-export const fetchSettings = async () => {
+export const fetchSettings = async (userData) => {
   try {
     const { data } = await axios.get(
-      `https://rslang-server-slavajsfe.herokuapp.com/users/${userId}/settings`,
+      `https://rslang-server-slavajsfe.herokuapp.com/users/${userData.userId}/settings`,
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${userData.token}`,
         },
       },
     );
     return data;
   } catch (error) {
-    return error;
+    throw new Error(error);
+  }
+};
+
+export const setHardWord = async (wordId, userData) => {
+  try {
+    await axios.post(
+      `https://rslang-server-slavajsfe.herokuapp.com/users/${userData.userId}/words/${wordId}`,
+      {
+        difficulty: 'hard',
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${userData.token}`,
+        },
+      },
+    );
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export const setEasyWord = async (wordId, userData) => {
+  try {
+    await axios.post(
+      `https://rslang-server-slavajsfe.herokuapp.com/users/${userData.userId}/words/${wordId}`,
+      {
+        difficulty: 'easy',
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${userData.token}`,
+        },
+      },
+    );
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export const getWords = async (currentGroup, currentPage) => {
+  try {
+    const { data } = await axios.get(
+      `https://react-learnwords-example.herokuapp.com/words?group=${currentGroup}&page=${currentPage}`,
+    );
+    return data;
+  } catch (error) {
+    throw new Error(error);
   }
 };
