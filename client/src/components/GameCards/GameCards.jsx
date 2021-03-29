@@ -11,7 +11,7 @@ export default function GameCards() {
         <Box className={`game-card ${game.className}`} boxShadow={3} key={game.name}>
           <Link to={game.path}>
             <img src={game.image} alt="" />
-            <h2 className="card-title">
+            <h2 className="card-title center">
               {game.name}
             </h2>
           </Link>
