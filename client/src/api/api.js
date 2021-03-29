@@ -1,9 +1,6 @@
 import * as axios from 'axios';
 import generateReqBody from './utils';
 
-// const { userId } = JSON.parse(localStorage.getItem('usedData')) || '';
-// const { token } = JSON.parse(localStorage.getItem('usedData')) || '';
-
 export const updateSettings = async (optional, field, value, userData) => {
   const reqBody = generateReqBody(optional, field, value);
   try {

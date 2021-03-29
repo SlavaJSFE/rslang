@@ -30,6 +30,7 @@ const TextbookModule = ({
 
   useEffect(() => {
     setPageConnect(urlPage - 1);
+    fetchSettingsConnect();
   }, []);
 
   useEffect(() => {
