@@ -4,8 +4,10 @@ import { ThemeProvider } from '@material-ui/styles';
 import useRoutes from './routes';
 import './App.scss';
 import theme from './constants/theme';
+import useAuth from './hooks/auth.hook';
 
 function App() {
+  useAuth();
   const routes = useRoutes();
 
   return (

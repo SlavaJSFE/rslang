@@ -3,10 +3,15 @@ import { Link, useParams } from 'react-router-dom';
 import { Container } from '@material-ui/core';
 import { Pagination, PaginationItem } from '@material-ui/lab';
 import { connect } from 'react-redux';
-import './Textbook-module.scss';
+
 import '../../styles/common.scss';
+import './Textbook-module.scss';
 import Word from '../../components/Word/Word';
-import { setPage, fetchWords } from '../../redux/textBook/actions';
+import {
+  setPage,
+  fetchWords,
+  fetchSettings,
+} from '../../redux/textBook/actions';
 import NavTabs from '../../components/NavTabs/NavTabs';
 import Preloader from '../../components/Preloader/Preloader';
 import GameCards from '../../components/GameCards/GameCards';
@@ -18,12 +23,19 @@ const TextbookModule = ({
   currentPage,
   setPageConnect,
   currentGroup,
+  fetchSettingsConnect,
+  userData,
 }) => {
   const { urlPage } = useParams('/textbook/:group/:urlPage');
 
   useEffect(() => {
     setPageConnect(urlPage - 1);
+    fetchSettingsConnect();
   }, []);
+
+  useEffect(() => {
+    fetchSettingsConnect(userData);
+  }, [userData]);
 
   useEffect(() => {
     fetchWordsConnect(currentGroup, currentPage);
@@ -38,17 +50,21 @@ const TextbookModule = ({
       <Container>
         <div className="textbook-content">
           <NavTabs />
-          <div
-            className="textbook-list"
-            style={{ display: 'flex', flexWrap: 'wrap' }}
-          >
+          <div className="textbook-list">
             {loading ? (
-              <Preloader />
+              <Preloader size={60} />
             ) : (
-              words.map((word) => <Word word={word} key={word.id} />)
+              words.map((word) => (
+                <Word
+                  word={word}
+                  key={word.id}
+                  className="textbook-list__item"
+                />
+              ))
             )}
           </div>
           <Pagination
+            className="textbook-pagination"
             count={30}
             color="primary"
             page={currentPage + 1}
@@ -73,9 +89,11 @@ const mapStateToProps = (state) => ({
   loading: state.textBookPage.loading,
   currentPage: state.textBookPage.currentPage,
   currentGroup: state.textBookPage.currentGroup,
+  userData: state.user.user,
 });
 
 export default connect(mapStateToProps, {
   fetchWordsConnect: fetchWords,
   setPageConnect: setPage,
+  fetchSettingsConnect: fetchSettings,
 })(TextbookModule);
