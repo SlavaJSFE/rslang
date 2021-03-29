@@ -8,17 +8,12 @@ import {
   Button,
 } from '@material-ui/core';
 import VolumeUpRoundedIcon from '@material-ui/icons/VolumeUpRounded';
-<<<<<<< HEAD
-=======
-import axios from 'axios';
->>>>>>> acd2cbd4e89f63db60a6662e5559acdd2347e979
 import { connect } from 'react-redux';
 
 import useStyles from './WordStyles';
 import { server } from '../../constants/constants';
 import { setHardWord, setEasyWord } from '../../redux/textBook/actions';
 
-<<<<<<< HEAD
 const Word = ({
   word,
   isTranslation,
@@ -27,9 +22,6 @@ const Word = ({
   setEasyWordConnect,
   userData,
 }) => {
-=======
-const Word = ({ word, isTranslation, isButtonsActive }) => {
->>>>>>> acd2cbd4e89f63db60a6662e5559acdd2347e979
   const classes = useStyles();
 
   const playAudio = async (audioSrc) => {
@@ -46,32 +38,12 @@ const Word = ({ word, isTranslation, isButtonsActive }) => {
     await playAudio(`${server}${word.audioExample}`);
   };
 
-<<<<<<< HEAD
   const onHardWord = async () => {
     await setHardWordConnect(word.id, userData);
   };
 
   const onEasyWord = async () => {
     await setEasyWordConnect(word.id, userData);
-=======
-  const setHardWord = async () => {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjBlMzdlMzNiM2M4MDAxNTAwZWYzZiIsImlhdCI6MTYxNjk2MjQ1NSwiZXhwIjoxNjE2OTc2ODU1fQ.Sv1roL2te5DRUsWi9ZjvLsc5ldmGJEVhwX_8wE_WFEs';
-    try {
-      await axios.post(
-        `https://rslang-server-slavajsfe.herokuapp.com/users/6060e37e33b3c8001500ef3f/words/${word.id}`,
-        {
-          difficulty: 'hard',
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-    } catch (error) {
-      console.log(error);
-    }
->>>>>>> acd2cbd4e89f63db60a6662e5559acdd2347e979
   };
 
   return (
@@ -165,7 +137,6 @@ const Word = ({ word, isTranslation, isButtonsActive }) => {
 const mapStateToProps = (state) => ({
   isTranslation: state.textBookPage.settings.optional.isTranslation,
   isButtonsActive: state.textBookPage.settings.optional.isButtonsActive,
-<<<<<<< HEAD
   userData: state.user.user,
 });
 
@@ -173,8 +144,3 @@ export default connect(mapStateToProps, {
   setHardWordConnect: setHardWord,
   setEasyWordConnect: setEasyWord,
 })(Word);
-=======
-});
-
-export default connect(mapStateToProps)(Word);
->>>>>>> acd2cbd4e89f63db60a6662e5559acdd2347e979
