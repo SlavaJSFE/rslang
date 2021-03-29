@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import {
   Card,
@@ -6,21 +7,23 @@ import {
   CardMedia,
   Box,
   Button,
+  Chip,
 } from '@material-ui/core';
 import VolumeUpRoundedIcon from '@material-ui/icons/VolumeUpRounded';
 import { connect } from 'react-redux';
 
 import useStyles from './WordStyles';
 import { server } from '../../constants/constants';
-import { setHardWord, setEasyWord } from '../../redux/textBook/actions';
+import { setHardWord, deleteWord } from '../../redux/textBook/actions';
 
 const Word = ({
   word,
   isTranslation,
   isButtonsActive,
   setHardWordConnect,
-  setEasyWordConnect,
+  deleteWordConnect,
   userData,
+  isHard,
 }) => {
   const classes = useStyles();
 
@@ -39,11 +42,11 @@ const Word = ({
   };
 
   const onHardWord = async () => {
-    await setHardWordConnect(word.id, userData);
+    await setHardWordConnect(word._id, userData);
   };
 
-  const onEasyWord = async () => {
-    await setEasyWordConnect(word.id, userData);
+  const onDeleteWord = async () => {
+    await deleteWordConnect(word._id, userData);
   };
 
   return (
@@ -64,9 +67,19 @@ const Word = ({
               {word.transcription}
             </Typography>
           </Box>
-          <Button onClick={onPlay}>
-            <VolumeUpRoundedIcon />
-          </Button>
+          <Box>
+            {isHard === 'hard' && (
+              <Chip
+                classes={{ root: classes.chipRot, label: classes.label }}
+                variant="outlined"
+                color="default"
+                label="Сложное слово"
+              />
+            )}
+            <Button onClick={onPlay}>
+              <VolumeUpRoundedIcon />
+            </Button>
+          </Box>
         </Box>
         {isTranslation && (
           <Box>
@@ -123,7 +136,7 @@ const Word = ({
               variant="outlined"
               color="primary"
               className={classes.deleteBtn}
-              onClick={onEasyWord}
+              onClick={onDeleteWord}
             >
               Удалить
             </Button>
@@ -142,5 +155,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   setHardWordConnect: setHardWord,
-  setEasyWordConnect: setEasyWord,
+  deleteWordConnect: deleteWord,
 })(Word);

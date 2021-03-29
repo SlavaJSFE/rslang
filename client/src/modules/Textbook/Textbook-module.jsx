@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Container } from '@material-ui/core';
@@ -37,8 +38,8 @@ const TextbookModule = ({
   }, [userData]);
 
   useEffect(() => {
-    fetchWordsConnect(currentGroup, currentPage);
-  }, [currentPage, currentGroup]);
+    fetchWordsConnect(currentGroup, currentPage, userData);
+  }, [currentPage, currentGroup, userData]);
 
   const onPageChange = (event, page) => {
     setPageConnect(page - 1);
@@ -56,7 +57,8 @@ const TextbookModule = ({
               words.map((word) => (
                 <Word
                   word={word}
-                  key={word.id}
+                  key={word._id}
+                  isHard={word?.userWord?.difficulty}
                   className="textbook-list__item"
                 />
               ))

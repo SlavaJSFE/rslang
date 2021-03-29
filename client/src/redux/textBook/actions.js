@@ -33,11 +33,13 @@ export const setGroup = (group) => ({
   payload: group,
 });
 
-export const fetchWords = (currentGroup, currentPage) => async (dispatch) => {
+export const fetchWords = (currentGroup, currentPage, userData) => async (
+  dispatch,
+) => {
   dispatch(setWordsStarted());
   try {
-    const data = await api.getWords(currentGroup, currentPage)
-    dispatch(setWordsSuccess(data));
+    const data = await api.getWords(currentGroup, currentPage, userData);
+    dispatch(setWordsSuccess(data[0].paginatedResults));
   } catch (error) {
     dispatch(setWordsFailure(error.message));
   }
@@ -86,9 +88,9 @@ export const setHardWord = (wordId, userData) => async () => {
   }
 };
 
-export const setEasyWord = (wordId, userData) => async () => {
+export const deleteWord = (wordId, userData) => async () => {
   try {
-    await api.setEasyWord(wordId, userData);
+    await api.deleteWord(wordId, userData);
     // логика пометки удаоенного слова
   } catch (error) {
     console.log(error);
