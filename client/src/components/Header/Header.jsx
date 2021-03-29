@@ -11,7 +11,7 @@ export default function Header() {
     <Box className="header">
       <Box className="logo">
         <Link to="/">
-          <div className="logo">
+          <div className="logo center">
             <img src={rsLangLogo} alt="" />
             <h2 className="logo-title">RS Lang</h2>
           </div>

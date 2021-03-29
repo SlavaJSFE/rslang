@@ -23,20 +23,11 @@ export default function RegistrationPage() {
   const [showPassword, setShowPassword] = useState(false);
   const { loading, request } = useHttp();
 
-  function handleClickShowPassword() {
-    setShowPassword(!showPassword);
-  }
-
   async function handleSubmit() {
-    const body = {
-      name,
-      email,
-      password,
-    };
+    const body = { name, email, password };
 
     try {
-      const data = await request('https://rslang-server-slavajsfe.herokuapp.com/users', 'POST', body);
-      console.log(data);
+      await request('https://rslang-server-slavajsfe.herokuapp.com/users', 'POST', body);
     } catch (err) {
       throw new Error(err);
     }
@@ -76,7 +67,7 @@ export default function RegistrationPage() {
                 <InputAdornment position="end">
                   <IconButton
                     aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
+                    onClick={() => setShowPassword(!showPassword)}
                     edge="end"
                   >
                     {showPassword ? <Visibility /> : <VisibilityOff />}
