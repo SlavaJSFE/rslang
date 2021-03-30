@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Container } from '@material-ui/core';
 import { Pagination, PaginationItem } from '@material-ui/lab';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 
 import '../../styles/common.scss';
 import './Textbook-module.scss';
@@ -12,6 +12,7 @@ import {
   fetchWords,
   fetchSettings,
 } from '../../redux/textBook/actions';
+import { setGameWords } from '../../redux/miniGameWords/actions';
 import NavTabs from '../../components/NavTabs/NavTabs';
 import Preloader from '../../components/Preloader/Preloader';
 import GameCards from '../../components/GameCards/GameCards';
@@ -27,6 +28,12 @@ const TextbookModule = ({
   userData,
 }) => {
   const { urlPage } = useParams('/textbook/:group/:urlPage');
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+  dispatch(setGameWords(words));
+  }, [words]);
 
   useEffect(() => {
     setPageConnect(urlPage - 1);
