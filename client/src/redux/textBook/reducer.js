@@ -7,6 +7,7 @@ import {
   SET_GROUP,
   SET_SETTINGS,
   DELETE_WORD,
+  SET_HARD_WORD,
 } from './constants';
 
 const initialState = {
@@ -46,6 +47,16 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         words: state.words.filter((word) => word._id !== payload),
+      };
+    case SET_HARD_WORD:
+      return {
+        ...state,
+        words: state.words.map((word) => {
+          if (word._id === payload) {
+            return Object.assign(word, { userWord: { difficulty: 'hard' } });
+          }
+          return word;
+        }),
       };
     case SET_PAGE:
       return {

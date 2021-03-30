@@ -129,6 +129,7 @@ const Word = ({
               color="primary"
               className={classes.hardBtn}
               onClick={onHardWord}
+              disabled={isHard === 'hard'}
             >
               Сложно
             </Button>
@@ -137,6 +138,7 @@ const Word = ({
               color="primary"
               className={classes.deleteBtn}
               onClick={onDeleteWord}
+              disabled={isHard === 'hard'}
             >
               Удалить
             </Button>

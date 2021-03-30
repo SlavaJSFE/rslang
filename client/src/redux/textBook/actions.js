@@ -6,6 +6,7 @@ import {
   SET_GROUP,
   SET_SETTINGS,
   DELETE_WORD,
+  SET_HARD_WORD,
 } from './constants';
 import * as api from '../../api/api';
 
@@ -85,10 +86,15 @@ export const updateSettings = (field, value, userData) => async (
   }
 };
 
-export const setHardWord = (wordId, userData) => async () => {
+export const setHardWordRedux = (wordId) => ({
+  type: SET_HARD_WORD,
+  payload: wordId,
+});
+
+export const setHardWord = (wordId, userData) => async (dispatch) => {
   try {
+    dispatch(setHardWordRedux(wordId));
     await api.setHardWord(wordId, userData);
-    // логика пометки сложного слова
   } catch (error) {
     console.log(error);
   }
@@ -98,7 +104,6 @@ export const deleteWord = (wordId, userData) => async (dispatch) => {
   try {
     await api.deleteWord(wordId, userData);
     dispatch(deleteWordRedux(wordId));
-    // логика пометки удаоенного слова
   } catch (error) {
     console.log(error);
   }
