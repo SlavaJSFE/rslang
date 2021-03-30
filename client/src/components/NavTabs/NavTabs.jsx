@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import './NavTabs.scss';
 import { setGroup } from '../../redux/textBook/actions';
 
-function a11yProps(index) {
+function allProps(index) {
   return {
     id: `nav-tab-${index}`,
     'aria-controls': `nav-tabpanel-${index}`,
@@ -41,32 +41,32 @@ const NavTabs = ({ currentGroup, setGroupConnect, currentPage }) => {
       >
         <LinkTab
           label="Unit 1"
-          {...a11yProps(0)}
+          {...allProps(0)}
           to={`/textbook/1/${currentPage + 1}`}
         />
         <LinkTab
           label="Unit 2"
-          {...a11yProps(1)}
+          {...allProps(1)}
           to={`/textbook/2/${currentPage + 1}`}
         />
         <LinkTab
           label="Unit 3"
-          {...a11yProps(2)}
+          {...allProps(2)}
           to={`/textbook/3/${currentPage + 1}`}
         />
         <LinkTab
           label="Unit 4"
-          {...a11yProps(3)}
+          {...allProps(3)}
           to={`/textbook/4/${currentPage + 1}`}
         />
         <LinkTab
           label="Unit 5"
-          {...a11yProps(4)}
+          {...allProps(4)}
           to={`/textbook/5/${currentPage + 1}`}
         />
         <LinkTab
           label="Unit 6"
-          {...a11yProps(5)}
+          {...allProps(5)}
           to={`/textbook/6/${currentPage + 1}`}
         />
       </Tabs>
