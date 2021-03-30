@@ -136,7 +136,7 @@ const Word = ({
             className={classes.deleteBtn}
           >
             Удалить
-          </Button>
+          </Button> */}
           <RestoreBtn />
           <div className="vocabulary-module-resultsStudy">
             <div className="vocabulary-module-resultsStudy__values">
@@ -147,7 +147,7 @@ const Word = ({
               <span>ошибок: </span>
               <span className="vocabulary-module-resultsStudy__valuesNumber">002</span>
             </div>
-          </div> */}
+          </div>
           {isTranslation && (
             <Typography
               component="p"
