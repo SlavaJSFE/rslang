@@ -1,9 +1,8 @@
 import React from 'react';
-
 import VocabularyPage from '../VocabularyPage/VocabularyPage';
 
-export default function DeletedWords() {
+export default function StudiedWords() {
   return (
-    <VocabularyPage wordsType="vocabularyDifficultWords" />
+    <VocabularyPage />
   );
 }

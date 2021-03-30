@@ -25,6 +25,8 @@ const Word = ({
   deleteWordConnect,
   userData,
   isHard,
+  isTextbook,
+  isStudyStatistic,
 }) => {
   const classes = useStyles();
 
@@ -59,6 +61,13 @@ const Word = ({
         image={`${server}${word.image}`}
       />
       <CardContent className={classes.content}>
+        {!isTextbook && (
+          <span>
+            unit
+            {' '}
+            {word.group}
+          </span>
+        )}
         <Box className={classes.header}>
           <Box className={classes.headerText}>
             <Typography variant="h5" component="h3">
@@ -114,30 +123,17 @@ const Word = ({
             color="textPrimary"
             dangerouslySetInnerHTML={{ __html: word.textExample }}
           />
-          {/* <Typography
-            component="p"
-            color="textPrimary"
-            variant="body2"
-            dangerouslySetInnerHTML={{ __html: word.textExampleTranslate }}
-          />
+          {isTranslation && (
+            <Typography
+              component="p"
+              color="textPrimary"
+              variant="body2"
+              dangerouslySetInnerHTML={{ __html: word.textExampleTranslate }}
+            />
+          )}
         </Box>
-        <Box className={classes.buttons}>
-          <Button
-            variant="outlined"
-            color="primary"
-            className={classes.hardBtn}
-            onClick={setHardWord}
-          >
-            Сложно
-          </Button>
-          <Button
-            variant="outlined"
-            color="primary"
-            className={classes.deleteBtn}
-          >
-            Удалить
-          </Button> */}
-          <RestoreBtn />
+        { !isTextbook && <RestoreBtn /> }
+        {isStudyStatistic && (
           <div className="vocabulary-module-resultsStudy">
             <div className="vocabulary-module-resultsStudy__values">
               <span>правильных ответов: </span>
@@ -148,16 +144,8 @@ const Word = ({
               <span className="vocabulary-module-resultsStudy__valuesNumber">002</span>
             </div>
           </div>
-          {isTranslation && (
-            <Typography
-              component="p"
-              color="textPrimary"
-              variant="body2"
-              dangerouslySetInnerHTML={{ __html: word.textExampleTranslate }}
-            />
-          )}
-        </Box>
-        {isButtonsActive && (
+        )}
+        {isButtonsActive && isTextbook && (
           <Box className={classes.buttons}>
             <Button
               variant="outlined"
