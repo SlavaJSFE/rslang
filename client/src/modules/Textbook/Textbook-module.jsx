@@ -1,16 +1,23 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Container } from '@material-ui/core';
 import { Pagination, PaginationItem } from '@material-ui/lab';
 import { connect } from 'react-redux';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import '../../styles/common.scss';
 import './Textbook-module.scss';
 import Word from '../../components/Word/Word';
-import { setPage, fetchWords } from '../../redux/textBook/actions';
+import {
+  setPage,
+  fetchWords,
+  fetchSettings,
+} from '../../redux/textBook/actions';
 import NavTabs from '../../components/NavTabs/NavTabs';
 import Preloader from '../../components/Preloader/Preloader';
 import GameCards from '../../components/GameCards/GameCards';
+import calcPaginationCount from './utils';
 
 const TextbookModule = ({
   words,
@@ -19,6 +26,9 @@ const TextbookModule = ({
   currentPage,
   setPageConnect,
   currentGroup,
+  fetchSettingsConnect,
+  userData,
+  wordsCount,
 }) => {
   const { urlPage } = useParams('/textbook/:group/:urlPage');
 
@@ -27,8 +37,12 @@ const TextbookModule = ({
   }, []);
 
   useEffect(() => {
-    fetchWordsConnect(currentGroup, currentPage);
-  }, [currentPage, currentGroup]);
+    fetchSettingsConnect(userData);
+  }, [userData]);
+
+  useEffect(() => {
+    fetchWordsConnect(currentGroup, currentPage, userData);
+  }, [currentPage, currentGroup, userData]);
 
   const onPageChange = (event, page) => {
     setPageConnect(page - 1);
@@ -43,18 +57,25 @@ const TextbookModule = ({
             {loading ? (
               <Preloader size={60} />
             ) : (
-              words.map((word) => (
-                <Word
-                  word={word}
-                  key={word.id}
-                  className="textbook-list__item"
-                />
-              ))
+              <TransitionGroup>
+                {words.map((word) => (
+                  <CSSTransition key={word._id} timeout={200} className="item">
+                    <div>
+                      <Word
+                        word={word}
+                        key={word._id}
+                        isHard={word?.userWord?.difficulty}
+                        className="textbook-list__item"
+                      />
+                    </div>
+                  </CSSTransition>
+                ))}
+              </TransitionGroup>
             )}
           </div>
           <Pagination
             className="textbook-pagination"
-            count={30}
+            count={calcPaginationCount(wordsCount)}
             color="primary"
             page={currentPage + 1}
             onChange={onPageChange}
@@ -78,9 +99,12 @@ const mapStateToProps = (state) => ({
   loading: state.textBookPage.loading,
   currentPage: state.textBookPage.currentPage,
   currentGroup: state.textBookPage.currentGroup,
+  wordsCount: state.textBookPage.wordsCount,
+  userData: state.user.user,
 });
 
 export default connect(mapStateToProps, {
   fetchWordsConnect: fetchWords,
   setPageConnect: setPage,
+  fetchSettingsConnect: fetchSettings,
 })(TextbookModule);

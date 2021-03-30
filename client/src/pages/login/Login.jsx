@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Container,
   FormControl,
@@ -15,42 +15,31 @@ import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header';
 import './Login.scss';
 import useHttp from '../../hooks/http.hook';
-import useMessage from '../../hooks/message.hook';
+import useAuth from '../../hooks/auth.hook';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const {
-    loading,
-    request,
-    error,
-    clearError,
-  } = useHttp();
-  const message = useMessage();
-
-  function handleClickShowPassword() {
-    setShowPassword(!showPassword);
-  }
+  const { loading, request } = useHttp();
+  const { login } = useAuth();
 
   async function handleSubmit() {
-    const body = {
-      email,
-      password,
-    };
+    const body = { email, password };
 
     try {
       const data = await request('https://rslang-server-slavajsfe.herokuapp.com/signin', 'POST', body);
-      console.log(data);
+      const user = {
+        token: data.token,
+        refreshToken: data.refreshToken,
+        userId: data.userId,
+        name: data.name,
+      };
+      login(user);
     } catch (err) {
       throw new Error(err);
     }
   }
-
-  useEffect(() => {
-    message(error);
-    clearError(null);
-  }, [error, message, clearError]);
 
   return (
     <div className="login-page page">
@@ -78,7 +67,7 @@ export default function LoginPage() {
                 <InputAdornment position="end">
                   <IconButton
                     aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
+                    onClick={() => setShowPassword(!showPassword)}
                     edge="end"
                   >
                     {showPassword ? <Visibility /> : <VisibilityOff />}

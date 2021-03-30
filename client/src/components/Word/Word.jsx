@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import {
   Card,
@@ -6,15 +7,25 @@ import {
   CardMedia,
   Box,
   Button,
+  Chip,
 } from '@material-ui/core';
 import VolumeUpRoundedIcon from '@material-ui/icons/VolumeUpRounded';
-import axios from 'axios';
+import { connect } from 'react-redux';
 
 import useStyles from './WordStyles';
 import { server } from '../../constants/constants';
 import RestoreBtn from '../../modules/Vocabulary/RestoreBtn/RestoreBtn';
+import { setHardWord, deleteWord } from '../../redux/textBook/actions';
 
-const Word = ({ word }) => {
+const Word = ({
+  word,
+  isTranslation,
+  isButtonsActive,
+  setHardWordConnect,
+  deleteWordConnect,
+  userData,
+  isHard,
+}) => {
   const classes = useStyles();
 
   const playAudio = async (audioSrc) => {
@@ -31,22 +42,12 @@ const Word = ({ word }) => {
     await playAudio(`${server}${word.audioExample}`);
   };
 
-  const setHardWord = () => {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjE3NGQ5NDMyMzhhMDAxNWMyMGFiYSIsImlhdCI6MTYxNzA5OTM0NywiZXhwIjoxNjE3MTEzNzQ3fQ.aKg3DUtiFjE7rR7WqkKhIv_8L3UEbhGVIXAshw7ZdH4';
-    const idUser = '606174d943238a0015c20aba';
-    axios
-      .post(
-        `https://rslang-server-slavajsfe.herokuapp.com/users/${idUser}/words/${word.id}`,
-        {
-          difficulty: 'hard',
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      )
-      .then((res) => console.log(res));
+  const onHardWord = async () => {
+    await setHardWordConnect(word._id, userData);
+  };
+
+  const onDeleteWord = async () => {
+    await deleteWordConnect(word._id, userData);
   };
 
   return (
@@ -67,31 +68,45 @@ const Word = ({ word }) => {
               {word.transcription}
             </Typography>
           </Box>
-          <Button onClick={onPlay}>
-            <VolumeUpRoundedIcon />
-          </Button>
+          <Box>
+            {isHard === 'hard' && (
+              <Chip
+                classes={{ root: classes.chipRot, label: classes.label }}
+                variant="outlined"
+                color="default"
+                label="Сложное слово"
+              />
+            )}
+            <Button onClick={onPlay}>
+              <VolumeUpRoundedIcon />
+            </Button>
+          </Box>
         </Box>
-        <Box>
-          <Typography
-            color="textPrimary"
-            component="p"
-            className={classes.wordTranslate}
-          >
-            {word.wordTranslate}
-          </Typography>
-        </Box>
+        {isTranslation && (
+          <Box>
+            <Typography
+              color="textPrimary"
+              component="p"
+              className={classes.wordTranslate}
+            >
+              {word.wordTranslate}
+            </Typography>
+          </Box>
+        )}
         <Box className={classes.textMeaningTranslate}>
           <Typography
             color="textPrimary"
             component="p"
             dangerouslySetInnerHTML={{ __html: word.textMeaning }}
           />
-          <Typography
-            color="textPrimary"
-            component="p"
-            variant="body2"
-            dangerouslySetInnerHTML={{ __html: word.textMeaningTranslate }}
-          />
+          {isTranslation && (
+            <Typography
+              color="textPrimary"
+              component="p"
+              variant="body2"
+              dangerouslySetInnerHTML={{ __html: word.textMeaningTranslate }}
+            />
+          )}
         </Box>
         <Box>
           <Typography
@@ -99,7 +114,7 @@ const Word = ({ word }) => {
             color="textPrimary"
             dangerouslySetInnerHTML={{ __html: word.textExample }}
           />
-          <Typography
+          {/* <Typography
             component="p"
             color="textPrimary"
             variant="body2"
@@ -132,11 +147,50 @@ const Word = ({ word }) => {
               <span>ошибок: </span>
               <span className="vocabulary-module-resultsStudy__valuesNumber">002</span>
             </div>
-          </div>
+          </div> */}
+          {isTranslation && (
+            <Typography
+              component="p"
+              color="textPrimary"
+              variant="body2"
+              dangerouslySetInnerHTML={{ __html: word.textExampleTranslate }}
+            />
+          )}
         </Box>
+        {isButtonsActive && (
+          <Box className={classes.buttons}>
+            <Button
+              variant="outlined"
+              color="primary"
+              className={classes.hardBtn}
+              onClick={onHardWord}
+              disabled={isHard === 'hard'}
+            >
+              Сложно
+            </Button>
+            <Button
+              variant="outlined"
+              color="primary"
+              className={classes.deleteBtn}
+              onClick={onDeleteWord}
+              disabled={isHard === 'hard'}
+            >
+              Удалить
+            </Button>
+          </Box>
+        )}
       </CardContent>
     </Card>
   );
 };
 
-export default Word;
+const mapStateToProps = (state) => ({
+  isTranslation: state.textBookPage.settings.optional.isTranslation,
+  isButtonsActive: state.textBookPage.settings.optional.isButtonsActive,
+  userData: state.user.user,
+});
+
+export default connect(mapStateToProps, {
+  setHardWordConnect: setHardWord,
+  deleteWordConnect: deleteWord,
+})(Word);
