@@ -5,6 +5,9 @@ import {
   SET_PAGE,
   SET_GROUP,
   SET_SETTINGS,
+  DELETE_WORD,
+  SET_HARD_WORD,
+  SET_WORDS_COUNT,
 } from './constants';
 import * as api from '../../api/api';
 
@@ -33,11 +36,24 @@ export const setGroup = (group) => ({
   payload: group,
 });
 
-export const fetchWords = (currentGroup, currentPage) => async (dispatch) => {
+export const deleteWordRedux = (wordId) => ({
+  type: DELETE_WORD,
+  payload: wordId,
+});
+
+export const setWordsCount = (count) => ({
+  type: SET_WORDS_COUNT,
+  payload: count,
+});
+
+export const fetchWords = (currentGroup, currentPage, userData) => async (
+  dispatch,
+) => {
   dispatch(setWordsStarted());
   try {
-    const data = await api.getWords(currentGroup, currentPage);
-    dispatch(setWordsSuccess(data));
+    const data = await api.getWords(currentGroup, currentPage, userData);
+    dispatch(setWordsSuccess(data[0].paginatedResults));
+    dispatch(setWordsCount(data[0].totalCount[0].count));
   } catch (error) {
     dispatch(setWordsFailure(error.message));
   }
@@ -77,19 +93,24 @@ export const updateSettings = (field, value, userData) => async (
   }
 };
 
-export const setHardWord = (wordId, userData) => async () => {
+export const setHardWordRedux = (wordId) => ({
+  type: SET_HARD_WORD,
+  payload: wordId,
+});
+
+export const setHardWord = (wordId, userData) => async (dispatch) => {
   try {
+    dispatch(setHardWordRedux(wordId));
     await api.setHardWord(wordId, userData);
-    // логика пометки сложного слова
   } catch (error) {
     console.log(error);
   }
 };
 
-export const setEasyWord = (wordId, userData) => async () => {
+export const deleteWord = (wordId, userData) => async (dispatch) => {
   try {
-    await api.setEasyWord(wordId, userData);
-    // логика пометки удаоенного слова
+    await api.deleteWord(wordId, userData);
+    dispatch(deleteWordRedux(wordId));
   } catch (error) {
     console.log(error);
   }

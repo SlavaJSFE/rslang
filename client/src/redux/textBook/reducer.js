@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import {
   SET_WORDS_SUCCESS,
   SET_WORDS_FAILURE,
@@ -5,12 +6,16 @@ import {
   SET_PAGE,
   SET_GROUP,
   SET_SETTINGS,
+  DELETE_WORD,
+  SET_HARD_WORD,
+  SET_WORDS_COUNT,
 } from './constants';
 
 const initialState = {
   words: [],
   currentPage: 0,
   currentGroup: 0,
+  wordsCount: 0,
   error: null,
   loading: false,
   settings: {
@@ -40,6 +45,21 @@ export default (state = initialState, { type, payload }) => {
         error: payload,
         loading: false,
       };
+    case DELETE_WORD:
+      return {
+        ...state,
+        words: state.words.filter((word) => word._id !== payload),
+      };
+    case SET_HARD_WORD:
+      return {
+        ...state,
+        words: state.words.map((word) => {
+          if (word._id === payload) {
+            return Object.assign(word, { userWord: { difficulty: 'hard' } });
+          }
+          return word;
+        }),
+      };
     case SET_PAGE:
       return {
         ...state,
@@ -49,6 +69,11 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         currentGroup: payload,
+      };
+    case SET_WORDS_COUNT:
+      return {
+        ...state,
+        wordsCount: payload,
       };
     case SET_SETTINGS:
       return {

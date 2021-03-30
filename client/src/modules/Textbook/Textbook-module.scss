@@ -6,9 +6,7 @@
     align-items: center;
     min-height: 500px;
 
-    &__item {
-
-    }
+    &__item {}
   }
 
   &-pagination {
@@ -16,4 +14,28 @@
     justify-content: center;
     flex-wrap: wrap;
   }
+}
+
+.item-enter {
+  opacity: 0;
+}
+
+.item-enter-active {
+  opacity: 1;
+  transition: opacity 1000ms;
+}
+
+.exit {
+  opacity: 1;
+  transform: translate(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  transition-property: transform, opacity;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
+}
+
+.exit-active {
+  opacity: 0;
+  transform: translate(-1000px, 0);
+  transform: translate3d(-1000px, 0, 0);
 }
