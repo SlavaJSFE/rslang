@@ -32,7 +32,7 @@ const Word = ({ word }) => {
   };
 
   const setHardWord = () => {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjE3NGQ5NDMyMzhhMDAxNWMyMGFiYSIsImlhdCI6MTYxNzA0ODYxNSwiZXhwIjoxNjE3MDYzMDE1fQ.wIlfxKwN-EeloT8iAHTI32VEBOrziG17-2FfCmoLXJE';
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNjE3NGQ5NDMyMzhhMDAxNWMyMGFiYSIsImlhdCI6MTYxNzA5OTM0NywiZXhwIjoxNjE3MTEzNzQ3fQ.aKg3DUtiFjE7rR7WqkKhIv_8L3UEbhGVIXAshw7ZdH4';
     const idUser = '606174d943238a0015c20aba';
     axios
       .post(
@@ -123,6 +123,16 @@ const Word = ({ word }) => {
             Удалить
           </Button>
           <RestoreBtn />
+          <div className="vocabulary-module-resultsStudy">
+            <div className="vocabulary-module-resultsStudy__values">
+              <span>правильных ответов: </span>
+              <span className="vocabulary-module-resultsStudy__valuesNumber">000</span>
+            </div>
+            <div className="vocabulary-module-resultsStudy__values">
+              <span>ошибок: </span>
+              <span className="vocabulary-module-resultsStudy__valuesNumber">002</span>
+            </div>
+          </div>
         </Box>
       </CardContent>
     </Card>

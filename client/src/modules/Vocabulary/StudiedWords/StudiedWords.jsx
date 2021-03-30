@@ -14,7 +14,6 @@ export default function StudiedWords() {
       className="textbook-list"
       style={{ display: 'flex', flexWrap: 'wrap' }}
     >
-      изучаемые слова
       {/* {words.map((word) => (
         <div>
           <Word word={word} key={word.id} />

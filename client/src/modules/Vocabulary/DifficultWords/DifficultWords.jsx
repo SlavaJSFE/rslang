@@ -14,6 +14,7 @@ export default function DifficultWords() {
     dispatch(fetchVocabularyWords());
   }, []);
 console.log(words.length);
+
   return (
     <div
       className="textbook-list"
