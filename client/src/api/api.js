@@ -53,7 +53,7 @@ export const setHardWord = async (wordId, userData) => {
   }
 };
 
-export const setEasyWord = async (wordId, userData) => {
+export const deleteWord = async (wordId, userData) => {
   try {
     await axios.post(
       `https://rslang-server-slavajsfe.herokuapp.com/users/${userData.userId}/words/${wordId}`,
@@ -71,10 +71,22 @@ export const setEasyWord = async (wordId, userData) => {
   }
 };
 
-export const getWords = async (currentGroup, currentPage) => {
+export const getWords = async (currentGroup, currentPage, userData) => {
+  const filter = {
+    $and: [{ 'userWord.difficulty': { $ne: 'easy' } }],
+  };
   try {
     const { data } = await axios.get(
-      `https://react-learnwords-example.herokuapp.com/words?group=${currentGroup}&page=${currentPage}`,
+      `https://rslang-server-slavajsfe.herokuapp.com/users/${
+        userData.userId
+      }/aggregatedWords?group=${currentGroup}&page=${currentPage}&wordsPerPage=20&filter=${JSON.stringify(
+        filter,
+      )}`,
+      {
+        headers: {
+          Authorization: `Bearer ${userData.token}`,
+        },
+      },
     );
     return data;
   } catch (error) {
