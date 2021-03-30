@@ -27,7 +27,13 @@ export default function GameStart({ rule, setStart, wordsNumber }) {
     <Container>
       {showform && <LevelForm />}
       {showform && <NextBtn handleClick={handleFormBtnClick} text="Далее" />}
-      {showRule && <Rule rule={rule} setShowRule={setShowRule} setStartTimer={setStartTimer} />}
+      {showRule && (
+        <Rule
+          rule={rule}
+          setShowRule={setShowRule}
+          setStartTimer={setStartTimer}
+        />
+      )}
       {!showRule && startTimer && <Timer setStartTimer={setStartTimer} />}
     </Container>
   );

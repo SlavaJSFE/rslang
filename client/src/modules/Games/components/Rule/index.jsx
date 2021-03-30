@@ -11,9 +11,7 @@ export default function Rule({ setShowRule, setStartTimer, rule }) {
 
   return (
     <div className="game__rule">
-      <div>
-        {rule}
-      </div>
+      <div>{rule}</div>
       <OptionsBtn handleClick={handleClick} text="Далее" />
     </div>
   );

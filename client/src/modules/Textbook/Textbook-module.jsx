@@ -36,7 +36,7 @@ const TextbookModule = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-  dispatch(setGameWords(words));
+    dispatch(setGameWords(words));
   }, [words]);
 
   useEffect(() => {

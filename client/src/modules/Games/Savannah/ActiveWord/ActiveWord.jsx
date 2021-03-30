@@ -1,33 +1,38 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function ActiveWord({
-  text, breakPoint, setIsFail, isClicked,
+  text,
+  breakPoint,
+  setIsFail,
+  isFail,
+  isClicked,
 }) {
   const [progress, setProgress] = useState(0);
-  const btn = useRef();
 
   useEffect(() => {
-    const word = btn ? btn.current.getBoundingClientRect().y : null;
-    const shouldFall = word <= breakPoint - 15 && breakPoint && !isClicked;
-    const isDown = word >= breakPoint - 15 && breakPoint;
-
-    if (shouldFall) {
-      setProgress(progress + 0.03);
-    }
-
+    const isDown = progress >= breakPoint - 15 && breakPoint;
     if (isDown) {
       setIsFail(true);
+      setProgress(0);
     }
-  }, [progress, btn, breakPoint]);
+  }, [progress]);
+
+  useEffect(() => {
+    const inteval = setInterval(() => {
+      setProgress((currentProgress) => currentProgress + 3);
+    }, 50);
+    return () => {
+      clearInterval(inteval);
+    };
+  }, [isClicked, isFail]);
 
   return (
     <div
       className="activeWord"
       style={{
         position: 'absolute',
-        top: `${progress}%`,
+        top: `${progress}px`,
       }}
-      ref={btn}
     >
       {text}
     </div>

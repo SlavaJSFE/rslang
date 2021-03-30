@@ -15,9 +15,5 @@ export default function Timer({ setStartTimer }) {
       clearInterval(timer);
     };
   });
-  return (
-    <div>
-      {time}
-    </div>
-  );
+  return <div>{time}</div>;
 }
