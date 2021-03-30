@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 
 import useStyles from './WordStyles';
 import { server } from '../../constants/constants';
+import RestoreBtn from '../../modules/Vocabulary/RestoreBtn/RestoreBtn';
 import { setHardWord, deleteWord } from '../../redux/textBook/actions';
 
 const Word = ({
@@ -24,6 +25,8 @@ const Word = ({
   deleteWordConnect,
   userData,
   isHard,
+  isTextbook,
+  isStudyStatistic,
 }) => {
   const classes = useStyles();
 
@@ -58,6 +61,13 @@ const Word = ({
         image={`${server}${word.image}`}
       />
       <CardContent className={classes.content}>
+        {!isTextbook && (
+          <span>
+            unit
+            {' '}
+            {word.group}
+          </span>
+        )}
         <Box className={classes.header}>
           <Box className={classes.headerText}>
             <Typography variant="h5" component="h3">
@@ -122,7 +132,20 @@ const Word = ({
             />
           )}
         </Box>
-        {isButtonsActive && (
+        { !isTextbook && <RestoreBtn /> }
+        {isStudyStatistic && (
+          <div className="vocabulary-module-resultsStudy">
+            <div className="vocabulary-module-resultsStudy__values">
+              <span>правильных ответов: </span>
+              <span className="vocabulary-module-resultsStudy__valuesNumber">000</span>
+            </div>
+            <div className="vocabulary-module-resultsStudy__values">
+              <span>ошибок: </span>
+              <span className="vocabulary-module-resultsStudy__valuesNumber">002</span>
+            </div>
+          </div>
+        )}
+        {isButtonsActive && isTextbook && (
           <Box className={classes.buttons}>
             <Button
               variant="outlined"
