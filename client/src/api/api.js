@@ -82,7 +82,7 @@ export const getWords = async (currentGroup, currentPage) => {
   }
 };
 
-export const getGrupsWords = async (currentGroup) => {
+export const getGrupWords = async (currentGroup) => {
   try {
     const { data } = await axios.get(
       `https://react-learnwords-example.herokuapp.com/words?group=${currentGroup}`,

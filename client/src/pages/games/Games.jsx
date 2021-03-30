@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Container } from '@material-ui/core';
 
@@ -7,8 +7,6 @@ import Header from '../../components/Header';
 import GameCards from '../../components/GameCards/GameCards';
 
 export default function GamesPage() {
-  // const [words, setWords] = useState([]);
-
   return (
     <div className="games-page page">
       <Container>

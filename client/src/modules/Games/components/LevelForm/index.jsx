@@ -6,7 +6,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 
-import { setLevel } from '../../../../redux/miniGameWords/actions';
+import { setLevel, fetchGrupWords } from '../../../../redux/miniGameWords/actions';
 
 export default function LevelForm() {
   const value = useSelector((state) => state.game.level);
@@ -14,6 +14,7 @@ export default function LevelForm() {
 
   const handleChange = (event) => {
     dispatch(setLevel(event.target.value));
+    dispatch(fetchGrupWords(event.target.value));
   };
 
   return (

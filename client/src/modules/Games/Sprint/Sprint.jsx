@@ -1,6 +1,7 @@
 import React, {
   useEffect, useState, useMemo,
 } from 'react';
+import { useSelector } from 'react-redux';
 
 import useSound from 'use-sound';
 
@@ -14,6 +15,7 @@ import errorSound from '../../../assets/sounds/error.mp3';
 
 export default function AudioGame({ data }) {
   const [activeWord, setActiveWord] = useState('');
+  // const activeWords = useSelector((state) => state.game.words);
 
   const [playError] = useSound(errorSound);
   const [playCorrect] = useSound(correctSound);
@@ -26,16 +28,6 @@ export default function AudioGame({ data }) {
       setActiveWord(word);
     }
   }, [data, mixedData]);
-
-  // const handleClick = (e, word) => {
-  //   e.preventDefault();
-
-  //   if (word === activeWord.wordTranslate) {
-  //     playCorrect();
-  //   } else {
-  //     playError();
-  //   }
-  // };
 
   const checkCorrect = (e, idx) => {
     e.preventDefault();
