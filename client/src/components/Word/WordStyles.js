@@ -1,7 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
-import theme from '../../constants/theme';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     alignItems: 'center',
@@ -30,6 +29,14 @@ const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+    flexWrap: 'wrap',
+  },
+  chipRot: {
+    borderColor: 'red',
+    color: 'red',
+  },
+  label: {
+    fontSize: '16px',
   },
   headerText: {
     display: 'flex',
@@ -47,6 +54,6 @@ const useStyles = makeStyles({
   hardBtn: {
     marginRight: '10px',
   },
-});
+}));
 
 export default useStyles;
