@@ -5,17 +5,21 @@ export default function ActiveWord({
   breakPoint,
   setIsFail,
   isFail,
-  isClicked,
+  wordsForGame,
 }) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const isDown = progress >= breakPoint - 15 && breakPoint;
+    const isDown = progress >= breakPoint;
     if (isDown) {
       setIsFail(true);
       setProgress(0);
     }
   }, [progress]);
+
+  useEffect(() => {
+    setProgress(0);
+  }, [wordsForGame]);
 
   useEffect(() => {
     const inteval = setInterval(() => {
@@ -24,7 +28,7 @@ export default function ActiveWord({
     return () => {
       clearInterval(inteval);
     };
-  }, [isClicked, isFail]);
+  }, [isFail]);
 
   return (
     <div
