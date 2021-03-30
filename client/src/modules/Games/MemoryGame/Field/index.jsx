@@ -66,7 +66,7 @@ const Field = ({
       const [a, b] = openedCards;
       if (a.id === b.id && a.idx !== b.idx) {
         setTimeout(() => {
-        playCorrect();
+          playCorrect();
         }, 400);
 
         // if (a.clickedTimes === b.clickedTimes && a.clickedTimes === 1) {
