@@ -25,8 +25,11 @@ export default function useRoutes() {
           <Route path="/textbook">
             <TextbookPage />
           </Route>
-          <Route path="/games">
+          <Route path="/games" exact>
             <GamesPage />
+          </Route>
+          <Route path="/games/:type" exact>
+            <Game />
           </Route>
           <Route path="/statistics" exact>
             <StatisticsPage />
