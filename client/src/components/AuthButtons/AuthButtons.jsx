@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Avatar, Button } from '@material-ui/core';
+import { Avatar, Button, Tooltip } from '@material-ui/core';
 import './AuthButtons.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { reduxLogout } from '../../redux/user/actions';
@@ -21,10 +21,12 @@ export default function AuthButtons() {
     if (isAuth) {
       return (
         <div className="profile-links">
-          <Link className="avatar-name" to={`/user/${userId}`}>
-            <Avatar>A</Avatar>
-            <span className="user-name">{`Hello, ${name}`}</span>
-          </Link>
+          <Tooltip title="Мой профиль">
+            <Link className="avatar-name" to={`/user/${userId}`}>
+              <Avatar>A</Avatar>
+              <span className="user-name">{`Hello, ${name}`}</span>
+            </Link>
+          </Tooltip>
           <Button
             className="auth-button"
             variant="contained"

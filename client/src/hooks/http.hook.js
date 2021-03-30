@@ -1,8 +1,11 @@
 import { useCallback, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setError } from '../redux/user/actions';
 
 export default function useHttp() {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+
   const request = useCallback(async (url, method = 'GET', body = null, headers = {}) => {
     let jsonBody = body;
     setLoading(true);
@@ -22,7 +25,7 @@ export default function useHttp() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || 'Something went wrong');
+        throw new Error(data || 'Something went wrong');
       }
 
       setLoading(false);
@@ -30,17 +33,13 @@ export default function useHttp() {
       return data;
     } catch (err) {
       setLoading(false);
-      setError(err.message);
+      dispatch(setError(err));
       throw err;
     }
   }, []);
 
-  const clearError = useCallback(() => setError(null), []);
-
   return {
     loading,
     request,
-    error,
-    clearError,
   };
 }

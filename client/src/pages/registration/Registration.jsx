@@ -1,4 +1,6 @@
+/* eslint-disable no-empty */
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   Button,
   Container,
@@ -15,6 +17,8 @@ import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header';
 import './Registration.scss';
 import useHttp from '../../hooks/http.hook';
+import useAuth from '../../hooks/auth.hook';
+import { setMessage } from '../../redux/user/actions';
 
 export default function RegistrationPage() {
   const [name, setName] = useState('');
@@ -22,15 +26,30 @@ export default function RegistrationPage() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const { loading, request } = useHttp();
+  const { login } = useAuth();
+  const dispatch = useDispatch();
+  const successMessage = 'Новый пользователь был успешно создан';
 
   async function handleSubmit() {
     const body = { name, email, password };
 
     try {
-      await request('https://rslang-server-slavajsfe.herokuapp.com/users', 'POST', body);
-    } catch (err) {
-      throw new Error(err);
-    }
+      const response = await request('https://rslang-server-slavajsfe.herokuapp.com/users', 'POST', body);
+
+      if (response && response.id) {
+        dispatch(setMessage(successMessage));
+
+        const data = await request('https://rslang-server-slavajsfe.herokuapp.com/signin', 'POST', { email, password });
+
+        const user = {
+          token: data.token,
+          refreshToken: data.refreshToken,
+          userId: data.userId,
+          name: data.name,
+        };
+        login(user);
+      }
+    } catch (err) {}
   }
 
   return (

@@ -5,6 +5,7 @@ import useRoutes from './routes';
 import './App.scss';
 import theme from './constants/theme';
 import useAuth from './hooks/auth.hook';
+import Message from './components/Message/Message';
 
 function App() {
   useAuth();
@@ -16,6 +17,7 @@ function App() {
         <Router>
           {routes}
         </Router>
+        <Message />
       </div>
     </ThemeProvider>
   );
