@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 import React, { useState } from 'react';
 import {
   Container,
@@ -29,6 +30,7 @@ export default function LoginPage() {
 
     try {
       const data = await request('https://rslang-server-slavajsfe.herokuapp.com/signin', 'POST', body);
+
       const user = {
         token: data.token,
         refreshToken: data.refreshToken,
@@ -36,9 +38,7 @@ export default function LoginPage() {
         name: data.name,
       };
       login(user);
-    } catch (err) {
-      throw new Error(err);
-    }
+    } catch (err) {}
   }
 
   return (

@@ -1,7 +1,11 @@
 const SET_USER = 'SET_USER';
 const LOGOUT = 'LOGOUT';
+const SET_MESSAGE = 'SET_MESSAGE';
+const SET_ERROR = 'SET_ERROR';
 
 export {
   SET_USER,
   LOGOUT,
+  SET_MESSAGE,
+  SET_ERROR,
 };

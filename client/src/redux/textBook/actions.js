@@ -36,7 +36,7 @@ export const setGroup = (group) => ({
 export const fetchWords = (currentGroup, currentPage) => async (dispatch) => {
   dispatch(setWordsStarted());
   try {
-    const data = await api.getWords(currentGroup, currentPage)
+    const data = await api.getWords(currentGroup, currentPage);
     dispatch(setWordsSuccess(data));
   } catch (error) {
     dispatch(setWordsFailure(error.message));
