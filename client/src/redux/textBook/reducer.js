@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import {
   SET_WORDS_SUCCESS,
   SET_WORDS_FAILURE,
@@ -5,6 +6,7 @@ import {
   SET_PAGE,
   SET_GROUP,
   SET_SETTINGS,
+  DELETE_WORD,
 } from './constants';
 
 const initialState = {
@@ -39,6 +41,11 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         error: payload,
         loading: false,
+      };
+    case DELETE_WORD:
+      return {
+        ...state,
+        words: state.words.filter((word) => word._id !== payload),
       };
     case SET_PAGE:
       return {

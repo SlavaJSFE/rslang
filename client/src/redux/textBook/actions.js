@@ -5,6 +5,7 @@ import {
   SET_PAGE,
   SET_GROUP,
   SET_SETTINGS,
+  DELETE_WORD,
 } from './constants';
 import * as api from '../../api/api';
 
@@ -31,6 +32,11 @@ export const setPage = (page) => ({
 export const setGroup = (group) => ({
   type: SET_GROUP,
   payload: group,
+});
+
+export const deleteWordRedux = (wordId) => ({
+  type: DELETE_WORD,
+  payload: wordId,
 });
 
 export const fetchWords = (currentGroup, currentPage, userData) => async (
@@ -88,9 +94,10 @@ export const setHardWord = (wordId, userData) => async () => {
   }
 };
 
-export const deleteWord = (wordId, userData) => async () => {
+export const deleteWord = (wordId, userData) => async (dispatch) => {
   try {
     await api.deleteWord(wordId, userData);
+    dispatch(deleteWordRedux(wordId));
     // логика пометки удаоенного слова
   } catch (error) {
     console.log(error);

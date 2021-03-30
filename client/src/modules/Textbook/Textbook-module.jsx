@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Container } from '@material-ui/core';
 import { Pagination, PaginationItem } from '@material-ui/lab';
 import { connect } from 'react-redux';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import '../../styles/common.scss';
 import './Textbook-module.scss';
@@ -54,14 +55,20 @@ const TextbookModule = ({
             {loading ? (
               <Preloader size={60} />
             ) : (
-              words.map((word) => (
-                <Word
-                  word={word}
-                  key={word._id}
-                  isHard={word?.userWord?.difficulty}
-                  className="textbook-list__item"
-                />
-              ))
+              <TransitionGroup>
+                {words.map((word) => (
+                  <CSSTransition key={word._id} timeout={200} className="item">
+                    <div>
+                      <Word
+                        word={word}
+                        key={word._id}
+                        isHard={word?.userWord?.difficulty}
+                        className="textbook-list__item"
+                      />
+                    </div>
+                  </CSSTransition>
+                ))}
+              </TransitionGroup>
             )}
           </div>
           <Pagination

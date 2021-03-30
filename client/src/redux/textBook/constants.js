@@ -4,3 +4,4 @@ export const SET_WORDS_STARTED = 'SET_WORDS_STARTED';
 export const SET_PAGE = 'SET_PAGE';
 export const SET_GROUP = 'SET_GROUP';
 export const SET_SETTINGS = 'SET_SETTINGS';
+export const DELETE_WORD = 'DELETE_WORD';
