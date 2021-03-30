@@ -6,3 +6,4 @@ export const SET_GROUP = 'SET_GROUP';
 export const SET_SETTINGS = 'SET_SETTINGS';
 export const DELETE_WORD = 'DELETE_WORD';
 export const SET_HARD_WORD = 'SET_HARD_WORD';
+export const SET_WORDS_COUNT = 'SET_WORDS_COUNT';

@@ -17,6 +17,7 @@ import {
 import NavTabs from '../../components/NavTabs/NavTabs';
 import Preloader from '../../components/Preloader/Preloader';
 import GameCards from '../../components/GameCards/GameCards';
+import calcPaginationCount from './utils';
 
 const TextbookModule = ({
   words,
@@ -27,6 +28,7 @@ const TextbookModule = ({
   currentGroup,
   fetchSettingsConnect,
   userData,
+  wordsCount,
 }) => {
   const { urlPage } = useParams('/textbook/:group/:urlPage');
 
@@ -73,7 +75,7 @@ const TextbookModule = ({
           </div>
           <Pagination
             className="textbook-pagination"
-            count={30}
+            count={calcPaginationCount(wordsCount)}
             color="primary"
             page={currentPage + 1}
             onChange={onPageChange}
@@ -97,6 +99,7 @@ const mapStateToProps = (state) => ({
   loading: state.textBookPage.loading,
   currentPage: state.textBookPage.currentPage,
   currentGroup: state.textBookPage.currentGroup,
+  wordsCount: state.textBookPage.wordsCount,
   userData: state.user.user,
 });
 

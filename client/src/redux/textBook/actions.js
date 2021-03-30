@@ -7,6 +7,7 @@ import {
   SET_SETTINGS,
   DELETE_WORD,
   SET_HARD_WORD,
+  SET_WORDS_COUNT,
 } from './constants';
 import * as api from '../../api/api';
 
@@ -40,6 +41,11 @@ export const deleteWordRedux = (wordId) => ({
   payload: wordId,
 });
 
+export const setWordsCount = (count) => ({
+  type: SET_WORDS_COUNT,
+  payload: count,
+});
+
 export const fetchWords = (currentGroup, currentPage, userData) => async (
   dispatch,
 ) => {
@@ -47,6 +53,7 @@ export const fetchWords = (currentGroup, currentPage, userData) => async (
   try {
     const data = await api.getWords(currentGroup, currentPage, userData);
     dispatch(setWordsSuccess(data[0].paginatedResults));
+    dispatch(setWordsCount(data[0].totalCount[0].count));
   } catch (error) {
     dispatch(setWordsFailure(error.message));
   }

@@ -8,12 +8,14 @@ import {
   SET_SETTINGS,
   DELETE_WORD,
   SET_HARD_WORD,
+  SET_WORDS_COUNT,
 } from './constants';
 
 const initialState = {
   words: [],
   currentPage: 0,
   currentGroup: 0,
+  wordsCount: 0,
   error: null,
   loading: false,
   settings: {
@@ -67,6 +69,11 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         currentGroup: payload,
+      };
+    case SET_WORDS_COUNT:
+      return {
+        ...state,
+        wordsCount: payload,
       };
     case SET_SETTINGS:
       return {
