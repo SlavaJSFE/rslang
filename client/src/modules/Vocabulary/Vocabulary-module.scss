@@ -1,9 +1,3 @@
-.makeStyles-root-5 {
-  // height: auto !important;
-  // background-color: #faebd700 !important;
-}
-
-
 .makeStyles-tabs-6 {
   width: 30rem !important;
 }
@@ -48,4 +42,12 @@ background-color: white !important;
   border-top-left-radius: 1rem !important;
 }
 
+.vocabularyPagination{
+  display: flex;
+  justify-content: center;
+}
 
+.MuiPaginationItem-page.Mui-selected {
+  background-color: #885980 !important;
+  color: white;
+}

@@ -62,7 +62,7 @@ const Word = ({
       />
       <CardContent className={classes.content}>
         {!isTextbook && (
-          <span>
+          <span className={classes.unitWords}>
             unit
             {' '}
             {word.group}
