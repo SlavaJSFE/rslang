@@ -37,14 +37,13 @@ const Field = ({
   };
 
   const onStart = useCallback(() => {
-    console.log(cards);
     setCardsArr([...cards]);
 
     playSwap();
 
     if (!isPlaying) setTimeout(() => setIsplaying(!isPlaying), 3000);
   }, [cards, isPlaying, setIsplaying]);
-    /// /
+
   useEffect(() => {
     onStart();
   }, [onStart]);
@@ -53,16 +52,12 @@ const Field = ({
     cardsArr.forEach((el) => {
       el.isFlipped = false;
     });
-    // cant understand why
     setTimeout(() => {
       cardsArr.forEach((el) => {
         el.isFlipped = false;
       });
-      // setIsplaying(!isPlaying);
-    }, 8000);
+    }, 800);
 
-    // setIsFinished(!isFinished);
-    console.log(isPlaying, 'from onfinish');
     setmachedArr([]);
   }, [cardsArr]);
 

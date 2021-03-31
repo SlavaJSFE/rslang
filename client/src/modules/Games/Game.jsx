@@ -1,34 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import Savannah from './Savannah/Savannah';
 import AudioCall from './AudioCall/AudioCall';
 import Sprint from './Sprint/Sprint';
 import Memory from './MemoryGame';
+import GameStart from './GameStart';
+
+import { games } from '../../constants/constants';
 
 export default function GamesModule() {
   const { type } = useParams();
+  const [start, setStart] = useState(false);
 
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const activeWords = useSelector((state) => state.game.words);
+  const pageNumber = useSelector((state) => state.game.level);
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch('https://react-learnwords-example.herokuapp.com/words?group=1&page=1');
-      const json = await response.json();
-      setData([...json]);
-      setLoading(!loading);
-    }
-
-    if (data.length === 0) fetchData();
-  }, []);
+  const gameObj = games.find((el) => el.type === type);
+  const { rule } = gameObj;
 
   return (
     <div className="games-module">
-      {type === 'savannah' && <Savannah data={data} />}
-      {type === 'memory' && <Memory data={data} />}
-      {type === 'audiocall' && <AudioCall data={data} />}
-      {type === 'sprint' && <Sprint data={data} />}
+      {!start && (
+        <GameStart
+          rule={rule}
+          setStart={setStart}
+          wordsNumber={activeWords.length}
+        />
+      )}
+      {start && type === 'savannah' && <Savannah data={activeWords} />}
+      {start && type === 'memory' && <Memory data={activeWords} />}
+      {start && type === 'audiocall' && <AudioCall data={activeWords} />}
+      {start && type === 'sprint' && <Sprint data={activeWords} />}
     </div>
   );
 }

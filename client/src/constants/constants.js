@@ -10,25 +10,33 @@ const games = [
     name: 'Savannah',
     path: '/games/savannah',
     className: 'savannah',
+    type: 'savannah',
     image: savannahImage,
+    rule: 'bla bla sav',
   },
   {
     name: 'Audio Call',
     path: '/games/audiocall',
     className: 'audiocall',
+    type: 'audiocall',
     image: audioCallImage,
+    rule: 'bla bla aud',
   },
   {
     name: 'Sprint',
     path: '/games/sprint',
     className: 'sprint',
+    type: 'sprint',
     image: sprintImage,
+    rule: 'bla bla sprint',
   },
   {
     name: 'Memory',
     path: '/games/memory',
     className: 'memory',
+    type: 'memory',
     image: memoryImage,
+    rule: 'bla bla mem',
   },
 ];
 
