@@ -17,6 +17,7 @@ import Header from '../../components/Header';
 import './Login.scss';
 import useHttp from '../../hooks/http.hook';
 import useAuth from '../../hooks/auth.hook';
+import { server } from '../../constants/constants';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -29,7 +30,7 @@ export default function LoginPage() {
     const body = { email, password };
 
     try {
-      const data = await request('https://rslang-server-slavajsfe.herokuapp.com/signin', 'POST', body);
+      const data = await request(`${server}/signin`, 'POST', body);
 
       const user = {
         token: data.token,
