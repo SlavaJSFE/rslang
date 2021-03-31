@@ -1,5 +1,5 @@
 import * as axios from 'axios';
-import { server } from '../../constants/constants';
+import { server } from '../../../constants/constants';
 import {
   SET_DIF_WORDS_SUCCESS,
   SET_DIF_WORDS_FAILURE,
