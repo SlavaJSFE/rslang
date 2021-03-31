@@ -5,8 +5,8 @@ import {
   SET_DIF_WORDS_SUCCESS,
   SET_DIF_WORDS_FAILURE,
   SET_DIF_WORDS_STARTED,
-  SET_DIF_PAGE,
-  SET_DIF_GROUP,
+  // SET_DIF_PAGE,
+  // SET_DIF_GROUP,
 } from './constants';
 
 export const setWordsStarted = () => ({
@@ -24,15 +24,15 @@ export const setWordsFailure = (err) => ({
   payload: err,
 });
 
-export const setPage = (page) => ({
-  type: SET_DIF_PAGE,
-  payload: page,
-});
+// export const setPage = (page) => ({
+//   type: SET_DIF_PAGE,
+//   payload: page,
+// });
 
-export const setGroup = (group) => ({
-  type: SET_DIF_GROUP,
-  payload: group,
-});
+// export const setGroup = (group) => ({
+//   type: SET_DIF_GROUP,
+//   payload: group,
+// });
 
 // const token = useSelector((state) => state.user.user.token);
 // console.log(token);

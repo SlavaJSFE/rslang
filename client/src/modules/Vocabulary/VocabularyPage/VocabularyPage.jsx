@@ -6,6 +6,7 @@ import { Pagination } from '@material-ui/lab';
 import Word from '../../../components/Word/Word';
 import calcCountPagination, { calcLastWordIndex } from '../utils';
 import { fetchVocabularyWords } from '../../../redux/vocabulary/actions';
+import { fetchVocabularyDeletedWords } from '../../../redux/vocabulary/actionsDeletedWords';
 
 export default function VocabularyPage({ isStudyPage, wordsType }) {
   const allWords = useSelector((state) => state[wordsType].words);
@@ -16,6 +17,7 @@ export default function VocabularyPage({ isStudyPage, wordsType }) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchVocabularyWords(userData));
+    dispatch(fetchVocabularyDeletedWords(userData));
   }, []);
   const handleChange = (event, value) => {
     setPage(value);
