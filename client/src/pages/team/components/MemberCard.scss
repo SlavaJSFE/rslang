@@ -1,0 +1,37 @@
+@import '../../../styles/common.scss';
+
+.member {
+  background-color: $tertiary-color;
+  border: 2px solid $secondary-color;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  margin: 50px auto;
+  max-width: 500px;
+}
+.member-photo {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 100%;;
+  }
+}
+.member-description {
+  padding: 20px;
+}
+.member-name,
+.member-role {
+  margin: 0;
+}
+.member-location {
+  display: flex;
+
+  img {
+    width: 32px;
+  }
+}
+.member-social-media {
+  display: flex;
+}

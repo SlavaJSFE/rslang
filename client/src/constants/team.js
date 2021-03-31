@@ -1,0 +1,62 @@
+import SlavaImage from '../assets/images/team/panda.jpg';
+
+const team = [
+  {
+    image: SlavaImage,
+    name: 'Слава Шпилевский',
+    role: 'супергерой',
+    location: 'Минск, Беларусь',
+    email: 'viachaslau.shpileuski@gmail.com',
+    telegram: 'https://t.me/vaslauski',
+    gitHub: 'https://github.com/SlavaJSFE',
+    linkedIn: 'https://www.linkedin.com/in/viachaslau-shpileuski-3217bb201/',
+    CV: 'https://viachaslau-shpileuski-cv-en.netlify.app/',
+    contribution: '',
+  },
+  {
+    image: SlavaImage,
+    name: 'Настя Сташевская',
+    role: 'супергерой',
+    location: 'Москва, Россия',
+    email: '',
+    telegram: 'https://t.me/AStashevskaya',
+    gitHub: 'https://github.com/AStashevskaya',
+    linkedIn: '',
+    contribution: '',
+  },
+  {
+    image: SlavaImage,
+    name: 'Маша Францева',
+    role: 'супергерой',
+    location: 'Минск, Беларусь',
+    email: 'mariya.frantsava7@gmail.com',
+    telegram: 'https://t.me/MariyaFrantsava',
+    gitHub: 'https://github.com/mariyafrantsava',
+    linkedIn: 'https://www.linkedin.com/in/mariya-frantsava-652648206/',
+    contribution: '',
+  },
+  {
+    image: SlavaImage,
+    name: 'Женя Бандюкевич',
+    role: 'супергерой',
+    location: 'Минск, Беларусь',
+    email: '',
+    telegram: 'https://t.me/zhenya_band',
+    gitHub: 'https://github.com/zhenya-band',
+    linkedIn: '',
+    contribution: '',
+  },
+  {
+    image: SlavaImage,
+    name: 'Максим',
+    role: 'супергерой',
+    location: 'Харьков, Украина',
+    email: '',
+    telegram: 'https://t.me/simax_saab',
+    gitHub: 'https://github.com/SimaxSaab',
+    linkedIn: '',
+    contribution: '',
+  },
+];
+
+export default team;

@@ -1,7 +1,7 @@
 import { Container } from '@material-ui/core';
 import React from 'react';
 import './Footer.scss';
-import gitHubLogo from '../../assets/images/GitHub-Mark-32px.png';
+import gitHubLogo from '../../assets/images/icons/GitHub-Mark-32px.png';
 import rssLogo from '../../assets/images/rs-school-js.svg';
 
 export default function Footer() {

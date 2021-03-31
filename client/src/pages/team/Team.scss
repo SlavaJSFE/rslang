@@ -10,3 +10,7 @@
 .inner-team img {
   width: 100%;
 }
+.team-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}

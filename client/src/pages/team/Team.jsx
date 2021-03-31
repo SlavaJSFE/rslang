@@ -2,19 +2,24 @@ import React from 'react';
 import { Container, Grid } from '@material-ui/core';
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header';
-import './Team.scss';
 import dragon from '../../assets/images/team/dragon-head.jpg';
 import pantera from '../../assets/images/team/panther-hunting.jpg';
 import coder from '../../assets/images/team/working-project.jpg';
 import cat from '../../assets/images/team/cat-and-fish.jpg';
 import monkey from '../../assets/images/team/monkey.png';
+import team from '../../constants/team';
+import MemberCard from './components/MemberCard';
+import './Team.scss';
 
 export default function TeamPage() {
   return (
     <div className="team-page page">
       <Container>
         <Header />
-        <h2>Team Page</h2>
+        <h2>Наша команда</h2>
+        <div className="team-cards">
+          {team.map((member) => <MemberCard props={member} />)}
+        </div>
       </Container>
       <Container className="inner-team">
         <Container className="inner-team">
