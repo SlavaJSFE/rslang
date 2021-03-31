@@ -1,11 +1,9 @@
-/* eslint-disable no-console */
-/* eslint-disable max-len */
 import * as axios from 'axios';
 import {
   SET_DEL_WORDS_SUCCESS,
   SET_DEL_WORDS_FAILURE,
   SET_DEL_WORDS_STARTED,
-} from './constantsDeletedWords';
+} from './constants';
 
 export const setWordsStarted = () => ({
   type: SET_DEL_WORDS_STARTED,
@@ -37,7 +35,6 @@ export const fetchVocabularyDeletedWords = (userData) => async (dispatch) => {
       },
     )
       .then((data) => dispatch(setWordsSuccess(data.data[0].paginatedResults)));
-    // .then((data) => console.log(data.data[0].paginatedResults));
   } catch (error) {
     dispatch(setWordsFailure(error.message));
   }

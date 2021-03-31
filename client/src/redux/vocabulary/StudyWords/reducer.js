@@ -1,9 +1,9 @@
 import {
-  SET_DEL_WORDS_SUCCESS,
-  SET_DEL_WORDS_FAILURE,
-  SET_DEL_WORDS_STARTED,
+  SET_STUDY_WORDS_SUCCESS,
+  SET_STUDY_WORDS_FAILURE,
+  SET_STUDY_WORDS_STARTED,
 
-} from './constantsDeletedWords';
+} from './constants';
 
 const initialState = {
   words: [],
@@ -13,19 +13,19 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case SET_DEL_WORDS_STARTED:
+    case SET_STUDY_WORDS_STARTED:
       return {
         ...state,
         loading: payload,
       };
 
-    case SET_DEL_WORDS_SUCCESS:
+    case SET_STUDY_WORDS_SUCCESS:
       return {
         ...state,
         words: payload,
         loading: false,
       };
-    case SET_DEL_WORDS_FAILURE:
+    case SET_STUDY_WORDS_FAILURE:
       return {
         ...state,
         error: payload,

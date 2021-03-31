@@ -3,6 +3,6 @@ import VocabularyPage from '../VocabularyPage/VocabularyPage';
 
 export default function StudiedWords() {
   return (
-    <VocabularyPage isStudyPage wordsType="vocabularyDifficultWords" />
+    <VocabularyPage isStudyPage wordsType="vocabularyStudyWords" />
   );
 }

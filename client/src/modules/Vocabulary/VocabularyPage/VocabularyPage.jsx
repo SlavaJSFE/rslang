@@ -1,12 +1,12 @@
-/* eslint-disable max-len */
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Pagination } from '@material-ui/lab';
 // import Typography from '@material-ui/core/Typography';
 import Word from '../../../components/Word/Word';
 import calcCountPagination, { calcLastWordIndex } from '../utils';
-import { fetchVocabularyWords } from '../../../redux/vocabulary/actions';
-import { fetchVocabularyDeletedWords } from '../../../redux/vocabulary/actionsDeletedWords';
+import { fetchVocabularyWords } from '../../../redux/vocabulary/DifficultWords/actions';
+import { fetchVocabularyDeletedWords } from '../../../redux/vocabulary/DeletedWords/actions';
+import { fetchVocabularyStudyWords } from '../../../redux/vocabulary/StudyWords/actions';
 
 export default function VocabularyPage({ isStudyPage, wordsType }) {
   const allWords = useSelector((state) => state[wordsType].words);
@@ -18,6 +18,7 @@ export default function VocabularyPage({ isStudyPage, wordsType }) {
   useEffect(() => {
     dispatch(fetchVocabularyWords(userData));
     dispatch(fetchVocabularyDeletedWords(userData));
+    dispatch(fetchVocabularyStudyWords(userData));
   }, []);
   const handleChange = (event, value) => {
     setPage(value);
@@ -25,22 +26,31 @@ export default function VocabularyPage({ isStudyPage, wordsType }) {
     setFinish(calcLastWordIndex(allWords.length, value));
   };
   return (
-    <div
-      className="textbook-list"
-      style={{ display: 'flex', flexWrap: 'wrap' }}
-    >
-      {allWords.slice(start, finish).map((word) => (
-        <Word
-          word={word}
-          isStudyStatistic={isStudyPage}
-          key={word.id}
-        />
-      ))}
-      {/* <Typography>
+    <div>
+      <div
+        className="textbook-list"
+        style={{ display: 'flex', flexWrap: 'wrap' }}
+      >
+        {allWords.slice(start, finish).map((word) => (
+          <Word
+            word={word}
+            isStudyStatistic={isStudyPage}
+            key={word.id}
+          />
+        ))}
+        {/* <Typography>
         Page:
         {page}
       </Typography> */}
-      <Pagination count={calcCountPagination(allWords.length)} page={page} onChange={handleChange} />
+      </div>
+      <div>
+        <Pagination
+          className="vocabularyPagination"
+          count={calcCountPagination(allWords.length)}
+          page={page}
+          onChange={handleChange}
+        />
+      </div>
     </div>
   );
 }
