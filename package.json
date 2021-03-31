@@ -4,12 +4,8 @@
   "description": "Final task of RSS React course",
   "main": "index.js",
   "scripts": {
-    "server": "npm run server --prefix server",
-    "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "install-server": "cd server && npm install",
-    "install-client": "cd client && npm install",
-    "install": "npm run install-server && npm run install-client"
+    "dev": "npm start --prefix client",
+    "install-client": "cd client && npm install"
   },
   "repository": {
     "type": "git",

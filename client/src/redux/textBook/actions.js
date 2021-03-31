@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 import {
   SET_WORDS_SUCCESS,
   SET_WORDS_FAILURE,
@@ -68,9 +69,7 @@ export const fetchSettings = (userData) => async (dispatch) => {
   try {
     const data = await api.fetchSettings(userData);
     dispatch(setSettings(data.optional));
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 };
 
 export const updateSettings = (field, value, userData) => async (
@@ -88,9 +87,7 @@ export const updateSettings = (field, value, userData) => async (
       userData,
     );
     dispatch(setSettings(data));
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 };
 
 export const setHardWordRedux = (wordId) => ({
@@ -102,16 +99,12 @@ export const setHardWord = (wordId, userData) => async (dispatch) => {
   try {
     dispatch(setHardWordRedux(wordId));
     await api.setHardWord(wordId, userData);
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 };
 
 export const deleteWord = (wordId, userData) => async (dispatch) => {
   try {
     await api.deleteWord(wordId, userData);
     dispatch(deleteWordRedux(wordId));
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 };
