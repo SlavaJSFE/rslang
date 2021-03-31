@@ -25,6 +25,9 @@ export default function VocabularyPage({ isStudyPage, wordsType }) {
     setStart(Math.ceil((value - 1) * 20));
     setFinish(calcLastWordIndex(allWords.length, value));
   };
+
+  const wordsVocabularyPage = allWords.slice(start, finish);
+
   return (
     <div>
       <div
