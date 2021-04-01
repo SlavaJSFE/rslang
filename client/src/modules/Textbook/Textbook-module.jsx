@@ -19,6 +19,7 @@ import NavTabs from '../../components/NavTabs/NavTabs';
 import Preloader from '../../components/Preloader/Preloader';
 import GameCards from '../../components/GameCards/GameCards';
 import calcPaginationCount from './utils';
+import ErrorMessage from './ErrorMessage/ErrorMessage';
 
 const TextbookModule = ({
   words,
@@ -57,6 +58,7 @@ const TextbookModule = ({
 
   return (
     <div className="textbook-module">
+      <ErrorMessage />
       <Container>
         <div className="textbook-content">
           <NavTabs />

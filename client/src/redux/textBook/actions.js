@@ -8,6 +8,7 @@ import {
   DELETE_WORD,
   SET_HARD_WORD,
   SET_WORDS_COUNT,
+  SET_IS_AUTH_ERROR,
 } from './constants';
 import * as api from '../../api/api';
 
@@ -44,6 +45,11 @@ export const deleteWordRedux = (wordId) => ({
 export const setWordsCount = (count) => ({
   type: SET_WORDS_COUNT,
   payload: count,
+});
+
+export const setIsAuthError = (value) => ({
+  type: SET_IS_AUTH_ERROR,
+  payload: value,
 });
 
 export const fetchWords = (currentGroup, currentPage, userData) => async (

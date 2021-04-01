@@ -9,6 +9,7 @@ import {
   DELETE_WORD,
   SET_HARD_WORD,
   SET_WORDS_COUNT,
+  SET_IS_AUTH_ERROR,
 } from './constants';
 
 const initialState = {
@@ -18,6 +19,7 @@ const initialState = {
   wordsCount: 0,
   error: null,
   loading: false,
+  isAuthError: false,
   settings: {
     optional: {
       isTranslation: true,
@@ -50,6 +52,11 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         error: payload,
         loading: false,
+      };
+    case SET_IS_AUTH_ERROR:
+      return {
+        ...state,
+        isAuthError: payload,
       };
     case DELETE_WORD:
       return {
