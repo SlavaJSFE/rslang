@@ -9,12 +9,13 @@ class Chart extends Component{
     }
   }
 
-  static defaultProps = {
-    displayTitle:true,
-    displayLegend: false,
+  // static defaultProps = {
+  // static defaultProps = {
+  //   displayTitle:true,
+  //   displayLegend: false,
     // legendPosition:'right',
     // location:'City'
-  }
+  // }
 
   render(){
     return (

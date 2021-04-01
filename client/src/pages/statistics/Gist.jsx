@@ -1,8 +1,11 @@
-import React, { Component } from 'react';
+/* eslint-disable import/no-named-as-default */
+import React, { Component, useState } from 'react';
 import './Gist.css';
 import Chart from './Chart';
 
 class Gist extends Component {
+  const [chartData, setChartData] = useState();
+
   constructor() {
     super();
     this.state = {
@@ -49,7 +52,7 @@ class Gist extends Component {
   render() {
     return (
       <div className="App">
-        <Chart chartData={this.state.chartData} legendPosition="bottom" />
+        <Chart chartData={chartData} legendPosition="bottom" />
       </div>
     );
   }
