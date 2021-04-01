@@ -12,6 +12,7 @@ export default function SoundBtn({ audioSrc }) {
   const [play] = useSound(url);
 
   const handleSoundBtnClick = () => {
+    console.log(url);
     play();
   };
 
