@@ -56,4 +56,19 @@ const setRightAnswer = (word) => async (dispatch, getState) => {
   }
 };
 
-export { setGameWords, setLevel, fetchGrupWords, setRightAnswer };
+const setWrongAnswer = (word) => async (dispatch, getState) => {
+  const { user } = getState().user;
+  try {
+    await api.setWrongAnswer(word, user);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export {
+  setGameWords,
+  setLevel,
+  fetchGrupWords,
+  setRightAnswer,
+  setWrongAnswer,
+};

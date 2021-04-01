@@ -10,7 +10,10 @@ import { getRandomWords } from '../utils';
 import correctSound from '../../../assets/sounds/correct.mp3';
 import errorSound from '../../../assets/sounds/error.mp3';
 import useStyles from './SavannahStyles';
-import { setRightAnswer } from '../../../redux/miniGameWords/actions';
+import {
+  setRightAnswer,
+  setWrongAnswer,
+} from '../../../redux/miniGameWords/actions';
 
 function popActiveWord(wordsForGame, activeWord) {
   return wordsForGame.filter(
@@ -39,6 +42,7 @@ export default function Savannah({ data }) {
       dispatch(setRightAnswer(activeWordForCheck));
     } else {
       playError();
+      dispatch(setWrongAnswer(activeWordForCheck));
       setHp(hp - 1);
     }
   }

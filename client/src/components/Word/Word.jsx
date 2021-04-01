@@ -45,7 +45,7 @@ const Word = ({
   };
 
   const onHardWord = async () => {
-    await setHardWordConnect(word.id, userData);
+    await setHardWordConnect(word, userData);
   };
 
   const onDeleteWord = async () => {

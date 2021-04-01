@@ -98,10 +98,10 @@ export const setHardWordRedux = (wordId) => ({
   payload: wordId,
 });
 
-export const setHardWord = (wordId, userData) => async (dispatch) => {
+export const setHardWord = (word, userData) => async (dispatch) => {
   try {
-    dispatch(setHardWordRedux(wordId));
-    await api.setHardWord(wordId, userData);
+    await api.setHardWord(word, userData);
+    dispatch(setHardWordRedux(word.id));
   } catch (error) {
     console.log(error);
   }
