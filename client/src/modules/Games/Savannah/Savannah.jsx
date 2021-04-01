@@ -106,7 +106,9 @@ export default function Savannah({ data }) {
             container={wordsContainer}
             game="savanna"
           />
-          <Rating name="stars" value={hp} className={classes.root} readOnly />
+          <div className="">
+            <Rating name="stars" value={hp} className={classes.root} readOnly />
+          </div>
         </div>
       )}
     </div>
