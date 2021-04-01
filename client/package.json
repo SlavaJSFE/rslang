@@ -22,12 +22,10 @@
     "react-transition-group": "^4.4.1",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
-<<<<<<< HEAD
-    "redux-thunk": "^2.3.0"
-=======
     "redux-thunk": "^2.3.0",
-    "use-sound": "^2.0.1"
->>>>>>> develop
+    "use-sound": "^2.0.1",
+    "chart.js": "^2.6.0",
+    "react-chartjs-2": "^2.1.0",
   },
   "scripts": {
     "start": "react-scripts start",
