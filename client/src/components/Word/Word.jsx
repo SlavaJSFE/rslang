@@ -16,12 +16,15 @@ import useStyles from './WordStyles';
 import { server } from '../../constants/constants';
 import RestoreBtn from '../../modules/Vocabulary/RestoreBtn/RestoreBtn';
 import { setHardWord, deleteWord } from '../../redux/textBook/actions';
+import { restoreWord } from '../../redux/vocabulary/actions';
+import StudyResults from '../../modules/Vocabulary/CommonStudyResults/StudyResults';
 
 const Word = ({
   word,
   isTranslation,
   isButtonsActive,
   setHardWordConnect,
+  restoreWordConnect,
   deleteWordConnect,
   userData,
   isHard,
@@ -50,6 +53,10 @@ const Word = ({
 
   const onDeleteWord = async () => {
     await deleteWordConnect(word._id, userData);
+  };
+
+  const onRestoreWord = async () => {
+    await restoreWordConnect(word._id, userData);
   };
 
   return (
@@ -132,18 +139,13 @@ const Word = ({
             />
           )}
         </Box>
-        { !isTextbook && <RestoreBtn /> }
+        { !isTextbook && (
+        <RestoreBtn
+          onClick={onRestoreWord}
+        />
+        )}
         {isStudyStatistic && (
-          <div className="vocabulary-module-resultsStudy">
-            <div className="vocabulary-module-resultsStudy__values">
-              <span>правильных ответов: </span>
-              <span className="vocabulary-module-resultsStudy__valuesNumber">{word.userWord.optional?.amountRightAnswers ?? 0}</span>
-            </div>
-            <div className="vocabulary-module-resultsStudy__values">
-              <span>ошибок: </span>
-              <span className="vocabulary-module-resultsStudy__valuesNumber">{word.userWord.optional?.amountWrongAnswers ?? 0}</span>
-            </div>
-          </div>
+          <StudyResults word={word} />
         )}
         {isButtonsActive && isTextbook && (
           <Box className={classes.buttons}>
@@ -181,4 +183,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   setHardWordConnect: setHardWord,
   deleteWordConnect: deleteWord,
+  restoreWordConnect: restoreWord,
 })(Word);
