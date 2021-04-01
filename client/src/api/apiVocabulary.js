@@ -2,13 +2,9 @@ import * as axios from 'axios';
 
 // eslint-disable-next-line import/prefer-default-export
 export const restoreWord = async (wordId, userData) => {
-  console.log('hi');
   try {
-    await axios.post(
+    await axios.delete(
       `https://rslang-server-slavajsfe.herokuapp.com/users/${userData.userId}/words/${wordId}`,
-      {
-        difficulty: '12345678',
-      },
       {
         headers: {
           Authorization: `Bearer ${userData.token}`,
@@ -19,5 +15,3 @@ export const restoreWord = async (wordId, userData) => {
     throw new Error(error);
   }
 };
-
-// export default restoreWord;

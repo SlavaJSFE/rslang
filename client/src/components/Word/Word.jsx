@@ -11,10 +11,8 @@ import {
 } from '@material-ui/core';
 import VolumeUpRoundedIcon from '@material-ui/icons/VolumeUpRounded';
 import { connect } from 'react-redux';
-
 import useStyles from './WordStyles';
 import { server } from '../../constants/constants';
-import RestoreBtn from '../../modules/Vocabulary/RestoreBtn/RestoreBtn';
 import { setHardWord, deleteWord } from '../../redux/textBook/actions';
 import { restoreWord } from '../../redux/vocabulary/actions';
 import StudyResults from '../../modules/Vocabulary/CommonStudyResults/StudyResults';
@@ -140,9 +138,17 @@ const Word = ({
           )}
         </Box>
         { !isTextbook && (
-        <RestoreBtn
-          onClick={onRestoreWord}
-        />
+        <Box className={classes.buttons}>
+          <Button
+            variant="outlined"
+            color="primary"
+            type="button"
+            className={classes.deleteBtn}
+            onClick={onRestoreWord}
+          >
+            восстановить
+          </Button>
+        </Box>
         )}
         {isStudyStatistic && (
           <StudyResults word={word} />

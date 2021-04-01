@@ -8,6 +8,9 @@ import { fetchVocabularyWords } from '../../../redux/vocabulary/DifficultWords/a
 import { fetchVocabularyDeletedWords } from '../../../redux/vocabulary/DeletedWords/actions';
 import { fetchVocabularyStudyWords } from '../../../redux/vocabulary/StudyWords/actions';
 
+import '../../../styles/common.scss';
+import '../../Textbook/Textbook-module.scss';
+
 export default function VocabularyPage({ isStudyPage, wordsType }) {
   const allWords = useSelector((state) => state[wordsType].words);
   const userData = useSelector((state) => state.user.user);
@@ -19,7 +22,8 @@ export default function VocabularyPage({ isStudyPage, wordsType }) {
     dispatch(fetchVocabularyWords(userData));
     dispatch(fetchVocabularyDeletedWords(userData));
     dispatch(fetchVocabularyStudyWords(userData));
-  }, []);
+  }, [allWords]);
+
   const handleChange = (event, value) => {
     setPage(value);
     setStart(Math.ceil((value - 1) * 20));
@@ -39,6 +43,7 @@ export default function VocabularyPage({ isStudyPage, wordsType }) {
             word={word}
             isStudyStatistic={isStudyPage}
             key={word.id}
+            className="textbook-list__item"
           />
         ))}
         {/* <Typography>

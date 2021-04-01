@@ -1,6 +1,5 @@
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/require-default-props */
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Container } from '@material-ui/core';
 import PropTypes from 'prop-types';
