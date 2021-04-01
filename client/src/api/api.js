@@ -50,6 +50,10 @@ export const setHardWord = async (word, userData) => {
       headers,
       data: {
         difficulty: 'hard',
+        optional: {
+          amountRightAnswers: 0,
+          amountWrongAnswers: 0,
+        },
       },
     });
   } catch (error) {

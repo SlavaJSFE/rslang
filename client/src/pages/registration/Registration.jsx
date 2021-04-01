@@ -19,6 +19,7 @@ import './Registration.scss';
 import useHttp from '../../hooks/http.hook';
 import useAuth from '../../hooks/auth.hook';
 import { setMessage } from '../../redux/user/actions';
+import { server } from '../../constants/constants';
 
 export default function RegistrationPage() {
   const [name, setName] = useState('');
@@ -34,12 +35,12 @@ export default function RegistrationPage() {
     const body = { name, email, password };
 
     try {
-      const response = await request('https://rslang-server-slavajsfe.herokuapp.com/users', 'POST', body);
+      const response = await request(`${server}/users`, 'POST', body);
 
       if (response && response.id) {
         dispatch(setMessage(successMessage));
 
-        const data = await request('https://rslang-server-slavajsfe.herokuapp.com/signin', 'POST', { email, password });
+        const data = await request(`${server}/signin`, 'POST', { email, password });
 
         const user = {
           token: data.token,
