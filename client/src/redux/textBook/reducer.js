@@ -36,7 +36,13 @@ export default (state = initialState, { type, payload }) => {
     case SET_WORDS_SUCCESS:
       return {
         ...state,
-        words: payload,
+        words: payload.reduce((prev, cur) => {
+          if (cur._id) {
+            cur.id = cur._id;
+            return [...prev, cur];
+          }
+          return [...prev, cur];
+        }, []),
         loading: false,
       };
     case SET_WORDS_FAILURE:
@@ -48,13 +54,13 @@ export default (state = initialState, { type, payload }) => {
     case DELETE_WORD:
       return {
         ...state,
-        words: state.words.filter((word) => word._id !== payload),
+        words: state.words.filter((word) => word.id !== payload),
       };
     case SET_HARD_WORD:
       return {
         ...state,
         words: state.words.map((word) => {
-          if (word._id === payload) {
+          if (word.id === payload) {
             return Object.assign(word, { userWord: { difficulty: 'hard' } });
           }
           return word;

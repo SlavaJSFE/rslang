@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import * as axios from 'axios';
 import generateReqBody from './utils';
 
@@ -97,7 +98,36 @@ export const getWords = async (currentGroup, currentPage, userData) => {
 export const getGrupWords = async (currentGroup) => {
   try {
     const { data } = await axios.get(
-      `https://react-learnwords-example.herokuapp.com/words?group=${currentGroup}`,
+      `https://rslang-server-slavajsfe.herokuapp.com/words?group=${currentGroup}`,
+    );
+    return data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export const setRightAnswer = async (word, userData) => {
+  const { userId, token } = userData;
+  const reqBody = word?.userWord?.optional?.rightAnswers
+    ? { optional: { rightAnswers: word.userWord.optional.rightAnswers + 1 } }
+    : { optional: { rightAnswers: 1 } };
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+  try {
+    const { data } = await axios({
+      method: word?.userWord ? 'put' : 'post',
+      url: `https://rslang-server-slavajsfe.herokuapp.com/users/${userId}/words/${word.id}`,
+      headers,
+      data: reqBody,
+    });
+    const words = JSON.parse(localStorage.getItem('words'));
+    localStorage.setItem(
+      'words',
+      JSON.stringify({
+        ...words,
+        [word.word]: { ...word, optional: reqBody.optional },
+      }),
     );
     return data;
   } catch (error) {

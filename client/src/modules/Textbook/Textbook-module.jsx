@@ -66,11 +66,11 @@ const TextbookModule = ({
             ) : (
               <TransitionGroup>
                 {words.map((word) => (
-                  <CSSTransition key={word._id} timeout={200} className="item">
+                  <CSSTransition key={word.id} timeout={200} className="item">
                     <div>
                       <Word
                         word={word}
-                        key={word._id}
+                        key={word.id}
                         isHard={word?.userWord?.difficulty}
                         isTextbook
                         className="textbook-list__item"
