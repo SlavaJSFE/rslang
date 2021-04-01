@@ -51,9 +51,15 @@ export const fetchWords = (currentGroup, currentPage, userData) => async (
 ) => {
   dispatch(setWordsStarted());
   try {
-    const data = await api.getWords(currentGroup, currentPage, userData);
-    dispatch(setWordsSuccess(data[0].paginatedResults));
-    dispatch(setWordsCount(data[0].totalCount[0].count));
+    if (userData.token) {
+      const data = await api.getWords(currentGroup, currentPage, userData);
+      dispatch(setWordsSuccess(data[0].paginatedResults));
+      dispatch(setWordsCount(data[0].totalCount[0].count));
+    } else {
+      const data = await api.getWordsWithOutAuth(currentGroup, currentPage);
+      dispatch(setWordsSuccess(data));
+      dispatch(setWordsCount(null));
+    }
   } catch (error) {
     dispatch(setWordsFailure(error.message));
   }

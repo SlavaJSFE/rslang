@@ -83,7 +83,7 @@ const TextbookModule = ({
           </div>
           <Pagination
             className="textbook-pagination"
-            count={calcPaginationCount(wordsCount)}
+            count={calcPaginationCount(wordsCount) || 30}
             color="primary"
             page={currentPage + 1}
             onChange={onPageChange}
