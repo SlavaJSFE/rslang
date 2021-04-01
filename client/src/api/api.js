@@ -1,5 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import * as axios from 'axios';
+import * as storage from '../localStorageApi/localStorageApi';
+
 import generateReqBody from './utils';
 
 export const updateSettings = async (optional, field, value, userData) => {
@@ -118,10 +120,10 @@ export const setRightAnswer = async (word, userData) => {
     : {
       optional: { ...word.userWord?.optional, rightAnswers: 1 },
     };
-  console.log(reqBody);
   const headers = {
     Authorization: `Bearer ${token}`,
   };
+  storage.setRightAnswer(word, reqBody);
   try {
     const { data } = await axios({
       method: word?.userWord ? 'put' : 'post',
@@ -129,14 +131,6 @@ export const setRightAnswer = async (word, userData) => {
       headers,
       data: reqBody,
     });
-    // const words = JSON.parse(localStorage.getItem('words'));
-    // localStorage.setItem(
-    //   'words',
-    //   JSON.stringify({
-    //     ...words,
-    //     [word.word]: { ...word, optional: reqBody.optional },
-    //   }),
-    // );
     return data;
   } catch (error) {
     throw new Error(error);
@@ -156,6 +150,7 @@ export const setWrongAnswer = async (word, userData) => {
   const headers = {
     Authorization: `Bearer ${token}`,
   };
+  storage.setWrongAnswer(word, reqBody);
   try {
     await axios({
       method: word?.userWord ? 'put' : 'post',
@@ -163,14 +158,6 @@ export const setWrongAnswer = async (word, userData) => {
       headers,
       data: reqBody,
     });
-    // const words = JSON.parse(localStorage.getItem('words'));
-    // localStorage.setItem(
-    //   'words',
-    //   JSON.stringify({
-    //     ...words,
-    //     [word.word]: { ...word, optional: reqBody.optional },
-    //   }),
-    // );
   } catch (error) {
     throw new Error(error);
   }
