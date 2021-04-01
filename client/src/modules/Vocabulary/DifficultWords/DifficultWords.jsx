@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD
 // import savannahImage from '../../../assets/images/safari.jpg';
 import Word from '../../../components/Word/Word';
 // import {  fetchWordsConnect,  setPageConnect } from '../../Textbook/Textbook-module.jsx';
@@ -14,5 +15,12 @@ export default function DifficultWords() {
       сложные слова
       <Word word={word} key={word.id} />
     </div>
+=======
+import VocabularyPage from '../VocabularyPage/VocabularyPage';
+
+export default function DifficultWords() {
+  return (
+    <VocabularyPage wordsType="vocabularyDifficultWords" />
+>>>>>>> develop
   );
 }

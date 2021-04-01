@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 // import { Link } from 'react-router-dom';
 import { Box, Button, Container } from '@material-ui/core';
 import './Main.scss';
@@ -6,7 +7,11 @@ import Footer from '../../components/Footer/Footer';
 import mainImage from '../../assets/images/students-textbooksss.png';
 import Header from '../../components/Header';
 
+import { setGameWords } from '../../redux/miniGameWords/actions';
+
 export default function MainPage() {
+  const dispatch = useDispatch();
+  dispatch(setGameWords([]));
   return (
     <div className="main-page page">
       <Container>

@@ -1,0 +1,12 @@
+@import '../../styles/common.scss';
+
+.login-form {
+  display: grid;
+  gap: 20px;
+  width: 400px;
+  margin: 50px auto;
+  padding: 15px 50px 30px;
+  background-color: $tertiary-color;
+  border: 2px solid $primary-color;
+  border-radius: 10px;
+}
