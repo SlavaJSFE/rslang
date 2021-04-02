@@ -1,11 +1,8 @@
-.makeStyles-tabs-6 {
-  width: 30rem !important;
-}
-  
-.MuiTab-textColorInherit {
-background-color: white !important;
-}
+@import '../../styles/common.scss';
 
+.vocabulary-tabs {
+  color: $secondary-color;
+}
 .vocabulary-module-results{
   display: flex;
   flex-direction: row;
@@ -36,18 +33,4 @@ background-color: white !important;
   &__valuesNumber{
     color: red;
   }
-}
-
-.MuiTab-textColorInherit {
-  border-top-left-radius: 1rem !important;
-}
-
-.vocabularyPagination{
-  display: flex;
-  justify-content: center;
-}
-
-.MuiPaginationItem-page.Mui-selected {
-  background-color: #885980 !important;
-  color: white;
 }
