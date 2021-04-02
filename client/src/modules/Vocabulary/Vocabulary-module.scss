@@ -1,17 +1,8 @@
-.makeStyles-root-5 {
-  // height: auto !important;
-  // background-color: #faebd700 !important;
-}
+@import '../../styles/common.scss';
 
-
-.makeStyles-tabs-6 {
-  width: 30rem !important;
+.vocabulary-tabs {
+  color: $secondary-color;
 }
-  
-.MuiTab-textColorInherit {
-background-color: white !important;
-}
-
 .vocabulary-module-results{
   display: flex;
   flex-direction: row;
@@ -43,9 +34,3 @@ background-color: white !important;
     color: red;
   }
 }
-
-.MuiTab-textColorInherit {
-  border-top-left-radius: 1rem !important;
-}
-
-
