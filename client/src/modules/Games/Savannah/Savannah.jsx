@@ -1,11 +1,19 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect, useRef } from 'react';
 import useSound from 'use-sound';
+import Rating from '@material-ui/lab/Rating';
+import { useDispatch } from 'react-redux';
 
 import ActiveWord from './ActiveWord/ActiveWord';
 import WordsSet from '../components/WordsSet/WordsSet';
 import { getRandomWords } from '../utils';
 import correctSound from '../../../assets/sounds/correct.mp3';
 import errorSound from '../../../assets/sounds/error.mp3';
+import useStyles from './SavannahStyles';
+import {
+  setRightAnswer,
+  setWrongAnswer,
+} from '../../../redux/miniGameWords/actions';
 
 function popActiveWord(wordsForGame, activeWord) {
   return wordsForGame.filter(
@@ -14,11 +22,14 @@ function popActiveWord(wordsForGame, activeWord) {
 }
 
 export default function Savannah({ data }) {
+  const classes = useStyles();
+  const dispatch = useDispatch();
   const [activeWord, setActiveWord] = useState('');
   const [randomWords, setRandomWords] = useState([]);
   const [clientY, setClientY] = useState(0);
   const [isFail, setIsFail] = useState(false);
   const [wordsForGame, setWordsForGame] = useState(data);
+  const [hp, setHp] = useState(5);
 
   const wordsContainer = useRef();
 
@@ -28,8 +39,11 @@ export default function Savannah({ data }) {
   function checkForCorrectWord(word, activeWordForCheck) {
     if (word === activeWordForCheck.wordTranslate) {
       playCorrect();
+      dispatch(setRightAnswer(activeWordForCheck));
     } else {
       playError();
+      dispatch(setWrongAnswer(activeWordForCheck));
+      setHp(hp - 1);
     }
   }
 
@@ -55,6 +69,7 @@ export default function Savannah({ data }) {
     if (isFail) {
       playError();
       setNewRound();
+      setHp(hp - 1);
     }
     setIsFail(false);
   }, [isFail]);
@@ -74,19 +89,28 @@ export default function Savannah({ data }) {
 
   return (
     <div className="game__savannah">
-      <ActiveWord
-        text={activeWord ? activeWord.word : null}
-        breakPoint={clientY}
-        setIsFail={setIsFail}
-        isFail={isFail}
-        wordsForGame={wordsForGame}
-      />
-      <WordsSet
-        handleClick={handleClick}
-        words={randomWords}
-        container={wordsContainer}
-        game="savanna"
-      />
+      {hp === 0 ? (
+        <div>Game over</div>
+      ) : (
+        <div>
+          <ActiveWord
+            text={activeWord ? activeWord.word : null}
+            breakPoint={clientY}
+            setIsFail={setIsFail}
+            isFail={isFail}
+            wordsForGame={wordsForGame}
+          />
+          <WordsSet
+            handleClick={handleClick}
+            words={randomWords}
+            container={wordsContainer}
+            game="savanna"
+          />
+          <div className="">
+            <Rating name="stars" value={hp} className={classes.root} readOnly />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

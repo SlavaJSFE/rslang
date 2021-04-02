@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import {
   Card,
@@ -15,7 +14,11 @@ import { connect } from 'react-redux';
 import useStyles from './WordStyles';
 import { server } from '../../constants/constants';
 import RestoreBtn from '../../modules/Vocabulary/RestoreBtn/RestoreBtn';
-import { setHardWord, deleteWord } from '../../redux/textBook/actions';
+import {
+  setHardWord,
+  deleteWord,
+  setIsAuthError,
+} from '../../redux/textBook/actions';
 
 const Word = ({
   word,
@@ -27,6 +30,7 @@ const Word = ({
   isHard,
   isTextbook,
   isStudyStatistic,
+  setIsAuthErrorConnect,
 }) => {
   const classes = useStyles();
 
@@ -45,11 +49,17 @@ const Word = ({
   };
 
   const onHardWord = async () => {
-    await setHardWordConnect(word._id, userData);
+    if (!userData.token) {
+      setIsAuthErrorConnect(true);
+    }
+    await setHardWordConnect(word, userData);
   };
 
   const onDeleteWord = async () => {
-    await deleteWordConnect(word._id, userData);
+    if (!userData.token) {
+      setIsAuthErrorConnect(true);
+    }
+    await deleteWordConnect(word.id, userData);
   };
 
   return (
@@ -64,7 +74,6 @@ const Word = ({
         {!isTextbook && (
           <span className={classes.unitWords}>
             unit
-            {' '}
             {word.group}
           </span>
         )}
@@ -132,16 +141,20 @@ const Word = ({
             />
           )}
         </Box>
-        { !isTextbook && <RestoreBtn /> }
+        {!isTextbook && <RestoreBtn />}
         {isStudyStatistic && (
           <div className="vocabulary-module-resultsStudy">
             <div className="vocabulary-module-resultsStudy__values">
               <span>правильных ответов: </span>
-              <span className="vocabulary-module-resultsStudy__valuesNumber">{word.userWord.optional?.amountRightAnswers ?? 0}</span>
+              <span className="vocabulary-module-resultsStudy__valuesNumber">
+                000
+              </span>
             </div>
             <div className="vocabulary-module-resultsStudy__values">
               <span>ошибок: </span>
-              <span className="vocabulary-module-resultsStudy__valuesNumber">{word.userWord.optional?.amountWrongAnswers ?? 0}</span>
+              <span className="vocabulary-module-resultsStudy__valuesNumber">
+                002
+              </span>
             </div>
           </div>
         )}
@@ -181,4 +194,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   setHardWordConnect: setHardWord,
   deleteWordConnect: deleteWord,
+  setIsAuthErrorConnect: setIsAuthError,
 })(Word);

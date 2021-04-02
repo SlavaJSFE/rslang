@@ -19,6 +19,7 @@ import NavTabs from '../../components/NavTabs/NavTabs';
 import Preloader from '../../components/Preloader/Preloader';
 import GameCards from '../../components/GameCards/GameCards';
 import calcPaginationCount from './utils';
+import ErrorMessage from './ErrorMessage/ErrorMessage';
 
 const TextbookModule = ({
   words,
@@ -57,6 +58,7 @@ const TextbookModule = ({
 
   return (
     <div className="textbook-module">
+      <ErrorMessage />
       <Container>
         <div className="textbook-content">
           <NavTabs />
@@ -66,11 +68,11 @@ const TextbookModule = ({
             ) : (
               <TransitionGroup>
                 {words.map((word) => (
-                  <CSSTransition key={word._id} timeout={200} className="item">
+                  <CSSTransition key={word.id} timeout={200} className="item">
                     <div>
                       <Word
                         word={word}
-                        key={word._id}
+                        key={word.id}
                         isHard={word?.userWord?.difficulty}
                         isTextbook
                         className="textbook-list__item"
@@ -83,7 +85,7 @@ const TextbookModule = ({
           </div>
           <Pagination
             className="textbook-pagination"
-            count={calcPaginationCount(wordsCount)}
+            count={calcPaginationCount(wordsCount) || 30}
             color="primary"
             page={currentPage + 1}
             onChange={onPageChange}
