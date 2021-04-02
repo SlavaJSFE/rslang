@@ -4,6 +4,8 @@ import './MemberCard.scss';
 import locationIcon from '../../../assets/images/icons/location.svg';
 import gitHubIcon from '../../../assets/images/icons/GitHub-Mark-32px.png';
 import linkedInIcon from '../../../assets/images/icons/linkedin.svg';
+import telegramIcon from '../../../assets/images/icons/telegram.svg';
+import emailIcon from '../../../assets/images/icons/email.svg';
 
 export default function MemberCard({ props }) {
   const {
@@ -14,6 +16,7 @@ export default function MemberCard({ props }) {
     gitHub,
     linkedIn,
     telegram,
+    email,
   } = props;
 
   return (
@@ -25,7 +28,7 @@ export default function MemberCard({ props }) {
         <h2 className="member-name">{name}</h2>
         <h4 className="member-role">{role}</h4>
         <div className="member-location">
-          <img src={locationIcon} alt="" />
+          <img src={locationIcon} alt="Location" />
           <span>{location}</span>
         </div>
         <p className="member-contribution">
@@ -36,16 +39,16 @@ export default function MemberCard({ props }) {
         </p>
         <div className="member-social-media">
           <Link to={gitHub}>
-            <img src={gitHubIcon} alt="" />
+            <img src={gitHubIcon} alt="GitHub" />
           </Link>
           <Link to={linkedIn}>
-            <img src={linkedInIcon} alt="" />
+            <img src={linkedInIcon} alt="LinkedIn" />
           </Link>
           <Link to={telegram}>
-            <img src={gitHubIcon} alt="" />
+            <img src={telegramIcon} alt="Telegram" />
           </Link>
-          <Link to={gitHub}>
-            <img src={gitHubIcon} alt="" />
+          <Link to={`mailto:${email}`}>
+            <img src={emailIcon} alt="Email" />
           </Link>
         </div>
       </div>

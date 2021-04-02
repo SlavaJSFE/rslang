@@ -21,7 +21,7 @@ const team = [
     email: '',
     telegram: 'https://t.me/AStashevskaya',
     gitHub: 'https://github.com/AStashevskaya',
-    linkedIn: '',
+    linkedIn: 'linkedin.com/in/anastasiya-stashevskaya-919b3b15b',
     contribution: '',
   },
   {
@@ -43,12 +43,12 @@ const team = [
     email: '',
     telegram: 'https://t.me/zhenya_band',
     gitHub: 'https://github.com/zhenya-band',
-    linkedIn: '',
+    linkedIn: 'linkedin.com/in/yauheni-bandyukevich',
     contribution: '',
   },
   {
     image: SlavaImage,
-    name: 'Максим',
+    name: 'Максим Сава',
     role: 'супергерой',
     location: 'Харьков, Украина',
     email: '',
