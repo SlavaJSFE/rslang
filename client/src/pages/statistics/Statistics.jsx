@@ -11,8 +11,8 @@ export default function StatisticsPage() {
       <Container>
         <Header />
         <StatisticsModule />
+        <Gist />
       </Container>
-      <Gist />
       <Footer />
     </div>
   );
