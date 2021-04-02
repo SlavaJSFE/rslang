@@ -1,12 +1,8 @@
-/* eslint-disable react/forbid-prop-types */
-/* eslint-disable react/require-default-props */
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-
-import { Container } from '@material-ui/core';
-
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+// import { Container } from '@material-ui/core';
+// import PropTypes from 'prop-types';
+// import { makeStyles } from '@material-ui/core/styles';
+import { Link, useParams } from 'react-router-dom';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
@@ -14,7 +10,6 @@ import Box from '@material-ui/core/Box';
 import DeletedWords from './DeletedWords/DeletedWords';
 import DifficultWords from './DifficultWords/DifficultWords';
 import StudiedWords from './StudiedWords/StudiedWords';
-import GameCards from '../../components/GameCards/GameCards';
 import './Vocabulary-module.scss';
 import CommonStudyResults from './CommonStudyResults/CommonStudyResults';
 
@@ -40,12 +35,6 @@ function TabPanel(props) {
   );
 }
 
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
-
 function allProps(index) {
   return {
     id: `vertical-tab-${index}`,
@@ -53,53 +42,55 @@ function allProps(index) {
   };
 }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    display: 'flex',
-    height: 'auto',
-  },
-  tabs: {
-    borderRight: `1px solid ${theme.palette.divider}`,
-  },
-}));
-
-export default function VerticalTabs() {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+export default function VocabularyModule() {
+  const { unit, page } = useParams();
+  console.log(unit, page);
 
   return (
     <div className="vocabulary-module">
-      <Container>
-        <CommonStudyResults />
-        <div className={classes.root}>
-          <Tabs
-            orientation="vertical"
-            variant="scrollable"
-            value={value}
-            onChange={handleChange}
-            aria-label="Vertical tabs example"
-            className={classes.tabs}
-          >
-            <Tab label="Изучаемые слова" {...allProps(0)} />
-            <Tab label="Сложные слова" {...allProps(1)} />
-            <Tab label="Удаленные слова" {...allProps(2)} />
-          </Tabs>
-          <TabPanel value={value} index={0}>
-            <StudiedWords />
-          </TabPanel>
-          <TabPanel value={value} index={1}>
-            <DifficultWords />
-          </TabPanel>
-          <TabPanel value={value} index={2}>
-            <DeletedWords />
-          </TabPanel>
-        </div>
-        <GameCards />
-      </Container>
+      <CommonStudyResults />
+      <div className="classes.root">
+        <Tabs
+          variant="fullWidth"
+          indicatorColor="secondary"
+          value={unit}
+          aria-label="Vertical tabs example"
+          className="vocabulary-tabs"
+          centered
+        >
+          <Tab
+            className="vocabulary-tab"
+            component={Link}
+            value="studied"
+            label="Изучаемые слова"
+            {...allProps('studied')}
+            to="/textbook/vocabulary/studied/1"
+          />
+          <Tab
+            component={Link}
+            value="difficult"
+            label="Сложные слова"
+            {...allProps('difficult')}
+            to="/textbook/vocabulary/difficult/1"
+          />
+          <Tab
+            component={Link}
+            value="deleted"
+            label="Удаленные слова"
+            {...allProps('deleted')}
+            to="/textbook/vocabulary/deleted/1"
+          />
+        </Tabs>
+        <TabPanel value={unit} index="studied">
+          <StudiedWords />
+        </TabPanel>
+        <TabPanel value={unit} index="difficult">
+          <DifficultWords />
+        </TabPanel>
+        <TabPanel value={unit} index="deleted">
+          <DeletedWords />
+        </TabPanel>
+      </div>
     </div>
   );
 }
