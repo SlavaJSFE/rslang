@@ -11,7 +11,7 @@ import { fetchVocabularyDeletedWords } from '../../../redux/vocabulary/DeletedWo
 import { fetchVocabularyStudyWords } from '../../../redux/vocabulary/StudyWords/actions';
 import '../../../styles/common.scss';
 import '../../Textbook/Textbook-module.scss';
-import '../Vocabulary-module.scss';
+import '../Vocabulary.scss';
 
 export default function VocabularyPage({ isStudyPage, wordsType }) {
   const allWords = useSelector((state) => state[wordsType].words);
