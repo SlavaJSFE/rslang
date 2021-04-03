@@ -91,7 +91,7 @@ const Word = ({
             </Typography>
           </Box>
           <Box>
-            {isHard === 'hard' && (
+            {isHard && (
               <Chip
                 classes={{ root: classes.chipRot, label: classes.label }}
                 variant="outlined"
@@ -168,7 +168,7 @@ const Word = ({
               color="primary"
               className={classes.hardBtn}
               onClick={onHardWord}
-              disabled={isHard === 'hard'}
+              disabled={isHard}
             >
               Сложно
             </Button>
@@ -177,7 +177,7 @@ const Word = ({
               color="primary"
               className={classes.deleteBtn}
               onClick={onDeleteWord}
-              disabled={isHard === 'hard'}
+              disabled={isHard}
             >
               Удалить
             </Button>

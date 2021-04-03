@@ -11,6 +11,7 @@ import { fetchVocabularyDeletedWords } from '../../../redux/vocabulary/DeletedWo
 import { fetchVocabularyStudyWords } from '../../../redux/vocabulary/StudyWords/actions';
 import '../../../styles/common.scss';
 import '../../Textbook/Textbook-module.scss';
+import '../Vocabulary-module.scss';
 
 export default function VocabularyPage({ isStudyPage, wordsType }) {
   const allWords = useSelector((state) => state[wordsType].words);
@@ -37,8 +38,7 @@ export default function VocabularyPage({ isStudyPage, wordsType }) {
   return (
     <div>
       <div
-        className="textbook-list"
-        style={{ display: 'flex', flexWrap: 'wrap' }}
+        className="textbook-list cardWordVocabulary"
       >
         {allWords.slice(start, finish).map((word) => (
           <Word
