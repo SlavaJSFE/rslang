@@ -10,20 +10,23 @@ import {
   Chip,
 } from '@material-ui/core';
 import VolumeUpRoundedIcon from '@material-ui/icons/VolumeUpRounded';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import useStyles from './WordStyles';
 import { server } from '../../constants/constants';
-import { setHardWord, deleteWord } from '../../redux/textBook/actions';
-import { restoreWord } from '../../redux/vocabulary/actions';
+import * as textBookActions from '../../redux/textBook/actions';
+import * as vocabularyActions from '../../redux/vocabulary/actions';
 import StudyResults from '../../modules/Vocabulary/CommonStudyResults/StudyResults';
+import { fetchVocabularyWords } from '../../redux/vocabulary/DifficultWords/actions';
+import { fetchVocabularyDeletedWords } from '../../redux/vocabulary/DeletedWords/actions';
+import { fetchVocabularyStudyWords } from '../../redux/vocabulary/StudyWords/actions';
 
 const Word = ({
   word,
   isTranslation,
   isButtonsActive,
-  setHardWordConnect,
-  restoreWordConnect,
-  deleteWordConnect,
+  setHardWord,
+  restoreWord,
+  deleteWord,
   userData,
   isHard,
   isTextbook,
@@ -31,7 +34,7 @@ const Word = ({
 }) => {
   const classes = useStyles();
 
-  const playAudio = async (audioSrc) => {
+  const playAudio = (audioSrc) => {
     const audio = new Audio(audioSrc);
     return new Promise((resolve) => {
       audio.play();
@@ -46,15 +49,20 @@ const Word = ({
   };
 
   const onHardWord = async () => {
-    await setHardWordConnect(word._id, userData);
+    await setHardWord(word._id, userData);
   };
 
   const onDeleteWord = async () => {
-    await deleteWordConnect(word._id, userData);
+    await deleteWord(word._id, userData);
   };
 
+  const dispatch = useDispatch();
+
   const onRestoreWord = async () => {
-    await restoreWordConnect(word._id, userData);
+    await restoreWord(word._id, userData);
+    dispatch(fetchVocabularyWords(userData));
+    dispatch(fetchVocabularyDeletedWords(userData));
+    dispatch(fetchVocabularyStudyWords(userData));
   };
 
   return (
@@ -146,7 +154,7 @@ const Word = ({
             className={classes.deleteBtn}
             onClick={onRestoreWord}
           >
-            восстановить
+            Восстановить
           </Button>
         </Box>
         )}
@@ -186,8 +194,10 @@ const mapStateToProps = (state) => ({
   userData: state.user.user,
 });
 
-export default connect(mapStateToProps, {
-  setHardWordConnect: setHardWord,
-  deleteWordConnect: deleteWord,
-  restoreWordConnect: restoreWord,
-})(Word);
+const mapDispatchToProps = ({
+  setHardWord: textBookActions.setHardWord,
+  deleteWord: textBookActions.deleteWord,
+  restoreWord: vocabularyActions.restoreWord,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Word);
