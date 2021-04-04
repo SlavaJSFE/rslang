@@ -123,7 +123,7 @@ export const getWords = async (currentGroup, currentPage, userData) => {
 export const getGrupWords = async (currentGroup) => {
   try {
     const { data } = await axios.get(
-      `https://react-learnwords-example.herokuapp.com/words?group=${currentGroup}`,
+      `https://rslang-server-slavajsfe.herokuapp.com/words?group=${currentGroup}`,
     );
     return data;
   } catch (error) {

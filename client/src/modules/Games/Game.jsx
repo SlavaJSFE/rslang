@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Savannah from './Savannah/Savannah';
 import AudioCall from './AudioCall/AudioCall';
@@ -9,6 +9,7 @@ import Memory from './MemoryGame';
 import GameStart from './GameStart';
 
 import { games } from '../../constants/constants';
+import { fetchGrupWords } from '../../redux/miniGameWords/actions';
 
 export default function GamesModule() {
   const { type } = useParams();
@@ -16,9 +17,15 @@ export default function GamesModule() {
 
   const activeWords = useSelector((state) => state.game.words);
   const pageNumber = useSelector((state) => state.game.level);
+  const dispatch = useDispatch();
 
   const gameObj = games.find((el) => el.type === type);
   const { rule } = gameObj;
+
+  useEffect(() => {
+    if (activeWords.length === 0) dispatch(fetchGrupWords());
+  }, [activeWords]);
+  console.log(activeWords);
 
   return (
     <div className="games-module">
