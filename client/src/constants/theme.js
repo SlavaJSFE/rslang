@@ -1,12 +1,19 @@
 import { createMuiTheme } from '@material-ui/core';
 
+const primary = '#885980';
+const secondary = '#8AB94F';
+const tertiary = '#FAF1DA';
+
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#885980',
+      main: primary,
     },
     secondary: {
-      main: '#FAF1DA',
+      main: secondary,
+    },
+    tertiary: {
+      main: tertiary,
     },
   },
   overrides: {
@@ -21,10 +28,15 @@ const theme = createMuiTheme({
         border: '2px solid',
       },
       containedPrimary: {
-        border: '2px solid #885980',
+        border: `2px solid ${primary}`,
       },
       containedSecondary: {
-        border: '2px solid #8AB94F',
+        border: `2px solid ${secondary}`,
+      },
+    },
+    MuiTab: {
+      root: {
+        backgroundColor: tertiary,
       },
     },
   },

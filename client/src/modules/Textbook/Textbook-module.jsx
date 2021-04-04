@@ -31,7 +31,7 @@ const TextbookModule = ({
   userData,
   wordsCount,
 }) => {
-  const { urlPage } = useParams('/textbook/:group/:urlPage');
+  const { urlPage } = useParams('/textbook/list/:group/:urlPage');
 
   const dispatch = useDispatch();
 
@@ -71,7 +71,7 @@ const TextbookModule = ({
                       <Word
                         word={word}
                         key={word._id}
-                        isHard={word?.userWord?.difficulty}
+                        isHard={!!word?.userWord?.difficulty}
                         isTextbook
                         className="textbook-list__item"
                       />
@@ -90,7 +90,7 @@ const TextbookModule = ({
             renderItem={(item) => (
               <PaginationItem
                 component={Link}
-                to={`/textbook/${currentGroup + 1}/${item.page}`}
+                to={`/textbook/list/${currentGroup + 1}/${item.page}`}
                 {...item}
               />
             )}

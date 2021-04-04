@@ -5,13 +5,13 @@ import './Navigation.scss';
 export default function Navigation() {
   return (
     <nav className="navigation">
-      <Link to="/textbook/1/1">
+      <Link to="/textbook">
         <div className="menu-item">УЧЕБНИК</div>
       </Link>
       <Link to="/games">
         <div className="menu-item">ИГРЫ</div>
       </Link>
-      <Link to="/statistics">
+      <Link to="/statistic">
         <div className="menu-item">СТАТИСТИКА</div>
       </Link>
       <Link to="/team">

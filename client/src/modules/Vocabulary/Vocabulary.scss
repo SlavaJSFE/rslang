@@ -1,12 +1,9 @@
-.makeStyles-tabs-6 {
-  width: 30rem !important;
-}
-  
-.MuiTab-textColorInherit {
-background-color: white !important;
-}
+@import '../../styles/common.scss';
 
-.vocabulary-module-results{
+.vocabulary-tabs {
+  color: $secondary-color;
+}
+.vocabulary-results{
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -23,7 +20,7 @@ background-color: white !important;
   }
 }
 
-.vocabulary-module-resultsStudy{
+.vocabulary-resultsStudy{
   display: flex;
   justify-content: space-around;
   margin-top: .5rem;
@@ -37,17 +34,7 @@ background-color: white !important;
     color: red;
   }
 }
-
-.MuiTab-textColorInherit {
-  border-top-left-radius: 1rem !important;
-}
-
-.vocabularyPagination{
+.cardWordVocabulary{
   display: flex;
-  justify-content: center;
-}
-
-.MuiPaginationItem-page.Mui-selected {
-  background-color: #885980 !important;
-  color: white;
+  flex-wrap: wrap;
 }

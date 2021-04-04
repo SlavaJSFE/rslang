@@ -1,0 +1,46 @@
+@import '../../../styles/common.scss';
+
+.member {
+  background-color: $tertiary-color;
+  border: 2px solid $secondary-color;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 40% 60%;
+  margin: 50px auto;
+  max-width: 700px;
+}
+.member-photo {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 100%;;
+  }
+}
+.member-description {
+  padding: 20px;
+}
+.member-name,
+.member-role {
+  margin: 0;
+}
+.member-location {
+  margin-top: 10px;
+  display: flex;
+  column-gap: 5px;
+
+  img {
+    width: 24px;
+  }
+}
+.member-social-media {
+  display: flex;
+
+  a {
+    margin-right: 8px;
+  }  
+  img {
+    width: 32px;
+  }
+}
