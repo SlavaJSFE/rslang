@@ -35,12 +35,12 @@ export default function RegistrationPage() {
     const body = { name, email, password };
 
     try {
-      const response = await request(`${server}/users`, 'POST', body);
+      const response = await request(`${server}users`, 'POST', body);
 
       if (response && response.id) {
         dispatch(setMessage(successMessage));
 
-        const data = await request(`${server}/signin`, 'POST', { email, password });
+        const data = await request(`${server}signin`, 'POST', { email, password });
 
         const user = {
           token: data.token,

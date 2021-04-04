@@ -30,7 +30,7 @@ export default function LoginPage() {
     const body = { email, password };
 
     try {
-      const data = await request(`${server}/signin`, 'POST', body);
+      const data = await request(`${server}signin`, 'POST', body);
 
       const user = {
         token: data.token,

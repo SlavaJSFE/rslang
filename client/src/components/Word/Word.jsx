@@ -43,9 +43,9 @@ const Word = ({
   };
 
   const onPlay = async () => {
-    await playAudio(`${server}/${word.audio}`);
-    await playAudio(`${server}/${word.audioMeaning}`);
-    await playAudio(`${server}/${word.audioExample}`);
+    await playAudio(`${server}${word.audio}`);
+    await playAudio(`${server}${word.audioExample}`);
+    await playAudio(`${server}${word.audioMeaning}`);
   };
 
   const onHardWord = async () => {
@@ -68,7 +68,7 @@ const Word = ({
         className={classes.media}
         component="img"
         alt={word.word}
-        image={`${server}/${word.image}`}
+        image={`${server}${word.image}`}
       />
       <CardContent className={classes.content}>
         {!isTextbook && (

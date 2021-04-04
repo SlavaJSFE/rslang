@@ -18,7 +18,7 @@ export default function AudioGame({ data }) {
   const [randomWords, setRandomWords] = useState([]);
   const [shouldOpen, setShouldOpen] = useState(false);
 
-  const url = `${server}/${activeWord ? activeWord.audio : null}`;
+  const url = `${server}${activeWord ? activeWord.audio : null}`;
 
   const [playError] = useSound(errorSound);
   const [playCorrect] = useSound(correctSound);
