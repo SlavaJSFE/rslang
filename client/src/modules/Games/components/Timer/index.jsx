@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import './timer.scss';
+
 export default function Timer({ setStartTimer }) {
   const [time, setTime] = useState(3);
 
@@ -11,9 +13,9 @@ export default function Timer({ setStartTimer }) {
     if (time === 0) {
       setStartTimer(false);
     }
-    return function () {
+    return () => {
       clearInterval(timer);
     };
   });
-  return <div>{time}</div>;
+  return <div className="timer">{time}</div>;
 }
