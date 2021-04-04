@@ -9,23 +9,23 @@ import {
   Chip,
 } from '@material-ui/core';
 import VolumeUpRoundedIcon from '@material-ui/icons/VolumeUpRounded';
-import { connect } from 'react-redux';
-
+import { connect, useDispatch } from 'react-redux';
 import useStyles from './WordStyles';
 import { server } from '../../constants/constants';
-import RestoreBtn from '../../modules/Vocabulary/RestoreBtn/RestoreBtn';
-import {
-  setHardWord,
-  deleteWord,
-  setIsAuthError,
-} from '../../redux/textBook/actions';
+import * as textBookActions from '../../redux/textBook/actions';
+import * as vocabularyActions from '../../redux/vocabulary/actions';
+import StudyResults from '../../modules/Vocabulary/CommonStudyResults/StudyResults';
+import { fetchVocabularyWords } from '../../redux/vocabulary/DifficultWords/actions';
+import { fetchVocabularyDeletedWords } from '../../redux/vocabulary/DeletedWords/actions';
+import { fetchVocabularyStudyWords } from '../../redux/vocabulary/StudyWords/actions';
 
 const Word = ({
   word,
   isTranslation,
   isButtonsActive,
-  setHardWordConnect,
-  deleteWordConnect,
+  setHardWord,
+  restoreWord,
+  deleteWord,
   userData,
   isHard,
   isTextbook,
@@ -34,7 +34,7 @@ const Word = ({
 }) => {
   const classes = useStyles();
 
-  const playAudio = async (audioSrc) => {
+  const playAudio = (audioSrc) => {
     const audio = new Audio(audioSrc);
     return new Promise((resolve) => {
       audio.play();
@@ -52,14 +52,24 @@ const Word = ({
     if (!userData.token) {
       setIsAuthErrorConnect(true);
     }
-    await setHardWordConnect(word, userData);
+    await setHardWord(word, userData);
   };
 
   const onDeleteWord = async () => {
     if (!userData.token) {
       setIsAuthErrorConnect(true);
     }
-    await deleteWordConnect(word.id, userData);
+    await deleteWord(word.id, userData);
+    await setHardWord(word.id, userData);
+  };
+
+  const dispatch = useDispatch();
+
+  const onRestoreWord = async () => {
+    await restoreWord(word.id, userData);
+    dispatch(fetchVocabularyWords(userData));
+    dispatch(fetchVocabularyDeletedWords(userData));
+    dispatch(fetchVocabularyStudyWords(userData));
   };
 
   return (
@@ -87,7 +97,7 @@ const Word = ({
             </Typography>
           </Box>
           <Box>
-            {isHard === 'hard' && (
+            {isHard && (
               <Chip
                 classes={{ root: classes.chipRot, label: classes.label }}
                 variant="outlined"
@@ -141,22 +151,21 @@ const Word = ({
             />
           )}
         </Box>
-        {!isTextbook && <RestoreBtn />}
+        { !isTextbook && (
+        <Box className={classes.buttons}>
+          <Button
+            variant="outlined"
+            color="primary"
+            type="button"
+            className={classes.deleteBtn}
+            onClick={onRestoreWord}
+          >
+            Восстановить
+          </Button>
+        </Box>
+        )}
         {isStudyStatistic && (
-          <div className="vocabulary-module-resultsStudy">
-            <div className="vocabulary-module-resultsStudy__values">
-              <span>правильных ответов: </span>
-              <span className="vocabulary-module-resultsStudy__valuesNumber">
-                000
-              </span>
-            </div>
-            <div className="vocabulary-module-resultsStudy__values">
-              <span>ошибок: </span>
-              <span className="vocabulary-module-resultsStudy__valuesNumber">
-                002
-              </span>
-            </div>
-          </div>
+          <StudyResults word={word} />
         )}
         {isButtonsActive && isTextbook && (
           <Box className={classes.buttons}>
@@ -165,7 +174,7 @@ const Word = ({
               color="primary"
               className={classes.hardBtn}
               onClick={onHardWord}
-              disabled={isHard === 'hard'}
+              disabled={isHard}
             >
               Сложно
             </Button>
@@ -174,7 +183,7 @@ const Word = ({
               color="primary"
               className={classes.deleteBtn}
               onClick={onDeleteWord}
-              disabled={isHard === 'hard'}
+              disabled={isHard}
             >
               Удалить
             </Button>
@@ -191,8 +200,10 @@ const mapStateToProps = (state) => ({
   userData: state.user.user,
 });
 
-export default connect(mapStateToProps, {
-  setHardWordConnect: setHardWord,
-  deleteWordConnect: deleteWord,
-  setIsAuthErrorConnect: setIsAuthError,
-})(Word);
+const mapDispatchToProps = ({
+  setHardWord: textBookActions.setHardWord,
+  deleteWord: textBookActions.deleteWord,
+  restoreWord: vocabularyActions.restoreWord,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Word);

@@ -72,8 +72,8 @@ const TextbookModule = ({
                     <div>
                       <Word
                         word={word}
-                        key={word.id}
-                        isHard={word?.userWord?.difficulty}
+                        key={word._id}
+                        isHard={!!word?.userWord?.difficulty}
                         isTextbook
                         className="textbook-list__item"
                       />

@@ -13,10 +13,6 @@ const setGameWords = (words) => ({
   payload: words,
 });
 
-// const setGrupWords = () => ({
-//   type: SET_GRUP_WORDS,
-// });
-
 const setLevel = (value) => ({
   type: SET_LEVEL_GAME,
   payload: value,
@@ -37,7 +33,7 @@ const setWordsFailure = (err) => ({
   payload: err,
 });
 
-const fetchGrupWords = (currentGroup) => async (dispatch) => {
+const fetchGrupWords = (currentGroup = 0) => async (dispatch) => {
   dispatch(setWordsStarted());
   try {
     const data = await api.getGrupWords(+currentGroup);

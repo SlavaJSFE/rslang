@@ -25,14 +25,25 @@ export default function RegistrationPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [ava, setAvatar] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const { loading, request } = useHttp();
   const { login } = useAuth();
   const dispatch = useDispatch();
   const successMessage = 'Новый пользователь был успешно создан';
+  let avatar = '';
 
   async function handleSubmit() {
-    const body = { name, email, password };
+    const toBase64 = (file) => new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+    avatar = await toBase64(ava);
+    const body = {
+      name, email, password, avatar,
+    };
 
     try {
       const response = await request(`${server}users`, 'POST', body);
@@ -47,6 +58,7 @@ export default function RegistrationPage() {
           refreshToken: data.refreshToken,
           userId: data.userId,
           name: data.name,
+          avatar: data.avatar,
         };
         login(user);
       }
@@ -97,6 +109,8 @@ export default function RegistrationPage() {
               labelWidth={60}
             />
           </FormControl>
+          <p>Загрузить аватар на сервер</p>
+          <input accept="image/*" onChange={(e) => setAvatar(e.target.files[0])} type="file" placeholder="Загрузить аватар" />
           <div className="form-button">
             <Button
               type="submit"

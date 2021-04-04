@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
 import useSound from 'use-sound';
 
@@ -6,8 +6,9 @@ import SetWords from '../components/WordsSet/WordsSet';
 import SoundBtn from '../../../components/SoundBtnComponent/SoundBtn';
 import NextBtn from '../components/NextBtn/NextBtn';
 import ImageComponent from '../../../components/ImageComponent/ImageComponent';
+import Display from '../components/Display';
 
-import { getRandomWords } from '../utils';
+import { getRandomWords, getScore } from '../utils';
 import { server } from '../../../constants/constants';
 
 import correctSound from '../../../assets/sounds/correct.mp3';
@@ -17,14 +18,39 @@ export default function AudioGame({ data }) {
   const [activeWord, setActiveWord] = useState('');
   const [randomWords, setRandomWords] = useState([]);
   const [shouldOpen, setShouldOpen] = useState(false);
+  const [score, setScore] = useState(0);
+  const [correctAnswers, setCorrectAnswers] = useState(1);
+  const [coeff, setCoeff] = useState(1);
 
-  const url = `${server}${activeWord ? activeWord.audio : null}`;
+  const onScoreChange = () => {
+    let addScore = 10;
+
+    // if (correctAnswers % 4 === 0 && correctAnswers !== 0) setCoeff(coeff + 1);
+
+    if (!correctAnswers) setCoeff(1);
+
+    addScore *= coeff;
+    return addScore;
+  };
+
+  const playAudio = async (audioSrc) => {
+    const audio = new Audio(audioSrc);
+
+    return new Promise((resolve) => {
+      audio.play();
+      audio.onended = resolve;
+    });
+  };
+
+  const onPlay = async () => {
+    await playAudio(`${server}/${activeWord.audio}`);
+  };
 
   const [playError] = useSound(errorSound);
   const [playCorrect] = useSound(correctSound);
-  const [playWord] = useSound(url);
 
   useEffect(() => {
+    onPlay();
     if (data.length && activeWord !== '') {
       setRandomWords(getRandomWords(data, activeWord));
     }
@@ -43,9 +69,17 @@ export default function AudioGame({ data }) {
     if (word === activeWord.wordTranslate) {
       playCorrect();
       setShouldOpen(true);
+      setCorrectAnswers(correctAnswers + 1);
+      if (correctAnswers % 4 === 0 && correctAnswers !== 0) setCoeff(coeff + 1);
+      setScore(score + onScoreChange());
+      console.log(correctAnswers, score, coeff);
     } else {
       playError();
       setShouldOpen(true);
+      setCorrectAnswers(1);
+      setCoeff(1);
+      setScore(score + onScoreChange());
+      console.log(correctAnswers, score, coeff);
     }
   };
 
@@ -65,6 +99,7 @@ export default function AudioGame({ data }) {
 
   return (
     <div className="game__audio-game">
+      <Display text={score} />
       {shouldOpen ? (
         <>
           <ImageComponent image={activeWord.image} />

@@ -1,4 +1,7 @@
 import React from 'react';
+// import { Container } from '@material-ui/core';
+// import PropTypes from 'prop-types';
+// import { makeStyles } from '@material-ui/core/styles';
 import { Link, useParams } from 'react-router-dom';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -7,7 +10,7 @@ import Box from '@material-ui/core/Box';
 import DeletedWords from './DeletedWords/DeletedWords';
 import DifficultWords from './DifficultWords/DifficultWords';
 import StudiedWords from './StudiedWords/StudiedWords';
-import './Vocabulary-module.scss';
+import './Vocabulary.scss';
 import CommonStudyResults from './CommonStudyResults/CommonStudyResults';
 
 function TabPanel(props) {
@@ -44,7 +47,7 @@ export default function VocabularyModule() {
   console.log(unit, page);
 
   return (
-    <div className="vocabulary-module">
+    <div className="vocabulary">
       <CommonStudyResults />
       <div className="classes.root">
         <Tabs
