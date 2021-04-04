@@ -41,6 +41,10 @@ export const setHardWord = async (wordId, userData) => {
       `https://rslang-server-slavajsfe.herokuapp.com/users/${userData.userId}/words/${wordId}`,
       {
         difficulty: 'hard',
+        optional: {
+          amountRightAnswers: 0,
+          amountWrongAnswers: 0,
+        },
       },
       {
         headers: {

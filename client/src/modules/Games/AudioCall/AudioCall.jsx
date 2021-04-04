@@ -22,17 +22,6 @@ export default function AudioGame({ data }) {
   const [correctAnswers, setCorrectAnswers] = useState(1);
   const [coeff, setCoeff] = useState(1);
 
-  // const onScoreChange = useCallback(() => {
-  //   let addScore = 10;
-
-  //   if (correctAnswers % 4 === 0 && correctAnswers !== 0) setCoeff(coeff + 1);
-
-  //   if (!correctAnswers) setCoeff(1);
-
-  //   addScore *= coeff;
-  //   return addScore;
-  // }, [correctAnswers]);
-
   const onScoreChange = () => {
     let addScore = 10;
 
@@ -46,6 +35,7 @@ export default function AudioGame({ data }) {
 
   const playAudio = async (audioSrc) => {
     const audio = new Audio(audioSrc);
+
     return new Promise((resolve) => {
       audio.play();
       audio.onended = resolve;
@@ -53,7 +43,7 @@ export default function AudioGame({ data }) {
   };
 
   const onPlay = async () => {
-    await playAudio(`${server}${activeWord.audio}`);
+    await playAudio(`${server}/${activeWord.audio}`);
   };
 
   const [playError] = useSound(errorSound);

@@ -25,6 +25,7 @@ export default function GamesModule() {
   useEffect(() => {
     if (activeWords.length === 0) dispatch(fetchGrupWords());
   }, [activeWords]);
+  console.log(activeWords);
 
   return (
     <div className="games-module">
