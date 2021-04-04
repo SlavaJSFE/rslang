@@ -3,11 +3,14 @@
 import { setDifficulty } from '../api/api';
 import { getUserWord } from '../api/apiVocabulary';
 
-function setMediumWord(word, userData) {
-  const userWord = getUserWord(word.id, userData);
+async function setMediumWord(word, userData) {
+  console.log('word2', word);
+  const wordId = word.id;
+  const userWord = await getUserWord(wordId, userData);
   console.log('userWord', userWord);
-  if (false) {
-    setDifficulty(word._id, userData, 'medium');
+  if (userWord && userWord.difficulty !== 'hard') {
+    setDifficulty(wordId, userData, 'medium');
+    console.log('set medium');
   }
 }
 
