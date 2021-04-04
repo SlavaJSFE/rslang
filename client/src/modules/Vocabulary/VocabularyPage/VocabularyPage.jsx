@@ -49,7 +49,7 @@ export default function VocabularyPage({ isStudyPage, wordsType }) {
           />
         ))}
       </div>
-      <div>
+      <div className="paginationVocabulary">
         <Pagination
           className="vocabularyPagination"
           count={calcCountPagination(allWords.length)}

@@ -15,3 +15,23 @@ export const restoreWord = async (wordId, userData) => {
     throw new Error(error);
   }
 };
+
+export const getUserWord = async (wordId, userData) => {
+  try {
+    const { data } = await axios.get(
+      `https://rslang-server-slavajsfe.herokuapp.com/users/${userData.userId}/words/${wordId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${userData.token}`,
+        },
+      },
+    );
+    return data;
+  } catch (error) {
+    console.log('error', error.response);
+    if (error.response.status === 404) {
+      return '404';
+    }
+    throw new Error(error);
+  }
+};

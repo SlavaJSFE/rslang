@@ -12,6 +12,7 @@ import DifficultWords from './DifficultWords/DifficultWords';
 import StudiedWords from './StudiedWords/StudiedWords';
 import './Vocabulary.scss';
 import CommonStudyResults from './CommonStudyResults/CommonStudyResults';
+import GameCards from '../../components/GameCards/GameCards';
 
 function TabPanel(props) {
   const {
@@ -90,6 +91,7 @@ export default function VocabularyModule() {
         <TabPanel value={unit} index="deleted">
           <DeletedWords />
         </TabPanel>
+        <GameCards />
       </div>
     </div>
   );

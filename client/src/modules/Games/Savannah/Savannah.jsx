@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import useSound from 'use-sound';
+import { connect } from 'react-redux';
 
 import ActiveWord from './ActiveWord/ActiveWord';
 import WordsSet from '../components/WordsSet/WordsSet';
 import { getRandomWords } from '../utils';
+import setMediumWord from '../../../service/wordService';
 import correctSound from '../../../assets/sounds/correct.mp3';
 import errorSound from '../../../assets/sounds/error.mp3';
 
@@ -13,7 +15,7 @@ function popActiveWord(wordsForGame, activeWord) {
   );
 }
 
-export default function Savannah({ data }) {
+function Savannah({ data, userData }) {
   const [activeWord, setActiveWord] = useState('');
   const [randomWords, setRandomWords] = useState([]);
   const [clientY, setClientY] = useState(0);
@@ -42,6 +44,7 @@ export default function Savannah({ data }) {
   useEffect(() => {
     if (wordsForGame.length) {
       setActiveWord(wordsForGame[0]);
+      setMediumWord(wordsForGame[0], userData);
     } else {
       alert('конец игры');
     }
@@ -90,3 +93,9 @@ export default function Savannah({ data }) {
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  userData: state.user.user,
+});
+
+export default connect(mapStateToProps)(Savannah);
