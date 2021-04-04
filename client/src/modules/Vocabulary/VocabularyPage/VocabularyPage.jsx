@@ -9,9 +9,10 @@ import calcCountPagination, {
 import { fetchVocabularyWords } from '../../../redux/vocabulary/DifficultWords/actions';
 import { fetchVocabularyDeletedWords } from '../../../redux/vocabulary/DeletedWords/actions';
 import { fetchVocabularyStudyWords } from '../../../redux/vocabulary/StudyWords/actions';
+import { setGameWords } from '../../../redux/miniGameWords/actions';
 import '../../../styles/common.scss';
 import '../../Textbook/Textbook-module.scss';
-import '../Vocabulary-module.scss';
+import '../Vocabulary.scss';
 
 export default function VocabularyPage({ isStudyPage, wordsType }) {
   const allWords = useSelector((state) => state[wordsType].words);
@@ -32,8 +33,11 @@ export default function VocabularyPage({ isStudyPage, wordsType }) {
     setFinish(calcLastWordIndex(allWords.length, value));
   };
 
-  // eslint-disable-next-line no-unused-vars
   const wordsVocabularyPage = allWords.slice(start, finish);
+
+  // useEffect(() => {
+  //   dispatch(setGameWords(wordsVocabularyPage));
+  // }, [wordsVocabularyPage]);
 
   return (
     <div>

@@ -7,18 +7,18 @@ function CommonStudyResults() {
 
   return (
     <div>
-      <div className="vocabulary-module-results">
-        <div className="vocabulary-module-results__values">
+      <div className="vocabulary-results">
+        <div className="vocabulary-results__values">
           <span>всего изучаемых слов: </span>
-          <span className="vocabulary-module-results__valuesNumber">{amountOfStydyWords}</span>
+          <span className="vocabulary-results__valuesNumber">{amountOfStydyWords}</span>
         </div>
-        <div className="vocabulary-module-results__values">
+        <div className="vocabulary-results__values">
           <span>кол-во изученных слов: </span>
-          <span className="vocabulary-module-results__valuesNumber">{amountOfDeletedWords}</span>
+          <span className="vocabulary-results__valuesNumber">{amountOfDeletedWords}</span>
         </div>
-        <div className="vocabulary-module-results__values">
+        <div className="vocabulary-results__values">
           <span>кол-во слов оставшихся для изучения: </span>
-          <span className="vocabulary-module-results__valuesNumber">{3600 - amountOfDeletedWords}</span>
+          <span className="vocabulary-results__valuesNumber">{3600 - amountOfDeletedWords}</span>
         </div>
       </div>
     </div>
