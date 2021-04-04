@@ -30,7 +30,7 @@ const Word = ({
   isHard,
   isTextbook,
   isStudyStatistic,
-  setIsAuthErrorConnect,
+  setIsAuthError,
 }) => {
   const classes = useStyles();
 
@@ -50,14 +50,14 @@ const Word = ({
 
   const onHardWord = async () => {
     if (!userData.token) {
-      setIsAuthErrorConnect(true);
+      setIsAuthError(true);
     }
     await setHardWord(word, userData);
   };
 
   const onDeleteWord = async () => {
     if (!userData.token) {
-      setIsAuthErrorConnect(true);
+      setIsAuthError(true);
     }
     await deleteWord(word.id, userData);
     await setHardWord(word.id, userData);
@@ -151,22 +151,20 @@ const Word = ({
             />
           )}
         </Box>
-        { !isTextbook && (
-        <Box className={classes.buttons}>
-          <Button
-            variant="outlined"
-            color="primary"
-            type="button"
-            className={classes.deleteBtn}
-            onClick={onRestoreWord}
-          >
-            Восстановить
-          </Button>
-        </Box>
+        {!isTextbook && (
+          <Box className={classes.buttons}>
+            <Button
+              variant="outlined"
+              color="primary"
+              type="button"
+              className={classes.deleteBtn}
+              onClick={onRestoreWord}
+            >
+              Восстановить
+            </Button>
+          </Box>
         )}
-        {isStudyStatistic && (
-          <StudyResults word={word} />
-        )}
+        {isStudyStatistic && <StudyResults word={word} />}
         {isButtonsActive && isTextbook && (
           <Box className={classes.buttons}>
             <Button
@@ -200,10 +198,11 @@ const mapStateToProps = (state) => ({
   userData: state.user.user,
 });
 
-const mapDispatchToProps = ({
+const mapDispatchToProps = {
   setHardWord: textBookActions.setHardWord,
   deleteWord: textBookActions.deleteWord,
   restoreWord: vocabularyActions.restoreWord,
-});
+  setIsAuthError: textBookActions.setIsAuthError,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Word);
