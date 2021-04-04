@@ -22,6 +22,7 @@ import { server } from '../../constants/constants';
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  // const [avatar, setAvatar] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const { loading, request } = useHttp();
   const { login } = useAuth();
@@ -37,6 +38,7 @@ export default function LoginPage() {
         refreshToken: data.refreshToken,
         userId: data.userId,
         name: data.name,
+        avatar: data.avatar,
       };
       login(user);
     } catch (err) {}
