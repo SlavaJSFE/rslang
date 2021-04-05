@@ -19,7 +19,6 @@ import '../Vocabulary.scss';
 export default function VocabularyPage({ isStudyPage, wordsType }) {
   const allWords = useSelector((state) => state[wordsType].words);
   const userData = useSelector((state) => state.user.user);
-  const group = useSelector((state) => state.group);
   const [page, setPage] = React.useState(primaryPage);
   const [unit, setUnit] = React.useState(0);
   const [start, setStart] = React.useState(startWordOnPage);
@@ -29,8 +28,8 @@ export default function VocabularyPage({ isStudyPage, wordsType }) {
     dispatch(fetchVocabularyWords(userData));
     dispatch(fetchVocabularyDeletedWords(userData));
     dispatch(fetchVocabularyStudyWords(userData, unit));
-    dispatch(fetchVocabularyAmountStudyWords(userData, group));
-  }, [userData, group]);
+    dispatch(fetchVocabularyAmountStudyWords(userData));
+  }, [userData, unit]);
 
   const handleChange = (event, value) => {
     setPage(value);

@@ -76,8 +76,8 @@ const Word = ({
     await restoreWord(word._id, userData);
     dispatch(fetchVocabularyWords(userData));
     dispatch(fetchVocabularyDeletedWords(userData));
-    dispatch(fetchVocabularyStudyWords(userData));
-    dispatch(fetchVocabularyAmountStudyWords(userData, group));
+    dispatch(fetchVocabularyStudyWords(userData, group));
+    dispatch(fetchVocabularyAmountStudyWords(userData));
   };
 
   return (

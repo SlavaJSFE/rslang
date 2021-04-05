@@ -2,7 +2,6 @@ import {
   SET_AMOUNTSTUDY_WORDS_SUCCESS,
   SET_AMOUNTSTUDY_WORDS_FAILURE,
   SET_AMOUNTSTUDY_WORDS_STARTED,
-
 } from './constants';
 
 const initialState = {

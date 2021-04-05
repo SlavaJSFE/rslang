@@ -33,6 +33,7 @@ export default (state = initialState, { type, payload }) => {
         error: payload,
         loading: false,
       };
+
     case SET_STUDY_GROUP:
       return {
         ...state,
