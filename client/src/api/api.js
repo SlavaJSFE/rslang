@@ -61,11 +61,11 @@ export const setDifficulty = async (wordId, userData, typeDifficulty) => {
   }
 };
 
-export const setHardWord = async (wordId, userData) => {
-// export const setHardWord = async (word, userData) => {
-//   const headers = {
-//     Authorization: `Bearer ${userData.token}`,
-//   };
+// export const setHardWord = async (wordId, userData) => {
+export const setHardWord = async (word, userData) => {
+  const headers = {
+    Authorization: `Bearer ${userData.token}`,
+  };
   try {
     await axios({
       method: word?.userWord ? 'put' : 'post',

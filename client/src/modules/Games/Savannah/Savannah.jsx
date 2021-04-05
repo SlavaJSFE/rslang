@@ -1,9 +1,8 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect, useRef } from 'react';
 import useSound from 'use-sound';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import Rating from '@material-ui/lab/Rating';
-import { useDispatch } from 'react-redux';
 
 import ActiveWord from './ActiveWord/ActiveWord';
 import WordsSet from '../components/WordsSet/WordsSet';
@@ -23,7 +22,7 @@ function popActiveWord(wordsForGame, activeWord) {
   );
 }
 
-export default function Savannah({ data, userData }) {
+function Savannah({ data, userData }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [activeWord, setActiveWord] = useState('');
