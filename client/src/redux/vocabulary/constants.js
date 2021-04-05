@@ -1,3 +1,4 @@
 const RESTORE_WORD = 'RESTORE_WORD';
+export const DIFFICULTY_WORD = 'DIFFICULTY_WORD';
 
 export default RESTORE_WORD;

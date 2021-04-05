@@ -12,6 +12,8 @@ import DifficultWords from './DifficultWords/DifficultWords';
 import StudiedWords from './StudiedWords/StudiedWords';
 import './Vocabulary.scss';
 import CommonStudyResults from './CommonStudyResults/CommonStudyResults';
+import GameCards from '../../components/GameCards/GameCards';
+import UnitsMenuVocabulary from '../../components/UnitsMenuVocabulary/UnitsMenuVocabulary';
 
 function TabPanel(props) {
   const {
@@ -80,6 +82,7 @@ export default function VocabularyModule() {
             to="/textbook/vocabulary/deleted/1"
           />
         </Tabs>
+        <UnitsMenuVocabulary currentGroup={0} setGroupConnect={null} currentPage={0} />
         <TabPanel value={unit} index="studied">
           <StudiedWords />
         </TabPanel>
@@ -89,6 +92,7 @@ export default function VocabularyModule() {
         <TabPanel value={unit} index="deleted">
           <DeletedWords />
         </TabPanel>
+        <GameCards />
       </div>
     </div>
   );

@@ -39,6 +39,29 @@ export const fetchSettings = async (userData) => {
   }
 };
 
+export const setDifficulty = async (wordId, userData, typeDifficulty) => {
+  try {
+    await axios.post(
+      `https://rslang-server-slavajsfe.herokuapp.com/users/${userData.userId}/words/${wordId}`,
+      {
+        difficulty: typeDifficulty,
+        optional: {
+          rightAnswers: 0,
+          wrongAnswers: 0,
+        },
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${userData.token}`,
+        },
+      },
+    );
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+// export const setHardWord = async (wordId, userData) => {
 export const setHardWord = async (word, userData) => {
   const headers = {
     Authorization: `Bearer ${userData.token}`,
@@ -51,8 +74,8 @@ export const setHardWord = async (word, userData) => {
       data: {
         difficulty: 'hard',
         optional: {
-          amountRightAnswers: 0,
-          amountWrongAnswers: 0,
+          rightAnswers: 0,
+          wrongAnswers: 0,
         },
       },
     });

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import {
   Card,
@@ -20,6 +21,7 @@ import StudyResults from '../../modules/Vocabulary/CommonStudyResults/StudyResul
 import { fetchVocabularyWords } from '../../redux/vocabulary/DifficultWords/actions';
 import { fetchVocabularyDeletedWords } from '../../redux/vocabulary/DeletedWords/actions';
 import { fetchVocabularyStudyWords } from '../../redux/vocabulary/StudyWords/actions';
+import { fetchVocabularyAmountStudyWords } from '../../redux/vocabulary/AmountStudyWords/actions';
 
 const Word = ({
   word,
@@ -29,6 +31,7 @@ const Word = ({
   restoreWord,
   deleteWord,
   userData,
+  group,
   isHard,
   isTextbook,
   isStudyStatistic,
@@ -70,10 +73,11 @@ const Word = ({
   const dispatch = useDispatch();
 
   const onRestoreWord = async () => {
-    await restoreWord(word.id, userData);
+    await restoreWord(word._id, userData);
     dispatch(fetchVocabularyWords(userData));
     dispatch(fetchVocabularyDeletedWords(userData));
-    dispatch(fetchVocabularyStudyWords(userData));
+    dispatch(fetchVocabularyStudyWords(userData, group));
+    dispatch(fetchVocabularyAmountStudyWords(userData));
   };
 
   return (
@@ -201,6 +205,7 @@ const mapStateToProps = (state) => ({
   isTranslation: state.textBookPage.settings.optional.isTranslation,
   isButtonsActive: state.textBookPage.settings.optional.isButtonsActive,
   userData: state.user.user,
+  group: state.group,
 });
 
 const mapDispatchToProps = {
