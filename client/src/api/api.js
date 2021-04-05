@@ -41,13 +41,13 @@ export const fetchSettings = async (userData) => {
 
 export const setDifficulty = async (wordId, userData, typeDifficulty) => {
   try {
-    await axios.put(
+    await axios.post(
       `https://rslang-server-slavajsfe.herokuapp.com/users/${userData.userId}/words/${wordId}`,
       {
-        difficulty: '{ typeDifficulty }',
+        difficulty: typeDifficulty,
         optional: {
-          amountRightAnswers: 0,
-          amountWrongAnswers: 0,
+          rightAnswers: 0,
+          wrongAnswers: 0,
         },
       },
       {
@@ -74,8 +74,8 @@ export const setHardWord = async (word, userData) => {
       data: {
         difficulty: 'hard',
         optional: {
-          amountRightAnswers: 0,
-          amountWrongAnswers: 0,
+          rightAnswers: 0,
+          wrongAnswers: 0,
         },
       },
     });

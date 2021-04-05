@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,6 +10,7 @@ import calcCountPagination, {
 import { fetchVocabularyWords } from '../../../redux/vocabulary/DifficultWords/actions';
 import { fetchVocabularyDeletedWords } from '../../../redux/vocabulary/DeletedWords/actions';
 import { fetchVocabularyStudyWords } from '../../../redux/vocabulary/StudyWords/actions';
+import { fetchVocabularyAmountStudyWords } from '../../../redux/vocabulary/AmountStudyWords/actions';
 import { setGameWords } from '../../../redux/miniGameWords/actions';
 import '../../../styles/common.scss';
 import '../../Textbook/Textbook-module.scss';
@@ -17,15 +19,18 @@ import '../Vocabulary.scss';
 export default function VocabularyPage({ isStudyPage, wordsType }) {
   const allWords = useSelector((state) => state[wordsType].words);
   const userData = useSelector((state) => state.user.user);
+  const group = useSelector((state) => state.group);
   const [page, setPage] = React.useState(primaryPage);
+  const [unit, setUnit] = React.useState(0);
   const [start, setStart] = React.useState(startWordOnPage);
   const [finish, setFinish] = React.useState(wordsOnPage);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchVocabularyWords(userData));
     dispatch(fetchVocabularyDeletedWords(userData));
-    dispatch(fetchVocabularyStudyWords(userData));
-  }, [userData]);
+    dispatch(fetchVocabularyStudyWords(userData, unit));
+    dispatch(fetchVocabularyAmountStudyWords(userData, group));
+  }, [userData, group]);
 
   const handleChange = (event, value) => {
     setPage(value);
