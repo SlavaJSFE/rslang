@@ -7,7 +7,12 @@ import Rule from '../components/Rule';
 import NextBtn from '../components/NextBtn/NextBtn';
 import getAppropriateStyles from '../utils/getAppropriateStyles';
 
-export default function GameStart({ type, rule, setStart, wordsNumber }) {
+export default function GameStart({
+  type,
+  rule,
+  setStart,
+  wordsNumber,
+}) {
   const toShow = wordsNumber === 0;
   const [startTimer, setStartTimer] = useState(false);
   const [showRule, setShowRule] = useState(!toShow);

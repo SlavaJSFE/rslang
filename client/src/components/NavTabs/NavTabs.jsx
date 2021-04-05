@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 
 import './NavTabs.scss';
 import { setGroup } from '../../redux/textBook/actions';
-import { UNIT_1, UNIT_2, UNIT_3, UNIT_4, UNIT_5, UNIT_6 } from '../../constants/constants';
-import { tertiaryColor } from '../../constants/colors';
+import {
+  UNIT_1, UNIT_2, UNIT_3, UNIT_4, UNIT_5, UNIT_6,
+} from '../../constants/constants';
 
 function allProps(index) {
   return {
@@ -35,7 +36,6 @@ const NavTabs = ({ currentGroup, setGroupConnect, currentPage }) => {
       <Tabs
         value={currentGroup}
         onChange={onGroupChange}
-        // indicatorColor={tertiaryColor}
         variant="scrollable"
         scrollButtons="auto"
         aria-label="scrollable auto tabs"

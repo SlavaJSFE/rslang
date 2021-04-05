@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './MemberCard.scss';
 import locationIcon from '../../../../assets/images/icons/location.svg';
 import gitHubIcon from '../../../../assets/images/icons/GitHub-Mark-32px.png';
