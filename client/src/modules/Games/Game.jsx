@@ -9,6 +9,9 @@ import Memory from './MemoryGame';
 import GameStart from './GameStart';
 
 import { games } from '../../constants/constants';
+import {
+  AUDIO_CALL, MEMORY, SAVANNAH, SPRINT,
+} from './constants';
 
 export default function GamesModule() {
   const { type } = useParams();
@@ -24,15 +27,16 @@ export default function GamesModule() {
     <div className="games-module">
       {!start && (
         <GameStart
+          type={type}
           rule={rule}
           setStart={setStart}
           wordsNumber={activeWords.length}
         />
       )}
-      {start && type === 'savannah' && <Savannah data={activeWords} />}
-      {start && type === 'memory' && <Memory data={activeWords} />}
-      {start && type === 'audiocall' && <AudioCall data={activeWords} />}
-      {start && type === 'sprint' && <Sprint data={activeWords} />}
+      {start && type === SAVANNAH && <Savannah data={activeWords} />}
+      {start && type === MEMORY && <Memory data={activeWords} />}
+      {start && type === AUDIO_CALL && <AudioCall data={activeWords} />}
+      {start && type === SPRINT && <Sprint data={activeWords} />}
     </div>
   );
 }

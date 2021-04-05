@@ -5,6 +5,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { fetchSettings, updateSettings } from '../../redux/textBook/actions';
+import './Settings.scss';
 
 function SettingsModule({
   fetchSettingsConnect,
@@ -22,9 +23,8 @@ function SettingsModule({
   }, []);
 
   return (
-    <div className="settings-module">
-      <h2>Settings Module</h2>
-      <FormControl component="fieldset">
+    <div className="settings-module center">
+      <FormControl className="settings-field" component="fieldset">
         <FormGroup aria-label="position" row>
           <FormControlLabel
             value="start"

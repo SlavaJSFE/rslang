@@ -1,0 +1,6 @@
+@import '../../../styles/common.scss';
+
+.game__memory-game {
+  background-image: url('../../../assets/images/spring.jpg');
+  @include game-background;
+}

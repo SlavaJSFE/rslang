@@ -12,6 +12,7 @@ import { server } from '../../../constants/constants';
 
 import correctSound from '../../../assets/sounds/correct.mp3';
 import errorSound from '../../../assets/sounds/error.mp3';
+import './AudioCall.scss';
 
 export default function AudioGame({ data }) {
   const [activeWord, setActiveWord] = useState('');

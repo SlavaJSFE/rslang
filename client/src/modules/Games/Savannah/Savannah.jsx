@@ -6,6 +6,7 @@ import WordsSet from '../components/WordsSet/WordsSet';
 import { getRandomWords } from '../utils';
 import correctSound from '../../../assets/sounds/correct.mp3';
 import errorSound from '../../../assets/sounds/error.mp3';
+import './Savannah.scss';
 
 function popActiveWord(wordsForGame, activeWord) {
   return wordsForGame.filter(

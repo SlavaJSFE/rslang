@@ -15,8 +15,8 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header';
 import './Login.scss';
-import useHttp from '../../hooks/http.hook';
-import useAuth from '../../hooks/auth.hook';
+import useHttp from '../../hooks/http';
+import useAuth from '../../hooks/auth';
 import { server } from '../../constants/constants';
 
 export default function LoginPage() {

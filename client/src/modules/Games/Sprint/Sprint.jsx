@@ -12,6 +12,7 @@ import { makeRandomSprintData } from '../utils';
 
 import correctSound from '../../../assets/sounds/correct.mp3';
 import errorSound from '../../../assets/sounds/error.mp3';
+import './Sprint.scss';
 
 export default function AudioGame({ data }) {
   const [activeWord, setActiveWord] = useState('');

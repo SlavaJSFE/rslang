@@ -5,6 +5,7 @@ import React, { useState, useMemo } from 'react';
 import Field from './Field';
 
 import { getMemoryWords } from '../utils';
+import './Memory.scss';
 
 export default function MemoryGame({ data }) {
   // const [score, setScore] = useState(0);

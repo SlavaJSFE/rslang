@@ -13,9 +13,11 @@ import VolumeUpRoundedIcon from '@material-ui/icons/VolumeUpRounded';
 import { connect } from 'react-redux';
 
 import useStyles from './WordStyles';
-import { server } from '../../constants/constants';
+import { server, UNIT } from '../../constants/constants';
 import RestoreBtn from '../../modules/Vocabulary/RestoreBtn/RestoreBtn';
 import { setHardWord, deleteWord } from '../../redux/textBook/actions';
+import './Word.scss';
+import getUnitStyles from './utilits/getUnitStyles';
 
 const Word = ({
   word,
@@ -29,6 +31,8 @@ const Word = ({
   isStudyStatistic,
 }) => {
   const classes = useStyles();
+  const currentUnit = word.group + 1;
+  const unitClasses = getUnitStyles(currentUnit);
 
   const playAudio = async (audioSrc) => {
     const audio = new Audio(audioSrc);
@@ -53,7 +57,8 @@ const Word = ({
   };
 
   return (
-    <Card className={classes.root}>
+    <Card className={unitClasses.root}>
+      <div className={unitClasses.unitMark}>{`${UNIT} ${currentUnit}`}</div>
       <CardMedia
         className={classes.media}
         component="img"
