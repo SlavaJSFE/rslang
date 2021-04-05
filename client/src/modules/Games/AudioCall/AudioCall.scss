@@ -1,0 +1,6 @@
+@import '../../../styles/common.scss';
+
+.game__audio-game {
+  background-image: url('../../../assets/images/4289830.jpg');
+  @include game-background;
+}

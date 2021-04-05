@@ -9,6 +9,7 @@ import WordsSet from '../components/WordsSet/WordsSet';
 import { getRandomWords } from '../utils';
 import correctSound from '../../../assets/sounds/correct.mp3';
 import errorSound from '../../../assets/sounds/error.mp3';
+import './Savannah.scss';
 import useStyles from './SavannahStyles';
 import {
   setRightAnswer,

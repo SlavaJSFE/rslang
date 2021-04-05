@@ -1,4 +1,4 @@
-@import '../../../styles/common.scss';
+@import '../../../../styles/colors.scss';
 
 .member {
   background-color: $tertiary-color;
@@ -34,11 +34,14 @@
     width: 24px;
   }
 }
+.member-email {
+  margin: 10px 0;
+}
 .member-social-media {
   display: flex;
 
   a {
-    margin-right: 8px;
+    margin-right: 10px;
   }  
   img {
     width: 32px;

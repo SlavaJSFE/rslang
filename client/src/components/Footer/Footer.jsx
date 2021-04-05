@@ -13,23 +13,23 @@ export default function Footer() {
             <p className="year">2021 &copy;</p>
             <div className="author">
               <img src={gitHubLogo} alt="GitHub logo" />
-              <a href="https://github.com/AStashevskaya">AStashevskaya</a>
+              <a href="https://github.com/AStashevskaya" target="blank">AStashevskaya</a>
             </div>
             <div className="author">
               <img src={gitHubLogo} alt="GitHub logo" />
-              <a href="https://github.com/mariyafrantsava">mariyafrantsava</a>
+              <a href="https://github.com/mariyafrantsava" target="blank">mariyafrantsava</a>
             </div>
             <div className="author">
               <img src={gitHubLogo} alt="GitHub logo" />
-              <a href="https://github.com/SimaxSaab">SimaxSaab</a>
+              <a href="https://github.com/SimaxSaab" target="blank">SimaxSaab</a>
             </div>
             <div className="author">
               <img src={gitHubLogo} alt="GitHub logo" />
-              <a href="https://github.com/zhenya-band">zhenya-band</a>
+              <a href="https://github.com/zhenya-band" target="blank">zhenya-band</a>
             </div>
             <div className="author">
               <img src={gitHubLogo} alt="GitHub logo" />
-              <a href="https://github.com/SlavaJSFE">SlavaJSFE</a>
+              <a href="https://github.com/SlavaJSFE" target="blank">SlavaJSFE</a>
             </div>
           </div>
           <a href="https://rs.school/js/">

@@ -11,7 +11,9 @@ import {
 import VolumeUpRoundedIcon from '@material-ui/icons/VolumeUpRounded';
 import { connect, useDispatch } from 'react-redux';
 import useStyles from './WordStyles';
-import { server } from '../../constants/constants';
+import { server, UNIT } from '../../constants/constants';
+import './Word.scss';
+import getUnitStyles from './utilits/getUnitStyles';
 import * as textBookActions from '../../redux/textBook/actions';
 import * as vocabularyActions from '../../redux/vocabulary/actions';
 import StudyResults from '../../modules/Vocabulary/CommonStudyResults/StudyResults';
@@ -33,6 +35,8 @@ const Word = ({
   setIsAuthError,
 }) => {
   const classes = useStyles();
+  const currentUnit = word.group + 1;
+  const unitClasses = getUnitStyles(currentUnit);
 
   const playAudio = (audioSrc) => {
     const audio = new Audio(audioSrc);
@@ -43,9 +47,9 @@ const Word = ({
   };
 
   const onPlay = async () => {
-    await playAudio(`${server}${word.audio}`);
-    await playAudio(`${server}${word.audioExample}`);
-    await playAudio(`${server}${word.audioMeaning}`);
+    await playAudio(`${server}/${word.audio}`);
+    await playAudio(`${server}/${word.audioExample}`);
+    await playAudio(`${server}/${word.audioMeaning}`);
   };
 
   const onHardWord = async () => {
@@ -73,12 +77,13 @@ const Word = ({
   };
 
   return (
-    <Card className={classes.root}>
+    <Card className={unitClasses.root}>
+      <div className={unitClasses.unitMark}>{`${UNIT} ${currentUnit}`}</div>
       <CardMedia
         className={classes.media}
         component="img"
         alt={word.word}
-        image={`${server}${word.image}`}
+        image={`${server}/${word.image}`}
       />
       <CardContent className={classes.content}>
         {!isTextbook && (

@@ -4,7 +4,7 @@ import { Button, Tooltip } from '@material-ui/core';
 import './AuthButtons.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { reduxLogout } from '../../redux/user/actions';
-import useAuth from '../../hooks/auth.hook';
+import useAuth from '../../hooks/auth';
 import avatarLogo from '../../assets/images/avatar.svg';
 
 export default function AuthButtons() {

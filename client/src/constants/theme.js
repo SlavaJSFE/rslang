@@ -1,19 +1,16 @@
 import { createMuiTheme } from '@material-ui/core';
-
-const primary = '#885980';
-const secondary = '#8AB94F';
-const tertiary = '#FAF1DA';
+import { primaryColor, secondaryColor, tertiaryColor } from './colors';
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: primary,
+      main: primaryColor,
     },
     secondary: {
-      main: secondary,
+      main: secondaryColor,
     },
     tertiary: {
-      main: tertiary,
+      main: tertiaryColor,
     },
   },
   overrides: {
@@ -28,15 +25,16 @@ const theme = createMuiTheme({
         border: '2px solid',
       },
       containedPrimary: {
-        border: `2px solid ${primary}`,
+        border: `2px solid ${primaryColor}`,
       },
       containedSecondary: {
-        border: `2px solid ${secondary}`,
+        border: `2px solid ${secondaryColor}`,
       },
     },
     MuiTab: {
       root: {
-        backgroundColor: tertiary,
+        backgroundColor: tertiaryColor,
+        fontWeight: 'bold',
       },
     },
   },

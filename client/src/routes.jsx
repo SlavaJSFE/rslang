@@ -9,7 +9,6 @@ import TeamPage from './pages/team/Team';
 import LoginPage from './pages/login/Login';
 import RegistrationPage from './pages/registration/Registration';
 import UserProfile from './pages/user/UserProfile';
-
 import Game from './modules/Games/Game';
 
 export default function useRoutes() {

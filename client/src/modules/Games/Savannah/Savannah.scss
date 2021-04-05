@@ -1,0 +1,6 @@
+@import '../../../styles/common.scss';
+
+.game__savannah {
+  background-image: url('../../../assets/images/534657.jpg');
+  @include game-background;
+}
