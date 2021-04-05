@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './MemberCard.scss';
-import locationIcon from '../../../assets/images/icons/location.svg';
-import gitHubIcon from '../../../assets/images/icons/GitHub-Mark-32px.png';
-import linkedInIcon from '../../../assets/images/icons/linkedin.svg';
-import telegramIcon from '../../../assets/images/icons/telegram.svg';
-import emailIcon from '../../../assets/images/icons/email.svg';
+import locationIcon from '../../../../assets/images/icons/location.svg';
+import gitHubIcon from '../../../../assets/images/icons/GitHub-Mark-32px.png';
+import linkedInIcon from '../../../../assets/images/icons/linkedin.svg';
+import telegramIcon from '../../../../assets/images/icons/telegram.svg';
+import cvIcon from '../../../../assets/images/icons/page.svg';
 
 export default function MemberCard({ props }) {
   const {
@@ -17,6 +16,7 @@ export default function MemberCard({ props }) {
     linkedIn,
     telegram,
     email,
+    CV,
   } = props;
 
   return (
@@ -37,19 +37,30 @@ export default function MemberCard({ props }) {
           asperiores nobis at consequuntur sunt, repudiandae deleniti quis ea qui dicta!
           Exercitationem.
         </p>
+        <div className="member-email">
+          <a href={`mailto:${email}`}>{email}</a>
+        </div>
         <div className="member-social-media">
-          <Link to={gitHub}>
+          <a href={gitHub} target="blank">
             <img src={gitHubIcon} alt="GitHub" />
-          </Link>
-          <Link to={linkedIn}>
-            <img src={linkedInIcon} alt="LinkedIn" />
-          </Link>
-          <Link to={telegram}>
+          </a>
+          {
+            linkedIn ? (
+              <a href={linkedIn} target="blank">
+                <img src={linkedInIcon} alt="LinkedIn" />
+              </a>
+            ) : null
+          }
+          <a href={telegram} target="blank">
             <img src={telegramIcon} alt="Telegram" />
-          </Link>
-          <Link to={`mailto:${email}`}>
-            <img src={emailIcon} alt="Email" />
-          </Link>
+          </a>
+          {
+            CV ? (
+              <a href={CV} target="blank">
+                <img src={cvIcon} alt="CV" />
+              </a>
+            ) : null
+          }
         </div>
       </div>
     </div>

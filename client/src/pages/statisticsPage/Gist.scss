@@ -1,9 +1,9 @@
 @import '../../styles/common.scss';
-.statistic__grafics{
+.statistic__graphics{
 display: flex;
 justify-content: center;
 }
-.statistic__grafics__content {
+.statistic__graphics__content {
   text-align: center;
   width: 45rem;
   // background-color:$tertiary-color; 
@@ -37,7 +37,7 @@ canvas {
   height: 100% !important;
 }
 
-.graficsLine{
+.graphics-line{
   height: 1rem;
   background-color: #f8c01a;
 }

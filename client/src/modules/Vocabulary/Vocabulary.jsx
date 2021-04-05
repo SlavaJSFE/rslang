@@ -46,7 +46,6 @@ function allProps(index) {
 
 export default function VocabularyModule() {
   const { unit, page } = useParams();
-  console.log(unit, page);
 
   return (
     <div className="vocabulary">

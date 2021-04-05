@@ -1,0 +1,57 @@
+@import '../../styles/colors.scss';
+
+.word-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 5px 13px;
+  margin-bottom: 30px;
+  border-radius: 20px !important;
+  background-color: $tertiary-color !important;
+  // border: 2px solid red;
+}
+// .corner-ribbon {
+//   position: absolute;
+//   width: 200px;
+//   background-color: red;
+//   top: auto;
+//   right: -50px;
+//   bottom: 25px;
+//   left: auto;
+//   transform: rotate(-45deg);
+//   text-align: center;
+//   line-height: 50px;
+//   letter-spacing: 1px;
+//   box-shadow: 0 0 3px rgba(0,0,0,.3);
+// }
+
+.corner-ribbon {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 40px;
+  background-color: orangered;
+  color: white;
+  // clip-path: polygon(0 0%, 100% 0, 85% 50%, 100% 100%, 70% 100%, 30% 100%, 0 100%, 15% 50%);
+}
+// .corner-ribbon::before,
+// .corner-ribbon::after {
+//   content: "";
+//   position: absolute; 
+//   top: 0; 
+//   left: 0;
+//   width: 80px; 
+//   height: 80px; 
+//   background: inherit;
+//   border-radius: 8px;
+// }
+// .corner-ribbon::before {
+//   transform: rotate(30deg);
+// }
+// .corner-ribbon::after {
+//   transform: rotate(60deg);
+// }

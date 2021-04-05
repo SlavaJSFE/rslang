@@ -10,6 +10,7 @@ import { getRandomWords } from '../utils';
 import setMediumWord from '../../../service/wordService';
 import correctSound from '../../../assets/sounds/correct.mp3';
 import errorSound from '../../../assets/sounds/error.mp3';
+import './Savannah.scss';
 import useStyles from './SavannahStyles';
 import {
   setRightAnswer,

@@ -9,7 +9,7 @@ export const updateSettings = async (optional, field, value, userData) => {
   const reqBody = generateReqBody(optional, field, value);
   try {
     const { data } = await axios.put(
-      `${server}users/${userData.userId}/settings`,
+      `${server}/users/${userData.userId}/settings`,
       reqBody,
       {
         headers: {
@@ -26,7 +26,7 @@ export const updateSettings = async (optional, field, value, userData) => {
 export const fetchSettings = async (userData) => {
   try {
     const { data } = await axios.get(
-      `${server}users/${userData.userId}/settings`,
+      `${server}/users/${userData.userId}/settings`,
       {
         headers: {
           Authorization: `Bearer ${userData.token}`,
@@ -69,7 +69,7 @@ export const setHardWord = async (word, userData) => {
   try {
     await axios({
       method: word?.userWord ? 'put' : 'post',
-      url: `${server}users/${userData.userId}/words/${word.id}`,
+      url: `${server}/users/${userData.userId}/words/${word.id}`,
       headers,
       data: {
         difficulty: 'hard',
@@ -87,7 +87,7 @@ export const setHardWord = async (word, userData) => {
 export const deleteWord = async (wordId, userData) => {
   try {
     await axios.post(
-      `${server}users/${userData.userId}/words/${wordId}`,
+      `${server}/users/${userData.userId}/words/${wordId}`,
       {
         difficulty: 'easy',
       },
@@ -108,7 +108,7 @@ export const getWords = async (currentGroup, currentPage, userData) => {
   };
   try {
     const { data } = await axios.get(
-      `${server}users/${
+      `${server}/users/${
         userData.userId
       }/aggregatedWords?group=${currentGroup}&page=${currentPage}&wordsPerPage=20&filter=${JSON.stringify(
         filter,
@@ -128,7 +128,7 @@ export const getWords = async (currentGroup, currentPage, userData) => {
 export const getWordsWithOutAuth = async (currentGroup, currentPage) => {
   try {
     const { data } = await axios.get(
-      `${server}words?group=${currentGroup}&page=${currentPage}`,
+      `${server}/words?group=${currentGroup}&page=${currentPage}`,
     );
     return data;
   } catch (error) {
@@ -138,7 +138,7 @@ export const getWordsWithOutAuth = async (currentGroup, currentPage) => {
 
 export const getGrupWords = async (currentGroup) => {
   try {
-    const { data } = await axios.get(`${server}words?group=${currentGroup}`);
+    const { data } = await axios.get(`${server}/words?group=${currentGroup}`);
     return data;
   } catch (error) {
     throw new Error(error);
@@ -164,7 +164,7 @@ export const setRightAnswer = async (word, userData) => {
   try {
     const { data } = await axios({
       method: word?.userWord ? 'put' : 'post',
-      url: `${server}users/${userId}/words/${word.id}`,
+      url: `${server}/users/${userId}/words/${word.id}`,
       headers,
       data: reqBody,
     });
@@ -191,7 +191,7 @@ export const setWrongAnswer = async (word, userData) => {
   try {
     await axios({
       method: word?.userWord ? 'put' : 'post',
-      url: `${server}users/${userId}/words/${word.id}`,
+      url: `${server}/users/${userId}/words/${word.id}`,
       headers,
       data: reqBody,
     });

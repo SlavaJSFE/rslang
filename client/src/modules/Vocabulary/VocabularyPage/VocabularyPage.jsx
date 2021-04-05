@@ -13,7 +13,7 @@ import { fetchVocabularyStudyWords } from '../../../redux/vocabulary/StudyWords/
 import { fetchVocabularyAmountStudyWords } from '../../../redux/vocabulary/AmountStudyWords/actions';
 import { setGameWords } from '../../../redux/miniGameWords/actions';
 import '../../../styles/common.scss';
-import '../../Textbook/Textbook-module.scss';
+import '../../Textbook/Textbook.scss';
 import '../Vocabulary.scss';
 
 export default function VocabularyPage({ isStudyPage, wordsType }) {

@@ -3,10 +3,19 @@ import audioCallImage from '../assets/images/audiocall.jpg';
 import sprintImage from '../assets/images/sprint.jpg';
 import memoryImage from '../assets/images/memory.jpg';
 
-const DEFAULT_LEVEL = 0;
-const server = 'https://rslang-server-slavajsfe.herokuapp.com/';
+export const server = 'https://rslang-server-slavajsfe.herokuapp.com';
+export const CLICK_AWAY = 'clickaway';
+export const sixSeconds = 6000;
+export const UNIT = 'РАЗДЕЛ';
+export const UNIT_1 = 'Раздел 1';
+export const UNIT_2 = 'Раздел 2';
+export const UNIT_3 = 'Раздел 3';
+export const UNIT_4 = 'Раздел 4';
+export const UNIT_5 = 'Раздел 5';
+export const UNIT_6 = 'Раздел 6';
+export const DEFAULT_LEVEL = 0;
 
-const games = [
+export const games = [
   {
     name: 'Savannah',
     path: '/games/savannah',
@@ -40,5 +49,3 @@ const games = [
     rule: 'bla bla mem',
   },
 ];
-
-export { server, games, DEFAULT_LEVEL };
