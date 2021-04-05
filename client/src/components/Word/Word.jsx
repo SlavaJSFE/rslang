@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import {
   Card,
@@ -31,6 +30,7 @@ const Word = ({
   isHard,
   isTextbook,
   isStudyStatistic,
+  setIsAuthError,
 }) => {
   const classes = useStyles();
 
@@ -43,23 +43,30 @@ const Word = ({
   };
 
   const onPlay = async () => {
-    await playAudio(`${server}/${word.audio}`);
-    await playAudio(`${server}/${word.audioMeaning}`);
-    await playAudio(`${server}/${word.audioExample}`);
+    await playAudio(`${server}${word.audio}`);
+    await playAudio(`${server}${word.audioExample}`);
+    await playAudio(`${server}${word.audioMeaning}`);
   };
 
   const onHardWord = async () => {
-    await setHardWord(word._id, userData);
+    if (!userData.token) {
+      setIsAuthError(true);
+    }
+    await setHardWord(word, userData);
   };
 
   const onDeleteWord = async () => {
-    await deleteWord(word._id, userData);
+    if (!userData.token) {
+      setIsAuthError(true);
+    }
+    await deleteWord(word.id, userData);
+    await setHardWord(word.id, userData);
   };
 
   const dispatch = useDispatch();
 
   const onRestoreWord = async () => {
-    await restoreWord(word._id, userData);
+    await restoreWord(word.id, userData);
     dispatch(fetchVocabularyWords(userData));
     dispatch(fetchVocabularyDeletedWords(userData));
     dispatch(fetchVocabularyStudyWords(userData));
@@ -71,13 +78,12 @@ const Word = ({
         className={classes.media}
         component="img"
         alt={word.word}
-        image={`${server}/${word.image}`}
+        image={`${server}${word.image}`}
       />
       <CardContent className={classes.content}>
         {!isTextbook && (
           <span className={classes.unitWords}>
             unit
-            {' '}
             {word.group}
           </span>
         )}
@@ -145,22 +151,20 @@ const Word = ({
             />
           )}
         </Box>
-        { !isTextbook && (
-        <Box className={classes.buttons}>
-          <Button
-            variant="outlined"
-            color="primary"
-            type="button"
-            className={classes.deleteBtn}
-            onClick={onRestoreWord}
-          >
-            Восстановить
-          </Button>
-        </Box>
+        {!isTextbook && (
+          <Box className={classes.buttons}>
+            <Button
+              variant="outlined"
+              color="primary"
+              type="button"
+              className={classes.deleteBtn}
+              onClick={onRestoreWord}
+            >
+              Восстановить
+            </Button>
+          </Box>
         )}
-        {isStudyStatistic && (
-          <StudyResults word={word} />
-        )}
+        {isStudyStatistic && <StudyResults word={word} />}
         {isButtonsActive && isTextbook && (
           <Box className={classes.buttons}>
             <Button
@@ -194,10 +198,11 @@ const mapStateToProps = (state) => ({
   userData: state.user.user,
 });
 
-const mapDispatchToProps = ({
+const mapDispatchToProps = {
   setHardWord: textBookActions.setHardWord,
   deleteWord: textBookActions.deleteWord,
   restoreWord: vocabularyActions.restoreWord,
-});
+  setIsAuthError: textBookActions.setIsAuthError,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Word);

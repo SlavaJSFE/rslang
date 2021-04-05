@@ -13,6 +13,7 @@ export default function useAuth() {
       refreshToken: user.refreshToken,
       userId: user.userId,
       name: user.name,
+      avatar: user.avatar,
     }));
     dispatch(setUser(user));
   }, []);

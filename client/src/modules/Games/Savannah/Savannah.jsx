@@ -1,6 +1,9 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect, useRef } from 'react';
 import useSound from 'use-sound';
 import { connect } from 'react-redux';
+import Rating from '@material-ui/lab/Rating';
+import { useDispatch } from 'react-redux';
 
 import ActiveWord from './ActiveWord/ActiveWord';
 import WordsSet from '../components/WordsSet/WordsSet';
@@ -8,6 +11,11 @@ import { getRandomWords } from '../utils';
 import setMediumWord from '../../../service/wordService';
 import correctSound from '../../../assets/sounds/correct.mp3';
 import errorSound from '../../../assets/sounds/error.mp3';
+import useStyles from './SavannahStyles';
+import {
+  setRightAnswer,
+  setWrongAnswer,
+} from '../../../redux/miniGameWords/actions';
 
 function popActiveWord(wordsForGame, activeWord) {
   return wordsForGame.filter(
@@ -15,12 +23,15 @@ function popActiveWord(wordsForGame, activeWord) {
   );
 }
 
-function Savannah({ data, userData }) {
+export default function Savannah({ data, userData }) {
+  const classes = useStyles();
+  const dispatch = useDispatch();
   const [activeWord, setActiveWord] = useState('');
   const [randomWords, setRandomWords] = useState([]);
   const [clientY, setClientY] = useState(0);
   const [isFail, setIsFail] = useState(false);
   const [wordsForGame, setWordsForGame] = useState(data);
+  const [hp, setHp] = useState(5);
 
   const wordsContainer = useRef();
 
@@ -30,8 +41,11 @@ function Savannah({ data, userData }) {
   function checkForCorrectWord(word, activeWordForCheck) {
     if (word === activeWordForCheck.wordTranslate) {
       playCorrect();
+      dispatch(setRightAnswer(activeWordForCheck));
     } else {
       playError();
+      dispatch(setWrongAnswer(activeWordForCheck));
+      setHp(hp - 1);
     }
   }
 
@@ -58,6 +72,7 @@ function Savannah({ data, userData }) {
     if (isFail) {
       playError();
       setNewRound();
+      setHp(hp - 1);
     }
     setIsFail(false);
   }, [isFail]);
@@ -77,19 +92,28 @@ function Savannah({ data, userData }) {
 
   return (
     <div className="game__savannah">
-      <ActiveWord
-        text={activeWord ? activeWord.word : null}
-        breakPoint={clientY}
-        setIsFail={setIsFail}
-        isFail={isFail}
-        wordsForGame={wordsForGame}
-      />
-      <WordsSet
-        handleClick={handleClick}
-        words={randomWords}
-        container={wordsContainer}
-        game="savanna"
-      />
+      {hp === 0 ? (
+        <div>Game over</div>
+      ) : (
+        <div>
+          <ActiveWord
+            text={activeWord ? activeWord.word : null}
+            breakPoint={clientY}
+            setIsFail={setIsFail}
+            isFail={isFail}
+            wordsForGame={wordsForGame}
+          />
+          <WordsSet
+            handleClick={handleClick}
+            words={randomWords}
+            container={wordsContainer}
+            game="savanna"
+          />
+          <div className="">
+            <Rating name="stars" value={hp} className={classes.root} readOnly />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

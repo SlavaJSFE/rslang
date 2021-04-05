@@ -1,5 +1,7 @@
 import {
-  SET_GAME_WORDS, SET_LEVEL_GAME, SET_GRUPWORDS_SUCCESS,
+  SET_GAME_WORDS,
+  SET_LEVEL_GAME,
+  SET_GRUPWORDS_SUCCESS,
   SET_GRUPWORDS_FAILURE,
   SET_GRUPWORDS_STARTED,
 } from './constants';
@@ -41,6 +43,28 @@ const fetchGrupWords = (currentGroup = 0) => async (dispatch) => {
   }
 };
 
+const setRightAnswer = (word) => async (dispatch, getState) => {
+  const { user } = getState().user;
+  try {
+    await api.setRightAnswer(word, user);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const setWrongAnswer = (word) => async (dispatch, getState) => {
+  const { user } = getState().user;
+  try {
+    await api.setWrongAnswer(word, user);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export {
-  setGameWords, setLevel, fetchGrupWords,
+  setGameWords,
+  setLevel,
+  fetchGrupWords,
+  setRightAnswer,
+  setWrongAnswer,
 };
