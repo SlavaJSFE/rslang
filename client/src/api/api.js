@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 /* eslint-disable no-underscore-dangle */
 import * as axios from 'axios';
 import * as storage from '../localStorageApi/localStorageApi';
@@ -124,28 +125,37 @@ export const getGrupWords = async (currentGroup) => {
 
 export const setRightAnswer = async (word, userData) => {
   const { userId, token } = userData;
-  const reqBody = word?.userWord?.optional?.rightAnswers
+  const reqBody = word?.userWord?.optional
     ? {
-      optional: {
-        ...word.userWord.optional,
-        rightAnswers: word.userWord.optional.rightAnswers + 1,
-      },
+      ...word.userWord.optional.stat,
+      stat: [
+        {
+          date: new Date(),
+          gameName: 'savannah',
+          rightAnswers: word?.userWord?.optional?.stat?.rightAnswers + 1,
+        },
+      ],
     }
     : {
-      optional: { ...word.userWord?.optional, rightAnswers: 1 },
+      stat: [
+        {
+          date: new Date(),
+          gameName: 'savannah',
+          rightAnswers: 1,
+        },
+      ],
     };
   const headers = {
     Authorization: `Bearer ${token}`,
   };
-  storage.setRightAnswer(word, reqBody);
+  // storage.setRightAnswer(word, reqBody);
   try {
-    const { data } = await axios({
+    await axios({
       method: word?.userWord ? 'put' : 'post',
       url: `${server}users/${userId}/words/${word.id}`,
       headers,
-      data: reqBody,
+      data: { optional: reqBody },
     });
-    return data;
   } catch (error) {
     throw new Error(error);
   }
@@ -164,7 +174,7 @@ export const setWrongAnswer = async (word, userData) => {
   const headers = {
     Authorization: `Bearer ${token}`,
   };
-  storage.setWrongAnswer(word, reqBody);
+  // storage.setWrongAnswer(word, reqBody);
   try {
     await axios({
       method: word?.userWord ? 'put' : 'post',
