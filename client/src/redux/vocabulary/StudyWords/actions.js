@@ -28,7 +28,7 @@ export const fetchVocabularyStudyWords = (userData) => async (dispatch) => {
 
   try {
     await axios.get(
-      `${server}/users/${userId}/aggregatedWords?wordsPerPage=3600&filter=%7B%22%24and%22%3A%5B%7B%22userWord.difficulty%22%3A%22easy%22%7D%5D%7D`,
+      `${server}users/${userId}/aggregatedWords?wordsPerPage=3600&filter=%7B%22%24and%22%3A%5B%7B%22userWord.difficulty%22%3A%22easy%22%7D%5D%7D`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

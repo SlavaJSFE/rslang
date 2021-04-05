@@ -1,4 +1,7 @@
 import React from 'react';
+// import { Container } from '@material-ui/core';
+// import PropTypes from 'prop-types';
+// import { makeStyles } from '@material-ui/core/styles';
 import { Link, useParams } from 'react-router-dom';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -43,7 +46,7 @@ export default function VocabularyModule() {
   const { unit, page } = useParams();
 
   return (
-    <div className="vocabulary-module">
+    <div className="vocabulary">
       <CommonStudyResults />
       <div className="classes.root">
         <Tabs

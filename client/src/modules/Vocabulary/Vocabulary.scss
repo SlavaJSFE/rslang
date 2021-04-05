@@ -3,7 +3,7 @@
 .vocabulary-tabs {
   color: $secondary-color;
 }
-.vocabulary-module-results{
+.vocabulary-results{
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -20,7 +20,7 @@
   }
 }
 
-.vocabulary-module-resultsStudy{
+.vocabulary-resultsStudy{
   display: flex;
   justify-content: space-around;
   margin-top: .5rem;
@@ -33,4 +33,8 @@
   &__valuesNumber{
     color: red;
   }
+}
+.cardWordVocabulary{
+  display: flex;
+  flex-wrap: wrap;
 }

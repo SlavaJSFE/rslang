@@ -9,6 +9,7 @@ import {
   DELETE_WORD,
   SET_HARD_WORD,
   SET_WORDS_COUNT,
+  SET_IS_AUTH_ERROR,
 } from './constants';
 import * as api from '../../api/api';
 
@@ -47,14 +48,25 @@ export const setWordsCount = (count) => ({
   payload: count,
 });
 
+export const setIsAuthError = (value) => ({
+  type: SET_IS_AUTH_ERROR,
+  payload: value,
+});
+
 export const fetchWords = (currentGroup, currentPage, userData) => async (
   dispatch,
 ) => {
   dispatch(setWordsStarted());
   try {
-    const data = await api.getWords(currentGroup, currentPage, userData);
-    dispatch(setWordsSuccess(data[0].paginatedResults));
-    dispatch(setWordsCount(data[0].totalCount[0].count));
+    if (userData.token) {
+      const data = await api.getWords(currentGroup, currentPage, userData);
+      dispatch(setWordsSuccess(data[0].paginatedResults));
+      dispatch(setWordsCount(data[0].totalCount[0].count));
+    } else {
+      const data = await api.getWordsWithOutAuth(currentGroup, currentPage);
+      dispatch(setWordsSuccess(data));
+      dispatch(setWordsCount(null));
+    }
   } catch (error) {
     dispatch(setWordsFailure(error.message));
   }
@@ -95,11 +107,13 @@ export const setHardWordRedux = (wordId) => ({
   payload: wordId,
 });
 
-export const setHardWord = (wordId, userData) => async (dispatch) => {
+export const setHardWord = (word, userData) => async (dispatch) => {
   try {
-    dispatch(setHardWordRedux(wordId));
-    await api.setHardWord(wordId, userData);
-  } catch (error) {}
+    await api.setHardWord(word, userData);
+    dispatch(setHardWordRedux(word.id));
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const deleteWord = (wordId, userData) => async (dispatch) => {

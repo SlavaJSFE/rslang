@@ -13,6 +13,7 @@ export const UNIT_3 = 'Раздел 3';
 export const UNIT_4 = 'Раздел 4';
 export const UNIT_5 = 'Раздел 5';
 export const UNIT_6 = 'Раздел 6';
+export const DEFAULT_LEVEL = 0;
 
 export const games = [
   {

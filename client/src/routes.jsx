@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import MainPage from './pages/main/Main';
 import TextbookPage from './pages/textbook/Textbook';
 import GamesPage from './pages/games/Games';
-import StatisticsPage from './pages/statistics/Statistics';
+import StatisticsPage from './pages/statisticsPage/StatisticsPage';
 import TeamPage from './pages/team/Team';
 import LoginPage from './pages/login/Login';
 import RegistrationPage from './pages/registration/Registration';
@@ -30,7 +30,7 @@ export default function useRoutes() {
           <Route path="/games/:type" exact>
             <Game />
           </Route>
-          <Route path="/statistics" exact>
+          <Route path="/statistic" exact>
             <StatisticsPage />
           </Route>
           <Route path="/team" exact>
@@ -60,7 +60,7 @@ export default function useRoutes() {
         <Route path="/games/:type" exact>
           <Game />
         </Route>
-        <Route path="/statistics" exact>
+        <Route path="/statistic" exact>
           <StatisticsPage />
         </Route>
         <Route path="/team" exact>

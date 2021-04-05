@@ -86,6 +86,26 @@ function getMemoryWords(arrData) {
   return cards;
 }
 
+function getScore() {
+  let coef = 1;
+  let score = 10;
+
+  return (answers) => {
+    if (answers % 4 === 0 && answers !== 0) {
+      coef += 1;
+      score *= coef;
+    }
+    return score;
+  };
+}
+
+function addZero(n) {
+  const numb = +n.toFixed(0);
+  const min = Math.floor(numb / 60);
+  const sec = numb % 60;
+  return `0${min}:${sec >= 10 ? sec : `0${sec}`}`;
+}
+
 export {
-  shuffle, getRandom, getRandomWords, makeRandomSprintData, getMemoryWords,
+  shuffle, getRandom, getRandomWords, makeRandomSprintData, getMemoryWords, getScore, addZero,
 };

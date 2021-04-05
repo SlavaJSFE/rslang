@@ -11,7 +11,7 @@ export default function Navigation() {
       <Link to="/games">
         <div className="menu-item">ИГРЫ</div>
       </Link>
-      <Link to="/statistics">
+      <Link to="/statistic">
         <div className="menu-item">СТАТИСТИКА</div>
       </Link>
       <Link to="/team">
