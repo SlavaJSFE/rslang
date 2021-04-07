@@ -19,7 +19,7 @@ import * as textBookActions from '../../redux/textBook/actions';
 import * as vocabularyActions from '../../redux/vocabulary/actions';
 import StudyResults from '../../modules/Vocabulary/CommonStudyResults/StudyResults';
 import { fetchVocabularyWords } from '../../redux/vocabulary/DifficultWords/actions';
-import { fetchVocabularyDeletedWords } from '../../redux/vocabulary/DeletedWords/actions';
+import { getDelWords } from '../../api/apiVocabulary';
 import { fetchVocabularyStudyWords } from '../../redux/vocabulary/StudyWords/actions';
 import { fetchVocabularyAmountStudyWords } from '../../redux/vocabulary/AmountStudyWords/actions';
 
@@ -75,7 +75,8 @@ const Word = ({
   const onRestoreWord = async () => {
     await restoreWord(word._id, userData);
     dispatch(fetchVocabularyWords(userData));
-    dispatch(fetchVocabularyDeletedWords(userData));
+    // dispatch(fetchVocabularyDeletedWords(userData));
+    dispatch(getDelWords(userData));
     dispatch(fetchVocabularyStudyWords(userData, group));
     dispatch(fetchVocabularyAmountStudyWords(userData));
   };
@@ -90,12 +91,12 @@ const Word = ({
         image={`${server}/${word.image}`}
       />
       <CardContent className={classes.content}>
-        {!isTextbook && (
+        {/* {!isTextbook && (
           <span className={classes.unitWords}>
             unit
             {word.group}
           </span>
-        )}
+        )} */}
         <Box className={classes.header}>
           <Box className={classes.headerText}>
             <Typography variant="h5" component="h3">

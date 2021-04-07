@@ -14,9 +14,9 @@ export default function useTextbookRoutes(path) {
         <TextbookModule />
       </Route>
       <Route exact path={`${path}/vocabulary`}>
-        <Redirect to={`${path}/vocabulary/studied/1`} />
+        <Redirect to={`${path}/vocabulary/studied/1/1`} />
       </Route>
-      <Route path={`${path}/vocabulary/:unit/:page`}>
+      <Route path={`${path}/vocabulary/:typeWords/:unit/:numPage`}>
         <VocabularyModule />
       </Route>
       <Route exact path={`${path}/settings`}>
