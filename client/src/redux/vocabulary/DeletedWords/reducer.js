@@ -2,13 +2,19 @@ import {
   SET_DEL_WORDS_SUCCESS,
   SET_DEL_WORDS_FAILURE,
   SET_DEL_WORDS_STARTED,
+  SET_DEL_PAGE,
+  SET_DEL_GROUP,
+  SET_DEL_WORDS_COUNT,
 
 } from './constants';
 
 const initialState = {
-  words: [],
+  delWords: [],
   error: null,
   loading: false,
+  delCurrentPage: 0,
+  delCurrentGroup: 0,
+  delWordsCount: 0,
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -22,7 +28,7 @@ export default (state = initialState, { type, payload }) => {
     case SET_DEL_WORDS_SUCCESS:
       return {
         ...state,
-        words: payload,
+        delWords: payload,
         loading: false,
       };
     case SET_DEL_WORDS_FAILURE:
@@ -30,6 +36,21 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         error: payload,
         loading: false,
+      };
+    case SET_DEL_PAGE:
+      return {
+        ...state,
+        delCurrentPage: payload,
+      };
+    case SET_DEL_GROUP:
+      return {
+        ...state,
+        delCurrentGroup: payload,
+      };
+    case SET_DEL_WORDS_COUNT:
+      return {
+        ...state,
+        delWordsCount: payload,
       };
 
     default:
