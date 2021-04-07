@@ -6,6 +6,7 @@ import vocabularyStudyWordsReducer from './vocabulary/StudyWords/reducer';
 import vocabularyDifficultWordsReducer from './vocabulary/DifficultWords/reducer';
 import vocabularyDeletedWordsReducer from './vocabulary/DeletedWords/reducer';
 import vocabularyReducer from './vocabulary/reducer';
+import statisticsReducer from './statistics/reducer';
 
 const rootReducer = combineReducers({
   textBookPage: textBookReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   game: gameReducer,
   vocabulary: vocabularyReducer,
+  statistics: statisticsReducer,
 });
 
 export default rootReducer;

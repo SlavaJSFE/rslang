@@ -57,7 +57,7 @@ export default function Gist() {
     <div className="statistic__grafics">
       <div className="statistic__grafics__content">
         <BarChart barChartData={barChartData} legendPosition="bottom" />
-        <div className="graficsLine"></div>
+        <div className="graficsLine" />
         <LineChart lineChartData={lineChartData} legendPosition="bottom" />
       </div>
     </div>

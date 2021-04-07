@@ -1,6 +1,7 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import useSound from 'use-sound';
+import { useDispatch } from 'react-redux';
 
 import SetWords from '../components/WordsSet/WordsSet';
 import SoundBtn from '../../../components/SoundBtnComponent/SoundBtn';
@@ -8,13 +9,19 @@ import NextBtn from '../components/NextBtn/NextBtn';
 import ImageComponent from '../../../components/ImageComponent/ImageComponent';
 import Display from '../components/Display';
 
-import { getRandomWords, getScore } from '../utils';
+import { getRandomWords } from '../utils';
 import { server } from '../../../constants/constants';
 
 import correctSound from '../../../assets/sounds/correct.mp3';
 import errorSound from '../../../assets/sounds/error.mp3';
 
+import {
+  setRightAnswer,
+  setWrongAnswer,
+} from '../../../redux/miniGameWords/actions';
+
 export default function AudioGame({ data }) {
+  const dispatch = useDispatch();
   const [activeWord, setActiveWord] = useState('');
   const [randomWords, setRandomWords] = useState([]);
   const [shouldOpen, setShouldOpen] = useState(false);
@@ -67,19 +74,18 @@ export default function AudioGame({ data }) {
     e.preventDefault();
 
     if (word === activeWord.wordTranslate) {
+      dispatch(setRightAnswer(activeWord, 'audiocall'));
       playCorrect();
       setShouldOpen(true);
       setCorrectAnswers(correctAnswers + 1);
       if (correctAnswers % 4 === 0 && correctAnswers !== 0) setCoeff(coeff + 1);
       setScore(score + onScoreChange());
-      console.log(correctAnswers, score, coeff);
     } else {
       playError();
       setShouldOpen(true);
       setCorrectAnswers(1);
       setCoeff(1);
       setScore(score + onScoreChange());
-      console.log(correctAnswers, score, coeff);
     }
   };
 

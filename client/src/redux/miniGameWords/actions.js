@@ -4,6 +4,7 @@ import {
   SET_GRUPWORDS_SUCCESS,
   SET_GRUPWORDS_FAILURE,
   SET_GRUPWORDS_STARTED,
+  UPDATE_WORD,
 } from './constants';
 // import { setWordsSuccess, setWordsStarted, setWordsFailure } from '../textBook/actions';
 import * as api from '../../api/api';
@@ -33,6 +34,11 @@ const setWordsFailure = (err) => ({
   payload: err,
 });
 
+const updateWord = (word) => ({
+  type: UPDATE_WORD,
+  payload: word,
+});
+
 const fetchGrupWords = (currentGroup = 0) => async (dispatch) => {
   dispatch(setWordsStarted());
   try {
@@ -43,19 +49,20 @@ const fetchGrupWords = (currentGroup = 0) => async (dispatch) => {
   }
 };
 
-const setRightAnswer = (word) => async (dispatch, getState) => {
+const setRightAnswer = (word, gameName) => async (dispatch, getState) => {
   const { user } = getState().user;
   try {
-    await api.setRightAnswer(word, user);
+    await api.setRightAnswer(word, gameName, user);
+    // dispatch(updateWord(word));
   } catch (error) {
     console.log(error);
   }
 };
 
-const setWrongAnswer = (word) => async (dispatch, getState) => {
+const setWrongAnswer = (word, gameName) => async (dispatch, getState) => {
   const { user } = getState().user;
   try {
-    await api.setWrongAnswer(word, user);
+    await api.setWrongAnswer(word, gameName, user);
   } catch (error) {
     console.log(error);
   }

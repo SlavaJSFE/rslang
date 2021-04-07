@@ -4,6 +4,7 @@ import {
   SET_GRUPWORDS_FAILURE,
   SET_GRUPWORDS_STARTED,
   SET_GRUPWORDS_SUCCESS,
+  UPDATE_WORD,
 } from './constants';
 
 const initialState = {
@@ -41,6 +42,40 @@ const gameReducer = (state = initialState, action) => {
         ...state,
         error: payload,
         loading: false,
+      };
+    case UPDATE_WORD:
+      return {
+        ...state,
+        words: state.words.map((word) => {
+          if (word.id !== payload.id) {
+            return word;
+          }
+          if (word?.word?.userWord?.optional?.stat) {
+            const updatedWord = {
+              ...word,
+              stat: [
+                ...word?.userWord?.optional?.stat,
+                {
+                  date: new Date(),
+                  gameName: 'savannah',
+                  rightAnswers: word?.userWord?.optional?.stat.rightAnswers + 1,
+                },
+              ],
+            };
+            return updatedWord;
+          }
+          const updatedWord = {
+            ...word,
+            stat: [
+              {
+                date: new Date(),
+                gameName: 'savannah',
+                rightAnswers: 1,
+              },
+            ],
+          };
+          return updatedWord;
+        }),
       };
     default:
       return state;

@@ -6,6 +6,13 @@ import memoryImage from '../assets/images/memory.jpg';
 const DEFAULT_LEVEL = 0;
 const server = 'https://rslang-server-slavajsfe.herokuapp.com/';
 
+const gameNames = {
+  savannah: 'savannah',
+  audioCall: 'audiocall',
+  sprint: 'sprint',
+  memory: 'memory',
+};
+
 const games = [
   {
     name: 'Savannah',
@@ -41,4 +48,6 @@ const games = [
   },
 ];
 
-export { server, games, DEFAULT_LEVEL };
+export {
+  server, games, DEFAULT_LEVEL, gameNames,
+};
