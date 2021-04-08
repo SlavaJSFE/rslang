@@ -62,3 +62,19 @@ export const getDelWordsWithOutAuth = async (delCurrentGroup, delCurrentPage) =>
     throw new Error(error);
   }
 };
+
+export const getCountDelWord = async (userData, typeWords) => {
+  try {
+    const { data } = await axios.get(
+      `${server}/users/${userData.userId}/aggregatedWords?wordsPerPage=3600&filter=${JSON.stringify(getVocabularyFilter(typeWords))}`,
+      {
+        headers: {
+          Authorization: `Bearer ${userData.token}`,
+        },
+      },
+    );
+    return data;
+  } catch (error) {
+    throw new Error(error);
+  }
+};

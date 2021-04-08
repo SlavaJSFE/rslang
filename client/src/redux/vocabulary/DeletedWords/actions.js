@@ -46,7 +46,12 @@ export const fetchDelWords = (typeWords, delCurrentGroup, delCurrentPage, delUse
   dispatch(setWordsStarted());
   try {
     if (delUserData.token) {
-      const data = await vocabularyApi.getDelWords(typeWords, delCurrentGroup, delCurrentPage, delUserData);
+      const data = await vocabularyApi.getDelWords(
+        typeWords,
+        delCurrentGroup,
+        delCurrentPage,
+        delUserData,
+      );
       dispatch(setWordsSuccess(data[0].paginatedResults));
       dispatch(setWordsCount(data[0].totalCount[0].count));
     } else {

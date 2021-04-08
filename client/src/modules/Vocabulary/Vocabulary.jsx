@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { Pagination, PaginationItem } from '@material-ui/lab';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -13,6 +13,7 @@ import {
   setGroup,
   fetchDelWords,
 } from '../../redux/vocabulary/DeletedWords/actions';
+import { getCountDelWord } from '../../redux/vocabulary/actions';
 import './Vocabulary.scss';
 import CommonStudyResults from './CommonStudyResults/CommonStudyResults';
 import GameCards from '../../components/GameCards/GameCards';
@@ -49,6 +50,7 @@ function allProps(index) {
 
 function VocabularyModule({
   fetchDelWordsConnect,
+  getCountDelWordConnect,
   setGroupConnect,
   setPageConnect,
   loading,
@@ -57,10 +59,7 @@ function VocabularyModule({
   userData,
   wordsCount,
 }) {
-   console.log('wordsCount', wordsCount);
-
   const { typeWords, numPage } = useParams('/vocabulary/:typeWords/:unit/:numPage');
-  console.log('typeWords', typeWords);
   // const dispatch = useDispatch();
 
   // useEffect(() => {
@@ -73,6 +72,7 @@ function VocabularyModule({
 
   useEffect(() => {
     fetchDelWordsConnect(typeWords, currentGroup, currentPage, userData);
+    getCountDelWordConnect(userData);
   }, [typeWords, currentPage, currentGroup, userData]);
 
   const onPageChange = (event, page) => {
@@ -124,12 +124,6 @@ function VocabularyModule({
         <TabPanel value={typeWords} index={typeWords}>
           <VocabularyPage />
         </TabPanel>
-        {/* <TabPanel value={typeWords} index="difficult">
-          <VocabularyPage />
-        </TabPanel>
-        <TabPanel value={typeWords} index="deleted">
-          <VocabularyPage />
-        </TabPanel> */}
         <Pagination
           className="textbook-pagination"
           count={calcPaginationCount(wordsCount) || 30}
@@ -161,6 +155,7 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   fetchDelWordsConnect: fetchDelWords,
+  getCountDelWordConnect: getCountDelWord,
   setGroupConnect: setGroup,
   setPageConnect: setPage,
 })(VocabularyModule);
