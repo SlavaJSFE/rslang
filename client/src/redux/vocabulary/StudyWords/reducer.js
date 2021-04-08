@@ -2,6 +2,7 @@ import {
   SET_STUDY_WORDS_SUCCESS,
   SET_STUDY_WORDS_FAILURE,
   SET_STUDY_WORDS_STARTED,
+  SET_STUDY_GROUP,
 
 } from './constants';
 
@@ -9,6 +10,7 @@ const initialState = {
   words: [],
   error: null,
   loading: false,
+  group: 0,
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -30,6 +32,12 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         error: payload,
         loading: false,
+      };
+
+    case SET_STUDY_GROUP:
+      return {
+        ...state,
+        group: payload,
       };
 
     default:

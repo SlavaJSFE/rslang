@@ -6,8 +6,7 @@ import { Pagination, PaginationItem } from '@material-ui/lab';
 import { connect, useDispatch } from 'react-redux';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
-import '../../styles/common.scss';
-import './Textbook-module.scss';
+import './Textbook.scss';
 import Word from '../../components/Word/Word';
 import {
   setPage,

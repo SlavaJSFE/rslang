@@ -8,7 +8,7 @@ export default function useAuth() {
   const dispatch = useDispatch();
 
   const login = useCallback((user) => {
-    localStorage.setItem(storageName, JSON.stringify({
+    sessionStorage.setItem(storageName, JSON.stringify({
       token: user.token,
       refreshToken: user.refreshToken,
       userId: user.userId,
@@ -19,11 +19,11 @@ export default function useAuth() {
   }, []);
 
   const logout = useCallback(() => {
-    localStorage.removeItem(storageName);
+    sessionStorage.removeItem(storageName);
   }, []);
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem(storageName));
+    const user = JSON.parse(sessionStorage.getItem(storageName));
 
     if (user && user.token) {
       login(user);

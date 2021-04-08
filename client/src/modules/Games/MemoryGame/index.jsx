@@ -4,6 +4,7 @@ import Field from './Field';
 import GameTimer from '../components/GameTimer';
 
 import { getMemoryWords } from '../utils';
+import './Memory.scss';
 
 export default function MemoryGame({ data }) {
   // const [score, setScore] = useState(0);

@@ -5,6 +5,7 @@ import gameReducer from './miniGameWords/reducer';
 import vocabularyStudyWordsReducer from './vocabulary/StudyWords/reducer';
 import vocabularyDifficultWordsReducer from './vocabulary/DifficultWords/reducer';
 import vocabularyDeletedWordsReducer from './vocabulary/DeletedWords/reducer';
+import vocabularyAmountStudyWordsReducer from './vocabulary/AmountStudyWords/reducer';
 import vocabularyReducer from './vocabulary/reducer';
 import statisticsReducer from './statistics/reducer';
 
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   vocabularyStudyWords: vocabularyStudyWordsReducer,
   vocabularyDifficultWords: vocabularyDifficultWordsReducer,
   vocabularyDeletedWords: vocabularyDeletedWordsReducer,
+  vocabularyAmountStudyWords: vocabularyAmountStudyWordsReducer,
   user: userReducer,
   game: gameReducer,
   vocabulary: vocabularyReducer,

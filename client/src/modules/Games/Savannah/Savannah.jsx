@@ -1,14 +1,16 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect, useRef } from 'react';
 import useSound from 'use-sound';
+import { connect, useDispatch } from 'react-redux';
 import Rating from '@material-ui/lab/Rating';
-import { useDispatch } from 'react-redux';
 
 import ActiveWord from './ActiveWord/ActiveWord';
 import WordsSet from '../components/WordsSet/WordsSet';
 import { getRandomWords } from '../utils';
+import setMediumWord from '../../../service/wordService';
 import correctSound from '../../../assets/sounds/correct.mp3';
 import errorSound from '../../../assets/sounds/error.mp3';
+import './Savannah.scss';
 import useStyles from './SavannahStyles';
 import {
   setRightAnswer,
@@ -58,6 +60,7 @@ export default function Savannah({ data }) {
   useEffect(() => {
     if (wordsForGame.length) {
       setActiveWord(wordsForGame[0]);
+      setMediumWord(wordsForGame[0], userData);
     } else {
       alert('конец игры');
     }
@@ -116,3 +119,9 @@ export default function Savannah({ data }) {
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  userData: state.user.user,
+});
+
+export default connect(mapStateToProps)(Savannah);

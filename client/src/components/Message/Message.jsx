@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Snackbar } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { setError, setMessage } from '../../redux/user/actions';
+import { CLICK_AWAY, sixSeconds } from '../../constants/constants';
 
 export default function Message() {
   const [openMessage, setOpenMessage] = useState(false);
@@ -13,7 +14,7 @@ export default function Message() {
 
   function handleCloseMessage(reason) {
     dispatch(setMessage(null));
-    if (reason === 'clickaway') {
+    if (reason === CLICK_AWAY) {
       return;
     }
 
@@ -22,7 +23,7 @@ export default function Message() {
 
   function handleCloseError(reason) {
     dispatch(setError(null));
-    if (reason === 'clickaway') {
+    if (reason === CLICK_AWAY) {
       return;
     }
 
@@ -46,7 +47,7 @@ export default function Message() {
       <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         open={openMessage}
-        autoHideDuration={6000}
+        autoHideDuration={sixSeconds}
         onClose={handleCloseMessage}
       >
         <Alert onClose={handleCloseMessage} severity="success" variant="filled">
@@ -56,7 +57,7 @@ export default function Message() {
       <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         open={openError}
-        autoHideDuration={6000}
+        autoHideDuration={sixSeconds}
         onClose={handleCloseError}
       >
         <Alert onClose={handleCloseError} severity="error" variant="filled">

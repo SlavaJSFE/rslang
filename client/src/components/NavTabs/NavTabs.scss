@@ -1,5 +1,40 @@
+@import '../../styles/colors.scss';
+
 .textbook-tabs {
   display: flex;
   justify-content: center;
   margin-bottom: 25px;
+  color: $tertiary-color;
+
+  .MuiTabs-root {
+    width: 100%;
+  }
+  .MuiTabs-indicator {
+    background-color: $tertiary-color;
+  }
+  .MuiTabs-flexContainer {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .MuiTab-root {
+    min-width: unset;
+  }
+}
+.unit-1 {
+  background-color: $unit1-color !important;
+}
+.unit-2 {
+  background-color: $unit2-color !important;
+}
+.unit-3 {
+  background-color: $unit3-color !important;
+}
+.unit-4 {
+  background-color: $unit4-color !important;
+}
+.unit-5 {
+  background-color: $unit5-color !important;
+}
+.unit-6 {
+  background-color: $unit6-color !important;
 }

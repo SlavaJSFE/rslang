@@ -16,8 +16,8 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header';
 import './Registration.scss';
-import useHttp from '../../hooks/http.hook';
-import useAuth from '../../hooks/auth.hook';
+import useHttp from '../../hooks/http';
+import useAuth from '../../hooks/auth';
 import { setMessage } from '../../redux/user/actions';
 import { server } from '../../constants/constants';
 
@@ -46,12 +46,12 @@ export default function RegistrationPage() {
     };
 
     try {
-      const response = await request(`${server}users`, 'POST', body);
+      const response = await request(`${server}/users`, 'POST', body);
 
       if (response && response.id) {
         dispatch(setMessage(successMessage));
 
-        const data = await request(`${server}signin`, 'POST', { email, password });
+        const data = await request(`${server}/signin`, 'POST', { email, password });
 
         const user = {
           token: data.token,

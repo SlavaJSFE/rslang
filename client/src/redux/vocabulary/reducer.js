@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import RESTORE_WORD from './constants';
+import RESTORE_WORD, { DIFFICULTY_WORD } from './constants';
 
 const initialState = {
   words: [],
@@ -19,6 +19,11 @@ const initialState = {
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case RESTORE_WORD:
+      return {
+        ...state,
+        words: state.words.filter((word) => word._id !== payload),
+      };
+    case DIFFICULTY_WORD:
       return {
         ...state,
         words: state.words.filter((word) => word._id !== payload),

@@ -1,0 +1,25 @@
+@import '../../styles/colors.scss';
+
+.textbook-nav-buttons {
+  display: flex;
+  justify-content: center;
+  column-gap: 15px;
+  margin-bottom: 25px;
+
+  .active {
+    border-bottom: 2px solid $tertiary-color;
+  }
+}
+.textbook-menu-item {
+  display: grid;
+  justify-content: center;
+  color: $tertiary-color;
+
+  img {
+    width: 50px;
+    margin: 0 auto;
+  }
+  span {
+    padding: 10px;
+  }
+}

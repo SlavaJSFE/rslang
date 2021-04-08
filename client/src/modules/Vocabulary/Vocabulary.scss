@@ -1,4 +1,4 @@
-@import '../../styles/common.scss';
+@import '../../styles/colors.scss';
 
 .vocabulary-tabs {
   color: $secondary-color;
@@ -37,4 +37,9 @@
 .cardWordVocabulary{
   display: flex;
   flex-wrap: wrap;
+}
+
+.paginationVocabulary{
+  display: flex;
+  justify-content: center;
 }
