@@ -15,7 +15,14 @@ export const UNIT_5 = 'Раздел 5';
 export const UNIT_6 = 'Раздел 6';
 export const DEFAULT_LEVEL = 0;
 
-export const games = [
+const gameNames = {
+  savannah: 'savannah',
+  audioCall: 'audiocall',
+  sprint: 'sprint',
+  memory: 'memory',
+};
+
+const games = [
   {
     name: 'Savannah',
     path: '/games/savannah',
@@ -49,3 +56,7 @@ export const games = [
     rule: 'bla bla mem',
   },
 ];
+
+export {
+  server, games, DEFAULT_LEVEL, gameNames,
+};
