@@ -16,6 +16,6 @@ export function getVocabularyFilter(typeWords) {
     case 'studied': return { $or: [{ 'userWord.difficulty': 'medium' }, { 'userWord.difficulty': 'hard' }] };
     case 'difficult': return { $and: [{ 'userWord.difficulty': 'hard' }] };
     case 'deleted': return { $and: [{ 'userWord.difficulty': 'easy' }] };
-    default: return { $or: [{ 'userWord.difficulty': 'easy' }, { 'userWord.difficulty': 'hard' }] };
+    default: return '';
   }
 }

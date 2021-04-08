@@ -2,14 +2,14 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 function CommonStudyResults() {
-  const amountOfStydyWords = useSelector((state) => state.vocabularyAmountStudyWords.amountWords);
-  const amountOfDeletedWords = useSelector((state) => state.vocabularyDeletedWords.delWordsCount);
+  const amountOfStudyWords = useSelector((state) => state.vocabulary.countStudyWords);
+  const amountOfDeletedWords = useSelector((state) => state.vocabulary.countDelWords);
   return (
     <div>
       <div className="vocabulary-results">
         <div className="vocabulary-results__values">
           <span>всего изучаемых слов: </span>
-          <span className="vocabulary-results__valuesNumber">{amountOfStydyWords}</span>
+          <span className="vocabulary-results__valuesNumber">{amountOfStudyWords}</span>
         </div>
         <div className="vocabulary-results__values">
           <span>кол-во изученных слов: </span>

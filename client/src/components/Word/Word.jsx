@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core';
 import VolumeUpRoundedIcon from '@material-ui/icons/VolumeUpRounded';
 import { connect, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import useStyles from './WordStyles';
 import { server, UNIT } from '../../constants/constants';
 import './Word.scss';
@@ -22,6 +23,8 @@ import { fetchVocabularyWords } from '../../redux/vocabulary/DifficultWords/acti
 import { getDelWords } from '../../api/apiVocabulary';
 import { fetchVocabularyStudyWords } from '../../redux/vocabulary/StudyWords/actions';
 import { fetchVocabularyAmountStudyWords } from '../../redux/vocabulary/AmountStudyWords/actions';
+import { fetchDelWords } from '../../redux/vocabulary/DeletedWords/actions';
+import { getCountDelWord } from '../../redux/vocabulary/actions';
 
 const Word = ({
   word,
@@ -62,6 +65,8 @@ const Word = ({
     await setHardWord(word, userData);
   };
 
+  const dispatch = useDispatch();
+
   const onDeleteWord = async () => {
     if (!userData.token) {
       setIsAuthError(true);
@@ -70,15 +75,12 @@ const Word = ({
     await setHardWord(word.id, userData);
   };
 
-  const dispatch = useDispatch();
+  const { typeWords, unit, numPage } = useParams('/vocabulary/:typeWords/:unit/:numPage');
 
   const onRestoreWord = async () => {
     await restoreWord(word._id, userData);
-    dispatch(fetchVocabularyWords(userData));
-    // dispatch(fetchVocabularyDeletedWords(userData));
-    dispatch(getDelWords(userData));
-    dispatch(fetchVocabularyStudyWords(userData, group));
-    dispatch(fetchVocabularyAmountStudyWords(userData));
+    dispatch(fetchDelWords(typeWords, unit - 1, numPage - 1, userData));
+    dispatch(getCountDelWord(userData));
   };
 
   return (

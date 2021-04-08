@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import './Statistic.scss';
 
 function StatisticCommon() {
-  const amountOfDeletedWords = useSelector((state) => state.vocabularyDeletedWords.words.length);
+  const amountOfDeletedWords = useSelector((state) => state.vocabulary.countDelWords);
   return (
     <div>
       <h3 className="statistic__item">Краткосрочная статистика (по дням обучения)</h3>
