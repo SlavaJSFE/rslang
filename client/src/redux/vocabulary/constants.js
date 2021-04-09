@@ -1,4 +1,5 @@
 const RESTORE_WORD = 'RESTORE_WORD';
 export const DIFFICULTY_WORD = 'DIFFICULTY_WORD';
-
+export const COUNT_DEL_WORDS = 'COUNT_DEL_WORDS';
+export const COUNT_STUDY_WORDS = 'COUNT_STUDY_WORDS';
 export default RESTORE_WORD;

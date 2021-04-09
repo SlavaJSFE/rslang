@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 /* eslint-disable no-underscore-dangle */
 import * as axios from 'axios';
 import * as storage from '../localStorageApi/localStorageApi';
@@ -145,55 +146,88 @@ export const getGrupWords = async (currentGroup) => {
   }
 };
 
-export const setRightAnswer = async (word, userData) => {
+export const setRightAnswer = async (word, gameName, userData) => {
   const { userId, token } = userData;
-  const reqBody = word?.userWord?.optional?.rightAnswers
+  const statId = new Date().toLocaleString().slice(0, 10).replaceAll('.', '_');
+  const difficulty = word.userWord.difficulty === 'hard' ? 'hard' : 'medium';
+  const statistics = word?.userWord?.optional?.stat[statId]
     ? {
-      optional: {
-        ...word.userWord.optional,
-        rightAnswers: word.userWord.optional.rightAnswers + 1,
+      stat: {
+        ...word?.userWord?.optional?.stat,
+        [statId]: {
+          ...word?.userWord?.optional?.stat[statId],
+          [gameName]: {
+            ...word?.userWord?.optional?.stat[statId][gameName],
+            rightAnswers:
+                word?.userWord?.optional?.stat[statId][gameName]?.rightAnswers + 1 || 1,
+          },
+        },
       },
     }
     : {
-      optional: { ...word.userWord?.optional, rightAnswers: 1 },
+      stat: {
+        [statId]: {
+          [gameName]: {
+            rightAnswers: 1,
+          },
+        },
+      },
     };
   const headers = {
     Authorization: `Bearer ${token}`,
   };
-  storage.setRightAnswer(word, reqBody);
-  try {
-    const { data } = await axios({
-      method: word?.userWord ? 'put' : 'post',
-      url: `${server}/users/${userId}/words/${word.id}`,
-      headers,
-      data: reqBody,
-    });
-    return data;
-  } catch (error) {
-    throw new Error(error);
-  }
-};
-
-export const setWrongAnswer = async (word, userData) => {
-  const { userId, token } = userData;
-  const reqBody = word?.userWord?.optional?.wrongAnswers
-    ? {
-      optional: {
-        ...word.userWord.optional,
-        wrongAnswers: word.userWord.optional.wrongAnswers + 1,
-      },
-    }
-    : { optional: { ...word.userWord?.optional, wrongAnswers: 1 } };
-  const headers = {
-    Authorization: `Bearer ${token}`,
-  };
-  storage.setWrongAnswer(word, reqBody);
+  const data = { difficulty, optional: statistics };
+  // storage.setRightAnswer(word, reqBody);
   try {
     await axios({
       method: word?.userWord ? 'put' : 'post',
       url: `${server}/users/${userId}/words/${word.id}`,
       headers,
-      data: reqBody,
+      data,
+    });
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export const setWrongAnswer = async (word, gameName, userData) => {
+  const { userId, token } = userData;
+  const statId = new Date().toLocaleString().slice(0, 10).replaceAll('.', '_');
+  const difficulty = word.userWord.difficulty === 'hard' ? 'hard' : 'medium';
+  const statistics = word?.userWord?.optional?.stat[statId]
+    ? {
+      stat: {
+        ...word?.userWord?.optional?.stat,
+        [statId]: {
+          ...word?.userWord?.optional?.stat[statId],
+          [gameName]: {
+            ...word?.userWord?.optional?.stat[statId][gameName],
+            wrongAnswers:
+                word?.userWord?.optional?.stat[statId][gameName]?.wrongAnswer + 1 || 1,
+          },
+        },
+      },
+    }
+    : {
+      stat: {
+        [statId]: {
+          [gameName]: {
+            wrongAnswers: 1,
+          },
+        },
+      },
+    };
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+  const data = { difficulty, optional: statistics };
+  // storage.setRightAnswer(word, reqBody);
+  try {
+    await axios({
+      method: word?.userWord ? 'put' : 'post',
+      url: `${server}/users/${userId}/words/${word.id}`,
+      headers,
+      data,
     });
   } catch (error) {
     throw new Error(error);

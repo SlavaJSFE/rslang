@@ -16,6 +16,7 @@ import {
   setRightAnswer,
   setWrongAnswer,
 } from '../../../redux/miniGameWords/actions';
+import { gameNames } from '../../../constants/constants';
 
 function popActiveWord(wordsForGame, activeWord) {
   return wordsForGame.filter(
@@ -23,7 +24,8 @@ function popActiveWord(wordsForGame, activeWord) {
   );
 }
 
-function Savannah({ data, userData }) {
+export default function Savannah({ data }) {
+  const gameName = gameNames.savannah;
   const classes = useStyles();
   const dispatch = useDispatch();
   const [activeWord, setActiveWord] = useState('');
@@ -41,10 +43,10 @@ function Savannah({ data, userData }) {
   function checkForCorrectWord(word, activeWordForCheck) {
     if (word === activeWordForCheck.wordTranslate) {
       playCorrect();
-      dispatch(setRightAnswer(activeWordForCheck));
+      dispatch(setRightAnswer(activeWordForCheck, gameName));
     } else {
       playError();
-      dispatch(setWrongAnswer(activeWordForCheck));
+      dispatch(setWrongAnswer(activeWordForCheck, gameName));
       setHp(hp - 1);
     }
   }
