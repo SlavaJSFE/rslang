@@ -3,9 +3,14 @@ import audioCallImage from '../assets/images/audiocall.jpg';
 import sprintImage from '../assets/images/sprint.jpg';
 import memoryImage from '../assets/images/memory.jpg';
 
-export const server = 'https://rslang-server-slavajsfe.herokuapp.com';
+// export const server = 'https://rslang-server-slavajsfe.herokuapp.com';
+export const server = 'http://localhost:5000';
 export const CLICK_AWAY = 'clickaway';
 export const sixSeconds = 6000;
+export const HELLO = 'Привет';
+export const GUEST = 'Гость';
+export const IMAGE = 'image';
+
 export const UNIT = 'РАЗДЕЛ';
 export const UNIT_1 = 'Раздел 1';
 export const UNIT_2 = 'Раздел 2';
