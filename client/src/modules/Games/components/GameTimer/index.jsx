@@ -15,7 +15,7 @@ const GameTimer = ({ setTiming }) => {
 
     if (!count) setTiming(false);
 
-    return function () {
+    return () => {
       clearInterval(timer);
     };
   }, [count]);

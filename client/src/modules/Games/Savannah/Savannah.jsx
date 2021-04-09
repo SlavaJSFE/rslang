@@ -7,7 +7,6 @@ import Rating from '@material-ui/lab/Rating';
 import ActiveWord from './ActiveWord/ActiveWord';
 import WordsSet from '../components/WordsSet/WordsSet';
 import { getRandomWords } from '../utils';
-import setMediumWord from '../../../service/wordService';
 import correctSound from '../../../assets/sounds/correct.mp3';
 import errorSound from '../../../assets/sounds/error.mp3';
 import './Savannah.scss';
@@ -17,6 +16,7 @@ import {
   setWrongAnswer,
 } from '../../../redux/miniGameWords/actions';
 import { gameNames } from '../../../constants/constants';
+import { setMessage } from '../../../redux/user/actions';
 
 function popActiveWord(wordsForGame, activeWord) {
   return wordsForGame.filter(
@@ -24,7 +24,7 @@ function popActiveWord(wordsForGame, activeWord) {
   );
 }
 
-export default function Savannah({ data }) {
+function Savannah({ data }) {
   const gameName = gameNames.savannah;
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -60,9 +60,8 @@ export default function Savannah({ data }) {
   useEffect(() => {
     if (wordsForGame.length) {
       setActiveWord(wordsForGame[0]);
-      setMediumWord(wordsForGame[0], userData);
     } else {
-      alert('конец игры');
+      dispatch(setMessage('конец игры'));
     }
   }, [wordsForGame]);
 
