@@ -24,7 +24,7 @@ const Field = ({
   const [playCorrect] = useSound(correctSound);
 
   const handleClick = (card) => {
-    console.log(card);
+    // console.log(card);
     playSwap();
 
     if (!isPlaying || openedCards.length > 2 || machedArr.includes(card)) return;
@@ -33,7 +33,7 @@ const Field = ({
     flippedCard.isFlipped = true;
 
     setOpendeCards([...openedCards, card]);
-    console.log(cardsArr, openedCards);
+    // console.log(cardsArr, openedCards);
   };
 
   const onStart = useCallback(() => {

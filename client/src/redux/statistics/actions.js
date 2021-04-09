@@ -12,7 +12,7 @@ const getStatistics = () => async (dispatch, getState) => {
     const statistics = await api.getStatistics(user);
     dispatch(setStatistics(statistics));
   } catch (error) {
-    console.log(error);
+    throw new Error(error);
   }
 };
 

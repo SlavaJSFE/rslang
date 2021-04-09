@@ -4,7 +4,7 @@ import {
   SET_GRUPWORDS_SUCCESS,
   SET_GRUPWORDS_FAILURE,
   SET_GRUPWORDS_STARTED,
-  UPDATE_WORD,
+  // UPDATE_WORD, //! Unused var. Can I remove it?
 } from './constants';
 // import { setWordsSuccess, setWordsStarted, setWordsFailure } from '../textBook/actions';
 import * as api from '../../api/api';
@@ -33,11 +33,11 @@ const setWordsFailure = (err) => ({
   type: SET_GRUPWORDS_FAILURE,
   payload: err,
 });
-
-const updateWord = (word) => ({
-  type: UPDATE_WORD,
-  payload: word,
-});
+//! Unused var. For what is it?
+// const updateWord = (word) => ({
+//   type: UPDATE_WORD,
+//   payload: word,
+// });
 
 const fetchGrupWords = (currentGroup = 0) => async (dispatch) => {
   dispatch(setWordsStarted());
@@ -55,7 +55,7 @@ const setRightAnswer = (word, gameName) => async (dispatch, getState) => {
     await api.setRightAnswer(word, gameName, user);
     // dispatch(updateWord(word));
   } catch (error) {
-    console.log(error);
+    throw new Error(error);
   }
 };
 
@@ -64,7 +64,7 @@ const setWrongAnswer = (word, gameName) => async (dispatch, getState) => {
   try {
     await api.setWrongAnswer(word, gameName, user);
   } catch (error) {
-    console.log(error);
+    throw new Error(error);
   }
 };
 

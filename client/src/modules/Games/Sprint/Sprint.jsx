@@ -1,7 +1,7 @@
 import React, {
   useEffect, useState, useMemo, useCallback,
 } from 'react';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 import useSound from 'use-sound';
 
@@ -47,7 +47,7 @@ export default function Sprint({ data }) {
 
   useEffect(() => {
     if (!timing) {
-      console.log(timing);
+      // console.log(timing);
     }
   }, [timing]);
 

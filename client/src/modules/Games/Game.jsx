@@ -19,7 +19,7 @@ export default function GamesModule() {
   const [start, setStart] = useState(false);
 
   const activeWords = useSelector((state) => state.game.words);
-  const pageNumber = useSelector((state) => state.game.level);
+  // const pageNumber = useSelector((state) => state.game.level);
   const dispatch = useDispatch();
 
   const gameObj = games.find((el) => el.type === type);

@@ -1,7 +1,7 @@
 /* eslint-disable quotes */
 /* eslint-disable no-underscore-dangle */
 import * as axios from 'axios';
-import * as storage from '../localStorageApi/localStorageApi';
+// import * as storage from '../localStorageApi/localStorageApi';
 
 import { server } from '../constants/constants';
 import generateReqBody from './utils';

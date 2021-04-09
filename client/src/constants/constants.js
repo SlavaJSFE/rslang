@@ -15,14 +15,14 @@ export const UNIT_5 = 'Раздел 5';
 export const UNIT_6 = 'Раздел 6';
 export const DEFAULT_LEVEL = 0;
 
-const gameNames = {
+export const gameNames = {
   savannah: 'savannah',
   audioCall: 'audiocall',
   sprint: 'sprint',
   memory: 'memory',
 };
 
-const games = [
+export const games = [
   {
     name: 'Savannah',
     path: '/games/savannah',
@@ -57,6 +57,6 @@ const games = [
   },
 ];
 
-export {
-  server, games, DEFAULT_LEVEL, gameNames,
-};
+// export {
+//   games, gameNames,
+// };

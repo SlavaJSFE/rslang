@@ -18,7 +18,7 @@ import './AudioCall.scss';
 
 import {
   setRightAnswer,
-  setWrongAnswer,
+  // setWrongAnswer, //!Unused var
 } from '../../../redux/miniGameWords/actions';
 
 export default function AudioGame({ data }) {

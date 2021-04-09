@@ -21,7 +21,7 @@ export default function MemoryGame({ data }) {
 
   useEffect(() => {
     if (!timing) {
-      console.log(timing);
+      // console.log(timing);
     }
   }, [timing]);
 
