@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState /* useCallback */ } from 'react';
 
 import useSound from 'use-sound';
 
@@ -8,7 +8,7 @@ import NextBtn from '../components/NextBtn/NextBtn';
 import ImageComponent from '../../../components/ImageComponent/ImageComponent';
 import Display from '../components/Display';
 
-import { getRandomWords, getScore } from '../utils';
+import { getRandomWords /* getScore */ } from '../utils';
 import { server } from '../../../constants/constants';
 
 import correctSound from '../../../assets/sounds/correct.mp3';
@@ -73,14 +73,14 @@ export default function AudioGame({ data }) {
       setCorrectAnswers(correctAnswers + 1);
       if (correctAnswers % 4 === 0 && correctAnswers !== 0) setCoeff(coeff + 1);
       setScore(score + onScoreChange());
-      console.log(correctAnswers, score, coeff);
+      // console.log(correctAnswers, score, coeff);
     } else {
       playError();
       setShouldOpen(true);
       setCorrectAnswers(1);
       setCoeff(1);
       setScore(score + onScoreChange());
-      console.log(correctAnswers, score, coeff);
+      // console.log(correctAnswers, score, coeff);
     }
   };
 

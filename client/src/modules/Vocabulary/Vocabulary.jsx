@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { connect, useDispatch } from 'react-redux';
+import { connect /* , useDispatch */ } from 'react-redux';
 import { Pagination, PaginationItem } from '@material-ui/lab';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -51,16 +51,16 @@ function VocabularyModule({
   fetchDelWordsConnect,
   setGroupConnect,
   setPageConnect,
-  loading,
+  // loading,
   currentPage,
   currentGroup,
   userData,
   wordsCount,
 }) {
-   console.log('wordsCount', wordsCount);
+  //  console.log('wordsCount', wordsCount);
 
   const { typeWords, numPage } = useParams('/vocabulary/:typeWords/:unit/:numPage');
-  console.log('typeWords', typeWords);
+  // console.log('typeWords', typeWords);
   // const dispatch = useDispatch();
 
   // useEffect(() => {

@@ -9,7 +9,7 @@ import '../Vocabulary.scss';
 
 export default function VocabularyPage({ isStudyPage }) {
   const allWords = useSelector((state) => state.vocabularyDeletedWords.delWords);
-  console.log('allWords', allWords);
+  // console.log('allWords', allWords);
   // const currentPage = useSelector((state) => state.vocabularyDeletedWords.currentPage);
   // const currentGroup = useSelector((state) => state.vocabularyDeletedWords.currentGroup);
   // const userData = useSelector((state) => state.user.user);

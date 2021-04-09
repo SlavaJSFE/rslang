@@ -48,7 +48,7 @@ const setRightAnswer = (word) => async (dispatch, getState) => {
   try {
     await api.setRightAnswer(word, user);
   } catch (error) {
-    console.log(error);
+    throw new Error(error);
   }
 };
 
@@ -57,7 +57,7 @@ const setWrongAnswer = (word) => async (dispatch, getState) => {
   try {
     await api.setWrongAnswer(word, user);
   } catch (error) {
-    console.log(error);
+    throw new Error(error);
   }
 };
 

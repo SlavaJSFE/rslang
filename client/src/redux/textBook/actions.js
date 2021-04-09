@@ -111,9 +111,7 @@ export const setHardWord = (word, userData) => async (dispatch) => {
   try {
     await api.setHardWord(word, userData);
     dispatch(setHardWordRedux(word.id));
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 };
 
 export const deleteWord = (wordId, userData) => async (dispatch) => {
