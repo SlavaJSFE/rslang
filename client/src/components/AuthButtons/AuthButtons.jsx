@@ -1,16 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Tooltip } from '@material-ui/core';
+import { Avatar, Button, Tooltip } from '@material-ui/core';
 import './AuthButtons.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { reduxLogout } from '../../redux/user/actions';
 import useAuth from '../../hooks/auth';
 import avatarLogo from '../../assets/images/avatar.svg';
+import { HELLO, IMAGE } from '../../constants/constants';
 
 export default function AuthButtons() {
   const isAuth = useSelector((state) => state.user.isAuth);
   const { userId, name, avatar } = useSelector((state) => state.user.user);
-  const ava = avatar ? `${avatar}` : avatarLogo;
+  const ava = avatar === IMAGE ? avatarLogo : `${avatar}`;
   const dispatch = useDispatch();
   const { logout } = useAuth();
 
@@ -25,9 +26,8 @@ export default function AuthButtons() {
         <div className="profile-links">
           <Tooltip title="Мой профиль">
             <Link className="avatar-name" to={`/user/${userId}`}>
-              <img src={ava} alt="Avatar logo" width="30" height="30" />
-              {/* <Avatar>A</Avatar> */}
-              <span className="user-name">{`Hello, ${name}`}</span>
+              <Avatar src={ava} alt="Avatar logo" />
+              <span className="user-name">{`${HELLO}, ${name}`}</span>
             </Link>
           </Tooltip>
           <Button
