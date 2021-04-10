@@ -7,7 +7,6 @@ import Rating from '@material-ui/lab/Rating';
 import ActiveWord from './ActiveWord/ActiveWord';
 import WordsSet from '../components/WordsSet/WordsSet';
 import { getRandomWords } from '../utils';
-import setMediumWord from '../../../service/wordService';
 import correctSound from '../../../assets/sounds/correct.mp3';
 import errorSound from '../../../assets/sounds/error.mp3';
 import './Savannah.scss';
@@ -16,6 +15,8 @@ import {
   setRightAnswer,
   setWrongAnswer,
 } from '../../../redux/miniGameWords/actions';
+import { gameNames } from '../../../constants/constants';
+import { setMessage } from '../../../redux/user/actions';
 
 function popActiveWord(wordsForGame, activeWord) {
   return wordsForGame.filter(
@@ -23,7 +24,8 @@ function popActiveWord(wordsForGame, activeWord) {
   );
 }
 
-function Savannah({ data, userData }) {
+function Savannah({ data }) {
+  const gameName = gameNames.savannah;
   const classes = useStyles();
   const dispatch = useDispatch();
   const [activeWord, setActiveWord] = useState('');
@@ -41,10 +43,10 @@ function Savannah({ data, userData }) {
   function checkForCorrectWord(word, activeWordForCheck) {
     if (word === activeWordForCheck.wordTranslate) {
       playCorrect();
-      dispatch(setRightAnswer(activeWordForCheck));
+      dispatch(setRightAnswer(activeWordForCheck, gameName));
     } else {
       playError();
-      dispatch(setWrongAnswer(activeWordForCheck));
+      dispatch(setWrongAnswer(activeWordForCheck, gameName));
       setHp(hp - 1);
     }
   }
@@ -58,9 +60,8 @@ function Savannah({ data, userData }) {
   useEffect(() => {
     if (wordsForGame.length) {
       setActiveWord(wordsForGame[0]);
-      setMediumWord(wordsForGame[0], userData);
     } else {
-      alert('конец игры');
+      dispatch(setMessage('конец игры'));
     }
   }, [wordsForGame]);
 

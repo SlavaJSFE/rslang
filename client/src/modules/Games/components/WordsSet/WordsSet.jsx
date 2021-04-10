@@ -5,10 +5,7 @@ import GameButton from '../Button/Button';
 import './WordsSet.scss';
 
 export default function WordsSet({
-  words,
-  handleClick,
-  container,
-  game,
+  words, handleClick, container, game,
 }) {
   return (
     <div className={`words-set__${game}`} ref={container}>

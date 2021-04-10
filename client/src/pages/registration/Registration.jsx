@@ -2,14 +2,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
-  Button,
-  Container,
-  FormControl,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  TextField,
+  Button, Container, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField,
 } from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
@@ -19,7 +12,8 @@ import './Registration.scss';
 import useHttp from '../../hooks/http';
 import useAuth from '../../hooks/auth';
 import { setMessage } from '../../redux/user/actions';
-import { server } from '../../constants/constants';
+import { GUEST, server } from '../../constants/constants';
+import convertToBase64 from './utils/convertToBase64';
 
 export default function RegistrationPage() {
   const [name, setName] = useState('');
@@ -31,18 +25,12 @@ export default function RegistrationPage() {
   const { login } = useAuth();
   const dispatch = useDispatch();
   const successMessage = 'Новый пользователь был успешно создан';
-  let avatar = '';
 
   async function handleSubmit() {
-    const toBase64 = (file) => new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-    avatar = await toBase64(ava);
+    const avatar = await convertToBase64(ava);
+
     const body = {
-      name, email, password, avatar,
+      name: name || GUEST, email, password, avatar,
     };
 
     try {
@@ -109,8 +97,13 @@ export default function RegistrationPage() {
               labelWidth={60}
             />
           </FormControl>
-          <p>Загрузить аватар на сервер</p>
-          <input accept="image/*" onChange={(e) => setAvatar(e.target.files[0])} type="file" placeholder="Загрузить аватар" />
+          <InputLabel htmlFor="file-input">Загрузить фотографию</InputLabel>
+          <OutlinedInput
+            id="file-input"
+            type="file"
+            accept="image/*"
+            onChange={(e) => setAvatar(e.target.files[0])}
+          />
           <div className="form-button">
             <Button
               type="submit"

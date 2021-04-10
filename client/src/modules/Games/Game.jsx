@@ -19,7 +19,7 @@ export default function GamesModule() {
   const [start, setStart] = useState(false);
 
   const activeWords = useSelector((state) => state.game.words);
-  const pageNumber = useSelector((state) => state.game.level);
+  // const pageNumber = useSelector((state) => state.game.level);
   const dispatch = useDispatch();
 
   const gameObj = games.find((el) => el.type === type);
@@ -28,7 +28,6 @@ export default function GamesModule() {
   useEffect(() => {
     if (activeWords.length === 0) dispatch(fetchGrupWords());
   }, [activeWords]);
-  console.log(activeWords);
 
   return (
     <div className="games-module">

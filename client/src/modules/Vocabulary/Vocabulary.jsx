@@ -53,7 +53,7 @@ function VocabularyModule({
   getCountWordConnect,
   setGroupConnect,
   setPageConnect,
-  loading,
+  // loading,
   currentPage,
   currentGroup,
   userData,

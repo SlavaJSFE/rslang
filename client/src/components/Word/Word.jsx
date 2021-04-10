@@ -19,10 +19,11 @@ import getUnitStyles from './utilits/getUnitStyles';
 import * as textBookActions from '../../redux/textBook/actions';
 import * as vocabularyActions from '../../redux/vocabulary/actions';
 import StudyResults from '../../modules/Vocabulary/CommonStudyResults/StudyResults';
-import { fetchVocabularyWords } from '../../redux/vocabulary/DifficultWords/actions';
-import { getDelWords } from '../../api/apiVocabulary';
-import { fetchVocabularyStudyWords } from '../../redux/vocabulary/StudyWords/actions';
-import { fetchVocabularyAmountStudyWords } from '../../redux/vocabulary/AmountStudyWords/actions';
+// import { fetchVocabularyWords } from '../../redux/vocabulary/DifficultWords/actions';
+// import { getDelWords } from '../../api/apiVocabulary';
+// import { fetchVocabularyStudyWords } from '../../redux/vocabulary/StudyWords/actions';
+// import { fetchVocabularyAmountStudyWords }
+// from '../../redux/vocabulary/AmountStudyWords/actions';
 import { fetchDelWords } from '../../redux/vocabulary/DeletedWords/actions';
 import { getCountWord } from '../../redux/vocabulary/actions';
 
@@ -34,7 +35,7 @@ const Word = ({
   restoreWord,
   deleteWord,
   userData,
-  group,
+  // group, //!Unused var. Remove it if it's an unnecessary var!
   isHard,
   isTextbook,
   isStudyStatistic,

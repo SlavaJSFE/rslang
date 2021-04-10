@@ -21,7 +21,9 @@ function LinkTab(props) {
   return <Tab component={Link} {...props} />;
 }
 
-const UnitsMenuVocabulary = ({ currentGroup, setGroupConnect, setPageConnect, currentPage }) => {
+const UnitsMenuVocabulary = ({
+  currentGroup, setGroupConnect, setPageConnect, /* currentPage */
+}) => {
   const { typeWords, unit } = useParams('/vocabulary/:typeWords/:unit/:page');
 
   useEffect(() => {
