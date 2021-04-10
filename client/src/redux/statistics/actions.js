@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 import { SET_STATISTICS } from './constants';
 import * as api from '../../api/statisticsApi';
 
@@ -11,9 +12,7 @@ const getStatistics = () => async (dispatch, getState) => {
   try {
     const statistics = await api.getStatistics(user);
     dispatch(setStatistics(statistics));
-  } catch (error) {
-    throw new Error(error);
-  }
+  } catch (error) {}
 };
 
 // eslint-disable-next-line import/prefer-default-export
