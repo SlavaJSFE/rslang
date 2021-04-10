@@ -34,15 +34,15 @@ export const getUserWord = async (wordId, userData) => {
   }
 };
 
-export const getDelWords = async (typeWords, delCurrentGroup, delCurrentPage, delUserData) => {
+export const getDelWords = async (typeWords, currentGroup, currentPage, userData) => {
   try {
     const { data } = await axios.get(
-      `${server}/users/${delUserData.userId
-      }/aggregatedWords?group=${delCurrentGroup}&page=${delCurrentPage}&wordsPerPage=20&filter=
+      `${server}/users/${userData.userId
+      }/aggregatedWords?group=${currentGroup}&page=${currentPage}&wordsPerPage=20&filter=
       ${JSON.stringify(getVocabularyFilter(typeWords))}`,
       {
         headers: {
-          Authorization: `Bearer ${delUserData.token}`,
+          Authorization: `Bearer ${userData.token}`,
         },
       },
     );
@@ -52,10 +52,10 @@ export const getDelWords = async (typeWords, delCurrentGroup, delCurrentPage, de
   }
 };
 
-export const getDelWordsWithOutAuth = async (delCurrentGroup, delCurrentPage) => {
+export const getDelWordsWithOutAuth = async (currentGroup, currentPage) => {
   try {
     const { data } = await axios.get(
-      `${server}/words?group=${delCurrentGroup}&page=${delCurrentPage}`,
+      `${server}/words?group=${currentGroup}&page=${currentPage}`,
     );
     return data;
   } catch (error) {
@@ -63,7 +63,7 @@ export const getDelWordsWithOutAuth = async (delCurrentGroup, delCurrentPage) =>
   }
 };
 
-export const getCountDelWord = async (userData, typeWords) => {
+export const getCountWord = async (userData, typeWords) => {
   try {
     const { data } = await axios.get(
       `${server}/users/${userData.userId}/aggregatedWords?wordsPerPage=3600&filter=${JSON.stringify(getVocabularyFilter(typeWords))}`,

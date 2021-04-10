@@ -1,5 +1,5 @@
 /* eslint-disable no-empty */
-import RESTORE_WORD, { DIFFICULTY_WORD, COUNT_DEL_WORDS, COUNT_STUDY_WORDS } from './constants';
+import RESTORE_WORD, { DIFFICULTY_WORD, COUNT_WORDS, COUNT_STUDY_WORDS } from './constants';
 import * as apiVocabulary from '../../api/apiVocabulary';
 import * as api from '../../api/api';
 
@@ -27,9 +27,9 @@ export const setDifficulty = (wordId, userData) => async (dispatch) => {
   } catch (error) {}
 };
 
-export const getCountDelWordRedux = (countDelWords) => ({
-  type: COUNT_DEL_WORDS,
-  payload: countDelWords,
+export const getCountWordRedux = (countWords) => ({
+  type: COUNT_WORDS,
+  payload: countWords,
 });
 
 export const getCountStudyWordRedux = (countStudyWords) => ({
@@ -37,11 +37,11 @@ export const getCountStudyWordRedux = (countStudyWords) => ({
   payload: countStudyWords,
 });
 
-export const getCountDelWord = (userData) => async (dispatch) => {
+export const getCountWord = (userData) => async (dispatch) => {
   try {
-    const deletedData = await apiVocabulary.getCountDelWord(userData, 'deleted');
-    const studiedData = await apiVocabulary.getCountDelWord(userData, 'studied');
-    dispatch(getCountDelWordRedux(deletedData[0].paginatedResults.length));
+    const deletedData = await apiVocabulary.getCountWord(userData, 'deleted');
+    const studiedData = await apiVocabulary.getCountWord(userData, 'studied');
+    dispatch(getCountWordRedux(deletedData[0].paginatedResults.length));
     dispatch(getCountStudyWordRedux(studiedData[0].paginatedResults.length));
   } catch (error) {}
 };
