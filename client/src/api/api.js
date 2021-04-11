@@ -129,7 +129,7 @@ export const getWords = async (currentGroup, currentPage, userData) => {
 export const getWordsWithOutAuth = async (currentGroup, currentPage) => {
   try {
     const { data } = await axios.get(
-      `${server}/words?group=${currentGroup}&page=${currentPage}`,
+      `${server}/words?group=${currentGroup}&page=${currentPage || 0}`,
     );
     return data;
   } catch (error) {
@@ -137,10 +137,18 @@ export const getWordsWithOutAuth = async (currentGroup, currentPage) => {
   }
 };
 
-export const getGrupWords = async (currentGroup) => {
+export const getGrupWords = async (currentGroup, userData) => {
   try {
-    const { data } = await axios.get(`${server}/words?group=${currentGroup}`);
-    return data;
+    if (!userData) {
+      return await getWordsWithOutAuth(currentGroup);
+    }
+    const url = `${server}/users/${userData.userId}/aggregatedWords?group=${currentGroup}&wordsPerPage=20&}`;
+    const { data } = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${userData.token}`,
+      },
+    });
+    return data[0].paginatedResults;
   } catch (error) {
     throw new Error(error);
   }
@@ -195,7 +203,7 @@ export const setRightAnswer = async (word, gameName, userData) => {
 export const setWrongAnswer = async (word, gameName, userData) => {
   const { userId, token } = userData;
   const statId = new Date().toLocaleString().slice(0, 10).replaceAll('.', '_');
-  const difficulty = word.userWord.difficulty === 'hard' ? 'hard' : 'medium';
+  const difficulty = word?.userWord?.difficulty === 'hard' ? 'hard' : 'medium';
   const statistics = word?.userWord?.optional?.stat[statId]
     ? {
       stat: {
@@ -205,7 +213,8 @@ export const setWrongAnswer = async (word, gameName, userData) => {
           [gameName]: {
             ...word?.userWord?.optional?.stat[statId][gameName],
             wrongAnswers:
-                word?.userWord?.optional?.stat[statId][gameName]?.wrongAnswer + 1 || 1,
+                word?.userWord?.optional?.stat[statId][gameName]?.wrongAnswer
+                  + 1 || 1,
           },
         },
       },

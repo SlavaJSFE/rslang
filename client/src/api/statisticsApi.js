@@ -9,7 +9,7 @@ export const getStatistics = async (user) => {
   };
   try {
     const { data } = await axios.get(
-      `${server}users/${
+      `${server}/users/${
         user.userId
       }/aggregatedWords?wordsPerPage=3600&filter=${JSON.stringify(filter)}`,
       {
