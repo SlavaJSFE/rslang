@@ -1,12 +1,16 @@
-export const wordsOnPage = 20;
-export const startWordOnPage = 0;
-export const primaryPage = 1;
+import { getAllDate } from '../../pages/statisticsPage/utils';
 
-export default function calcCountPagination(count) {
-  return Math.ceil(count / wordsOnPage);
-}
-
-export function calcLastWordIndex(wordsCount, value) {
-  const lastIndex = Math.ceil((value) * wordsOnPage);
-  return wordsCount < lastIndex ? wordsCount : lastIndex;
+export default function calcRightAnswersByWord(statistics) {
+  const resultArr = [];
+  // const datesArr = getAllDate(statistics);
+  // datesArr.forEach((date, idx) => {
+  //   const date2 = date.replaceAll('"', '');
+  //   resultArr[idx] = statistics
+  //     .map((word) => word.userWord.optional.stat[date2])
+  //     .filter((item) => item !== undefined)
+  //     .map((item) => Object.values(item))
+  //     .map((item) => (item[0].rightAnswers ? item[0].rightAnswers : 0))
+  //     .reduce((prev, curr) => prev + curr, 0);
+  // });
+  return 5;
 }

@@ -156,19 +156,21 @@ export const getGrupWords = async (currentGroup, userData) => {
 
 export const setRightAnswer = async (word, gameName, userData) => {
   const { userId, token } = userData;
-  const statId = new Date().toLocaleString().slice(0, 10).replaceAll('.', '_');
-  const difficulty = word.userWord.difficulty === 'hard' ? 'hard' : 'medium';
-  const st = word?.userWord?.optional?.stat[statId];
+  // const statId = new Date().toLocaleString().slice(0, 10).replaceAll('.', '_');
+  const statId = new Date(2022, 1, 1).toLocaleString().slice(0, 10).replaceAll('.', '_');
+  console.log('statId', statId);
+  const difficulty = word?.userWord?.difficulty === 'hard' ? 'hard' : 'medium';
   const statistics = word?.userWord?.optional?.stat[statId]
     ? {
       stat: {
         ...word?.userWord?.optional?.stat,
         [statId]: {
-          ...st,
+          ...word?.userWord?.optional?.stat[statId],
           [gameName]: {
-            ...st[gameName],
+            ...word?.userWord?.optional?.stat[statId][gameName],
             rightAnswers:
-            st[gameName]?.rightAnswers + 1 || 1,
+                word?.userWord?.optional?.stat[statId][gameName]?.rightAnswers
+                  + 1 || 1,
           },
         },
       },
@@ -182,7 +184,6 @@ export const setRightAnswer = async (word, gameName, userData) => {
         },
       },
     };
-    console.log('statistics', statistics);
   const headers = {
     Authorization: `Bearer ${token}`,
   };
@@ -190,7 +191,7 @@ export const setRightAnswer = async (word, gameName, userData) => {
   // storage.setRightAnswer(word, reqBody);
   try {
     await axios({
-      method: word ? 'put' : 'post',
+      method: word?.userWord ? 'put' : 'post',
       url: `${server}/users/${userId}/words/${word.id}`,
       headers,
       data,

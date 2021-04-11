@@ -1,19 +1,12 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 import './Statistic.scss';
 import StatisticCommon from './StatisticCommon';
 import GameStatistic from './GameStatistic';
-import { getStatistics } from '../../redux/statistics/actions';
 import { gameNames } from '../../constants/constants';
 
 export default function Statistic() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    console.log(getStatistics());
-    // getStatistics();
-    // dispatch(getStatistics());
-  }, []);
   const statistics = useSelector((state) => state.statistics.statistics);
   return (
     <div className="statistic">
