@@ -25,7 +25,7 @@ import StudyResults from '../../modules/Vocabulary/CommonStudyResults/StudyResul
 // import { fetchVocabularyAmountStudyWords }
 // from '../../redux/vocabulary/AmountStudyWords/actions';
 import { fetchDelWords } from '../../redux/vocabulary/DeletedWords/actions';
-import { getCountDelWord } from '../../redux/vocabulary/actions';
+import { getCountWord } from '../../redux/vocabulary/actions';
 
 const Word = ({
   word,
@@ -81,7 +81,7 @@ const Word = ({
   const onRestoreWord = async () => {
     await restoreWord(word._id, userData);
     dispatch(fetchDelWords(typeWords, unit - 1, numPage - 1, userData));
-    dispatch(getCountDelWord(userData));
+    dispatch(getCountWord(userData));
   };
 
   return (

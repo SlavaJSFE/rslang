@@ -13,7 +13,7 @@ import {
   setGroup,
   fetchDelWords,
 } from '../../redux/vocabulary/DeletedWords/actions';
-import { getCountDelWord } from '../../redux/vocabulary/actions';
+import { getCountWord } from '../../redux/vocabulary/actions';
 import './Vocabulary.scss';
 import CommonStudyResults from './CommonStudyResults/CommonStudyResults';
 import GameCards from '../../components/GameCards/GameCards';
@@ -50,7 +50,7 @@ function allProps(index) {
 
 function VocabularyModule({
   fetchDelWordsConnect,
-  getCountDelWordConnect,
+  getCountWordConnect,
   setGroupConnect,
   setPageConnect,
   // loading,
@@ -72,7 +72,7 @@ function VocabularyModule({
 
   useEffect(() => {
     fetchDelWordsConnect(typeWords, currentGroup, currentPage, userData);
-    getCountDelWordConnect(userData);
+    getCountWordConnect(userData);
   }, [typeWords, currentPage, currentGroup, userData]);
 
   const onPageChange = (event, page) => {
@@ -122,7 +122,7 @@ function VocabularyModule({
         </Tabs>
         <UnitsMenuVocabulary />
         <TabPanel value={typeWords} index={typeWords}>
-          <VocabularyPage />
+          <VocabularyPage isStudyPage={typeWords === 'studied'} />
         </TabPanel>
         <Pagination
           className="textbook-pagination"
@@ -155,7 +155,7 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   fetchDelWordsConnect: fetchDelWords,
-  getCountDelWordConnect: getCountDelWord,
+  getCountWordConnect: getCountWord,
   setGroupConnect: setGroup,
   setPageConnect: setPage,
 })(VocabularyModule);

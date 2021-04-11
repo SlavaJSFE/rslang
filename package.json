@@ -27,5 +27,5 @@
     "prop-types": "^15.7.2",
     "react-chartjs-2": "^2.11.1"
   },
-  "proxy": "https://localhost:3030/" 
+  "proxy": "https://localhost:3030/"
 }

@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import './Gist.scss';
 import BarChart from './BarChart';
 import LineChart from './LineChart';
+import { getAllDate, getAllBarValues, getAllLineValues } from './utils';
 
 export default function Gist() {
+  const statistics = useSelector((state) => state.statistics.statistics);
+  const statisticDate = getAllDate(statistics);
+
   const [barChartData, setBarChartData] = useState();
-  const statisticBarDate = ['01.04.2021', '02.04.2021', '03.04.2021', '04.04.2021', '05.04.2021', '06.04.2021', '07.04.2021', '08.04.2021'];
-  const statisticBarValue = [6175, 1810, 1530, 1065, 1051, 950, 2500, 1323];
+  const statisticBarValue = getAllBarValues(statistics);
 
   const [lineChartData, setLineChartData] = useState();
-  const statisticLineDate = ['01.04.2021', '02.04.2021', '03.04.2021', '04.04.2021', '05.04.2021', '06.04.2021', '07.04.2021'];
-  const statisticLineValue = [100, 168, 234, 345, 454, 521, 645];
+  const statisticLineValue = getAllLineValues(statistics);
 
   const getBarChartData = () => {
     setBarChartData({
-      labels: statisticBarDate,
+      labels: statisticDate,
       datasets: [
         {
           label: '',
@@ -35,7 +38,7 @@ export default function Gist() {
 
   const getLineChartData = () => {
     setLineChartData({
-      labels: statisticLineDate,
+      labels: statisticDate,
       datasets: [
         {
           label: '',

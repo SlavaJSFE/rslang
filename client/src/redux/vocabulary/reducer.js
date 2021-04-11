@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import RESTORE_WORD, { DIFFICULTY_WORD, COUNT_DEL_WORDS, COUNT_STUDY_WORDS } from './constants';
+import RESTORE_WORD, { DIFFICULTY_WORD, COUNT_WORDS, COUNT_STUDY_WORDS } from './constants';
 
 const initialState = {
   words: [],
@@ -14,7 +14,7 @@ const initialState = {
       isButtonsActive: true,
     },
   },
-  countDelWords: 0,
+  countWords: 0,
   countStudyWords: 0,
 };
 
@@ -30,7 +30,7 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         words: state.words.filter((word) => word._id !== payload),
       };
-    case COUNT_DEL_WORDS:
+    case COUNT_WORDS:
       return {
         ...state,
         countDelWords: payload,
