@@ -10,7 +10,9 @@ import { gameNames } from '../../constants/constants';
 export default function Statistic() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getStatistics());
+    console.log(getStatistics());
+    // getStatistics();
+    // dispatch(getStatistics());
   }, []);
   const statistics = useSelector((state) => state.statistics.statistics);
   return (

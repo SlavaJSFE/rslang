@@ -122,7 +122,7 @@ function VocabularyModule({
         </Tabs>
         <UnitsMenuVocabulary />
         <TabPanel value={typeWords} index={typeWords}>
-          <VocabularyPage />
+          <VocabularyPage isStudyPage={typeWords === 'studied'} />
         </TabPanel>
         <Pagination
           className="textbook-pagination"

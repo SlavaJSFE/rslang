@@ -150,16 +150,17 @@ export const setRightAnswer = async (word, gameName, userData) => {
   const { userId, token } = userData;
   const statId = new Date().toLocaleString().slice(0, 10).replaceAll('.', '_');
   const difficulty = word.userWord.difficulty === 'hard' ? 'hard' : 'medium';
+  const st = word?.userWord?.optional?.stat[statId];
   const statistics = word?.userWord?.optional?.stat[statId]
     ? {
       stat: {
         ...word?.userWord?.optional?.stat,
         [statId]: {
-          ...word?.userWord?.optional?.stat[statId],
+          ...st,
           [gameName]: {
-            ...word?.userWord?.optional?.stat[statId][gameName],
+            ...st[gameName],
             rightAnswers:
-                word?.userWord?.optional?.stat[statId][gameName]?.rightAnswers + 1 || 1,
+            st[gameName]?.rightAnswers + 1 || 1,
           },
         },
       },
@@ -173,6 +174,7 @@ export const setRightAnswer = async (word, gameName, userData) => {
         },
       },
     };
+    console.log('statistics', statistics);
   const headers = {
     Authorization: `Bearer ${token}`,
   };
@@ -180,7 +182,7 @@ export const setRightAnswer = async (word, gameName, userData) => {
   // storage.setRightAnswer(word, reqBody);
   try {
     await axios({
-      method: word?.userWord ? 'put' : 'post',
+      method: word ? 'put' : 'post',
       url: `${server}/users/${userId}/words/${word.id}`,
       headers,
       data,
