@@ -1,6 +1,48 @@
 @import '../../../styles/common.scss';
+@import '../../../styles/colors.scss';
 
 .game__sprint {
   background-image: url('../../../assets/images/savannah.jpg');
   @include game-background;
+}
+.game-field {
+  margin: 0 auto;
+  height: calc(100% - 80px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 15px;
+  max-width: 500px;
+
+  img {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+.time-rating-score_block {
+  background-color: $tertiary-color;
+  border: 2px solid $secondary-color;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px 0;
+}
+.sprint-words {
+  background-color: $tertiary-color;
+  border: 2px solid $secondary-color;
+  border-radius: 10px;
+  margin: 20px 0;
+
+  h2 {
+    margin: 10px 0;
+  }
+}
+.sprint__buttons-set {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }

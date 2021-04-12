@@ -87,13 +87,13 @@ function getMemoryWords(arrData) {
 }
 
 function getScore() {
-  let coef = 1;
+  let coefficient = 1;
   let score = 10;
 
   return (answers) => {
     if (answers % 4 === 0 && answers !== 0) {
-      coef += 1;
-      score *= coef;
+      coefficient += 1;
+      score *= coefficient;
     }
     return score;
   };
