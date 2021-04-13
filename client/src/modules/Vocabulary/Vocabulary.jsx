@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { Pagination, PaginationItem } from '@material-ui/lab';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -18,11 +18,18 @@ import './Vocabulary.scss';
 import CommonStudyResults from './CommonStudyResults/CommonStudyResults';
 import GameCards from '../../components/GameCards/GameCards';
 import UnitsMenuVocabulary from '../../components/UnitsMenuVocabulary/UnitsMenuVocabulary';
+import { getStatistics } from '../../redux/statistics/actions';
 
 function TabPanel(props) {
   const {
     children, value, index, ...other
   } = props;
+
+  const dispatch = useDispatch();
+  useEffect(async () => {
+    getStatistics();
+    dispatch(getStatistics());
+  }, []);
 
   return (
     <div
@@ -53,18 +60,12 @@ function VocabularyModule({
   getCountWordConnect,
   setGroupConnect,
   setPageConnect,
-  // loading,
   currentPage,
   currentGroup,
   userData,
   wordsCount,
 }) {
   const { typeWords, numPage } = useParams('/vocabulary/:typeWords/:unit/:numPage');
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(setGameWords(words));
-  // }, [words]);
 
   useEffect(() => {
     setPageConnect(numPage - 1);

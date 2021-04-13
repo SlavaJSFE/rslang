@@ -19,6 +19,7 @@ import Preloader from '../../components/Preloader/Preloader';
 import GameCards from '../../components/GameCards/GameCards';
 import calcPaginationCount from './utils';
 import ErrorMessage from './ErrorMessage/ErrorMessage';
+import { getStatistics } from '../../redux/statistics/actions';
 
 const TextbookModule = ({
   words,
@@ -34,6 +35,11 @@ const TextbookModule = ({
   const { urlPage } = useParams('/textbook/list/:group/:urlPage');
 
   const dispatch = useDispatch();
+
+  useEffect(async () => {
+    getStatistics();
+    dispatch(getStatistics());
+  }, []);
 
   useEffect(() => {
     dispatch(setGameWords(words));
