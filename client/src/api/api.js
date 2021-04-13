@@ -156,9 +156,7 @@ export const getGrupWords = async (currentGroup, userData) => {
 
 export const setRightAnswer = async (word, gameName, userData) => {
   const { userId, token } = userData;
-  // const statId = new Date().toLocaleString().slice(0, 10).replaceAll('.', '_');
-  const statId = new Date(2022, 1, 1).toLocaleString().slice(0, 10).replaceAll('.', '_');
-  console.log('statId', statId);
+  const statId = new Date().toLocaleString().slice(0, 10).replaceAll('.', '_');
   const difficulty = word?.userWord?.difficulty === 'hard' ? 'hard' : 'medium';
   const statistics = word?.userWord?.optional?.stat[statId]
     ? {

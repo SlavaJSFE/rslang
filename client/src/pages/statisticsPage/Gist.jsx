@@ -7,17 +7,18 @@ import { getAllDate, getAllBarValues, getAllLineValues } from './utils';
 
 export default function Gist() {
   const statistics = useSelector((state) => state.statistics.statistics);
-  const statisticDate = getAllDate(statistics);
+  const statisticBarDate = getAllDate(statistics);
 
   const [barChartData, setBarChartData] = useState();
   const statisticBarValue = getAllBarValues(statistics);
 
   const [lineChartData, setLineChartData] = useState();
-  const statisticLineValue = getAllLineValues(statistics);
+  const statisticLineDate = [...[0], ...getAllDate(statistics)];
+  const statisticLineValue = [...[0], ...getAllLineValues(statistics)];
 
   const getBarChartData = () => {
     setBarChartData({
-      labels: statisticDate,
+      labels: statisticBarDate,
       datasets: [
         {
           label: '',
@@ -38,7 +39,7 @@ export default function Gist() {
 
   const getLineChartData = () => {
     setLineChartData({
-      labels: statisticDate,
+      labels: statisticLineDate,
       datasets: [
         {
           label: '',

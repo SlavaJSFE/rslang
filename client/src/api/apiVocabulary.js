@@ -1,5 +1,4 @@
 import * as axios from 'axios';
-// import { setDifficulty } from '../redux/vocabulary/actions';
 import { server } from '../constants/constants';
 import { getVocabularyFilter } from './utils';
 // eslint-disable-next-line import/prefer-default-export
