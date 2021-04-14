@@ -17,6 +17,7 @@ import {
 } from '../../../redux/miniGameWords/actions';
 import { gameNames } from '../../../constants/constants';
 import { setMessage } from '../../../redux/user/actions';
+import { GAME_OVER } from '../constants';
 
 function popActiveWord(wordsForGame, activeWord) {
   return wordsForGame.filter(
@@ -94,7 +95,7 @@ function Savannah({ data }) {
   return (
     <div className="game__savannah">
       {hp === 0 ? (
-        <div>Game over</div>
+        <div>{GAME_OVER}</div>
       ) : (
         <div>
           <ActiveWord

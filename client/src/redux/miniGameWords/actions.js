@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 import {
   SET_GAME_WORDS,
   SET_LEVEL_GAME,
@@ -47,18 +48,15 @@ const setRightAnswer = (word, gameName) => async (dispatch, getState) => {
   const { user } = getState().user;
   try {
     await api.setRightAnswer(word, gameName, user);
-  } catch (error) {
-    throw new Error(error);
-  }
+    // dispatch(updateWord(word));
+  } catch (error) {}
 };
 
 const setWrongAnswer = (word, gameName) => async (dispatch, getState) => {
   const { user } = getState().user;
   try {
     await api.setWrongAnswer(word, gameName, user);
-  } catch (error) {
-    throw new Error(error);
-  }
+  } catch (error) {}
 };
 
 export {

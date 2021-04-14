@@ -14,7 +14,6 @@ import { connect, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import useStyles from './WordStyles';
 import { server, UNIT } from '../../constants/constants';
-import './Word.scss';
 import getUnitStyles from './utilits/getUnitStyles';
 import * as textBookActions from '../../redux/textBook/actions';
 import * as vocabularyActions from '../../redux/vocabulary/actions';

@@ -22,12 +22,12 @@
 
 .vocabulary-resultsStudy{
   display: flex;
-  justify-content: space-around;
   margin-top: .5rem;
+  column-gap: 10px;
   &__values{
-    background-color: #ffd399;
-    padding: 0.7rem;
-    border-radius: 1rem;
+    border: 2px solid $secondary-color;
+    padding: 7px;
+    border-radius: 10px;
     width: fit-content;
   }
   &__valuesNumber{

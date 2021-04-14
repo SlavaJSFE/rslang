@@ -1,16 +1,17 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 
 import Field from './Field';
 import GameTimer from '../components/GameTimer';
 
 import { getMemoryWords } from '../utils';
 import './Memory.scss';
+import { GAME_OVER } from '../constants';
+import Display from '../components/Display';
 
 export default function MemoryGame({ data }) {
-  // const [score, setScore] = useState(0);
-  const [isPlaying, setIsplaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [timing, setTiming] = useState(true);
-  // const [score, setScore] = useState(0);
+  const [score, setScore] = useState(0);
   // const [correctAnswers, setCorrectAnswers] = useState(0);
   // const [coeff, setCoeff] = useState(1);
   // const [popupOpen, setPopupOpen] = useState(false);
@@ -19,20 +20,27 @@ export default function MemoryGame({ data }) {
 
   const cards = useMemo(() => getMemoryWords(data), [data]);
 
-  useEffect(() => {
-    if (!timing) {
-      // console.log(timing);
-    }
-  }, [timing]);
-
   return (
     <div className="game__memory-game">
-      <GameTimer setTiming={setTiming} />
-      <Field
-        cards={cards}
-        isPlaying={isPlaying}
-        setIsplaying={setIsplaying}
-      />
+      {!timing ? (
+        <div>
+          <div>{GAME_OVER}</div>
+          <div>{`Your score is ${score}`}</div>
+        </div>
+      ) : (
+        <div className="memory_game-field">
+          <GameTimer setTiming={setTiming} />
+          <Display text={score.toString()} />
+          <div className="memory_cards-wrapper">
+            <Field
+              cards={cards}
+              isPlaying={isPlaying}
+              setIsPlaying={setIsPlaying}
+              setScore={setScore}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
