@@ -1,5 +1,5 @@
 import React, {
-  useEffect, useState, useMemo, useCallback,
+  useEffect, useState, useMemo,
 } from 'react';
 import Rating from '@material-ui/lab/Rating';
 import useSound from 'use-sound';
@@ -70,16 +70,16 @@ export default function Sprint({ data }) {
           <div>{`Your score is ${score}`}</div>
         </div>
       ) : (
-        <div className="game-field">
+        <div className="sprint_game-field">
           <div className="time-rating-score_block">
             <GameTimer setTiming={setTiming} />
-            <div className="sprint-rating">
+            <div className="sprint_rating">
               <Rating name="stars" value={lives} readOnly />
             </div>
             <Display text={score} />
           </div>
           <ImageComponent image={activeWord.image} />
-          <div className="sprint-words">
+          <div className="sprint_words">
             <h2>{activeWord.word}</h2>
             <h2>{activeWord.wordTranslate}</h2>
           </div>

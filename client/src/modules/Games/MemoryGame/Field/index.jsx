@@ -11,7 +11,7 @@ import './index.scss';
 
 const Field = ({
   // eslint-disable-next-line no-unused-vars
-  cards, score, setscore, isPlaying, setIsplaying, level,
+  cards, score, setscore, isPlaying, setIsPlaying, level,
   // eslint-disable-next-line no-unused-vars
   isFinished, setIsFinished, isReseted, isAutoplaying, finish,
 }) => {
@@ -41,8 +41,8 @@ const Field = ({
 
     playSwap();
 
-    if (!isPlaying) setTimeout(() => setIsplaying(!isPlaying), 3000);
-  }, [cards, isPlaying, setIsplaying]);
+    if (!isPlaying) setTimeout(() => setIsPlaying(!isPlaying), 3000);
+  }, [cards, isPlaying, setIsPlaying]);
 
   useEffect(() => {
     onStart();
@@ -99,7 +99,7 @@ const Field = ({
   }, [machedArr.length, onFinish, cards, isPlaying]);
 
   return (
-    <div className="gamefield">
+    <div className="memory_cards">
       {cardsArr.map((card) => (
         <Card
           key={card.idx}

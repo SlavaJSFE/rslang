@@ -4,3 +4,15 @@
   background-image: url('../../../assets/images/spring.jpg');
   @include game-background;
 }
+.memory_game-field {
+  height: calc(100% - 80px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 15px;
+}
+.memory_cards-wrapper {
+  display: flex;
+  justify-content: center;
+}
