@@ -10,30 +10,25 @@ import Card from '../Card';
 import './index.scss';
 
 const Field = ({
-  // eslint-disable-next-line no-unused-vars
-  cards, score, setscore, isPlaying, setIsPlaying, level,
-  // eslint-disable-next-line no-unused-vars
-  isFinished, setIsFinished, isReseted, isAutoplaying, finish,
+  cards, isPlaying, setIsPlaying,
+  // score, setScore, level, isFinished, setIsFinished, isReseted, isAutoplaying, finish,
 }) => {
-  // eslint-disable-next-line no-unused-vars
   const [cardsArr, setCardsArr] = useState([]);
-  const [openedCards, setOpendeCards] = useState([]);
-  const [machedArr, setmachedArr] = useState([]);
+  const [openedCards, setOpenedCards] = useState([]);
+  const [matchedArr, setMatchedArr] = useState([]);
 
   const [playSwap] = useSound(swapSound);
   const [playCorrect] = useSound(correctSound);
 
   const handleClick = (card) => {
-    // console.log(card);
     playSwap();
 
-    if (!isPlaying || openedCards.length > 2 || machedArr.includes(card)) return;
+    if (!isPlaying || openedCards.length > 2 || matchedArr.includes(card)) return;
 
     const flippedCard = cardsArr.find((el) => el.idx === card.idx);
     flippedCard.isFlipped = true;
 
-    setOpendeCards([...openedCards, card]);
-    // console.log(cardsArr, openedCards);
+    setOpenedCards([...openedCards, card]);
   };
 
   const onStart = useCallback(() => {
@@ -58,7 +53,7 @@ const Field = ({
       });
     }, 800);
 
-    setmachedArr([]);
+    setMatchedArr([]);
   }, [cardsArr]);
 
   useEffect(() => {
@@ -70,40 +65,39 @@ const Field = ({
         }, 400);
 
         // if (a.clickedTimes === b.clickedTimes && a.clickedTimes === 1) {
-        //   setscore(score + 5);
+        //   setScore(score + 5);
         // } else {
-        //   setscore(score + 1);
+        //   setScore(score + 1);
         // }
 
-        setmachedArr([...machedArr, a, b]);
+        setMatchedArr([...matchedArr, a, b]);
 
-        setOpendeCards([]);
+        setOpenedCards([]);
       } else {
         setTimeout(() => {
           cardsArr.forEach((el) => {
-            if (machedArr.includes(el)) return;
+            if (matchedArr.includes(el)) return;
             el.isFlipped = false;
           });
           playSwap();
 
-          setOpendeCards([]);
+          setOpenedCards([]);
         }, 800);
       }
     }
-  }, [openedCards.length, setmachedArr, setOpendeCards]);
+  }, [openedCards.length, setMatchedArr, setOpenedCards]);
 
   useEffect(() => {
     const { length } = cards;
 
-    if (length === machedArr.length && isPlaying) setTimeout(() => onFinish(), 1000);
-  }, [machedArr.length, onFinish, cards, isPlaying]);
+    if (length === matchedArr.length && isPlaying) setTimeout(() => onFinish(), 1000);
+  }, [matchedArr.length, onFinish, cards, isPlaying]);
 
   return (
     <div className="memory_cards">
       {cardsArr.map((card) => (
         <Card
           key={card.idx}
-          // id={card.id}
           title={card.card === 1 ? card.word : card.wordTranslate}
           frontRotate={isPlaying && !card.isFlipped ? 'front-rotate' : ''}
           backRotate={isPlaying && !card.isFlipped ? 'back-rotate' : ''}
