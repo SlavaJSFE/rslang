@@ -28,6 +28,11 @@ export const TEAM = 'team';
 export const LOGIN = 'login';
 export const REGISTRATION = 'registration';
 
+export const SAVANNAH_RU = 'Саванна';
+export const AUDIO_CALL_RU = 'Аудиовызов';
+export const SPRINT_RU = 'Спринт';
+export const MEMORY_RU = 'Мемори';
+
 export const gameNames = {
   savannah: 'savannah',
   audioCall: 'audiocall',

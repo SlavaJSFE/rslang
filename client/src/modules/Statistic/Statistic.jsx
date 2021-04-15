@@ -4,7 +4,9 @@ import { useSelector } from 'react-redux';
 import './Statistic.scss';
 import StatisticCommon from './StatisticCommon';
 import GameStatistic from './GameStatistic';
-import { gameNames } from '../../constants/constants';
+import {
+  AUDIO_CALL_RU, MEMORY_RU, SAVANNAH_RU, SPRINT_RU,
+} from '../../constants/constants';
 
 export default function Statistic() {
   const statistics = useSelector((state) => state.statistics.statistics);
@@ -14,10 +16,10 @@ export default function Statistic() {
       <div>
         <h4 className="statistic__item">Статистика по мини-играм</h4>
         <div className="statistic__list">
-          <GameStatistic gameName={gameNames.savannah} statistics={statistics} />
-          <GameStatistic gameName={gameNames.audioCall} statistics={statistics} />
-          <GameStatistic gameName="Спринт" data={[]} />
-          <GameStatistic gameName="Своя игра" data={[]} />
+          <GameStatistic gameName={SAVANNAH_RU} statistics={statistics} />
+          <GameStatistic gameName={AUDIO_CALL_RU} statistics={statistics} />
+          <GameStatistic gameName={SPRINT_RU} data={[]} />
+          <GameStatistic gameName={MEMORY_RU} data={[]} />
         </div>
       </div>
       <h3 className="statistic__item">Долгосрочная статистика</h3>
