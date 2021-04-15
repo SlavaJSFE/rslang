@@ -1,0 +1,107 @@
+@mixin equalSides($size) {
+    width: $size;
+    height: $size;
+  }
+
+  @mixin colomnFlex($j-c: center, $dir: column) {
+    display: flex;
+    flex-direction: $dir;
+    justify-content: $j-c;
+}
+
+@mixin centerFlex() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin fixed($pos) {
+    position: $pos;
+    left: 0;
+    right: 0;
+  }
+
+
+.card {
+    overflow: hidden;
+    position: relative;
+    @include equalSides(100px);
+    margin: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    transform: scale(1);
+    transition: all .7s ease-in;
+
+    @media (max-width: 768px){
+      @include equalSides(80px);  
+    }
+
+    @media (max-width: 500px){
+      @include equalSides(70px);  
+      margin: 2px;
+    }
+
+
+    &:hover {
+      box-shadow: none;
+        transform: scale(1.05);
+        transition: all .4s ease-in;
+       }
+    
+    &__image {
+      width: 82%;
+      overflow: hidden;
+      padding-top: 15px;
+      transition: all .4s ease-in;
+      user-select: none;
+      
+
+        img {
+        @include equalSides(100%);
+        object-fit: contain;   
+        }
+    } 
+
+    &__text {
+      font-family: 'Noconne';
+      color: #212121;
+      font-size: 20px;
+
+      @media(max-width: 768px) {
+        font-size: 18px;
+      } 
+    }
+
+    &__front,
+    &__back {
+      @include colomnFlex();
+      @include centerFlex();
+      @include fixed(absolute);
+      @include equalSides(100%);
+      top: 0;
+      transition: 1s;
+      backface-visibility: hidden;
+      border-radius: 10px;
+      box-shadow:0px 2px 9px 8px rgba(13, 13, 13, 0.1);
+      background-color: white;
+    }
+
+    &__front {
+      transition: all .4s ease-in;
+      background-color: white;
+
+      img {
+        @include equalSides(100%);
+        object-fit: cover;
+      }
+    }
+
+    &__back {
+      transform: rotateY(180deg);
+      background-color: bisque;
+    }
+
+  }
+
+.front-rotate {transform: rotateY(180deg);}
+.back-rotate {transform: rotateY(360deg)}

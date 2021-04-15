@@ -1,0 +1,31 @@
+@import '../../../styles/common.scss';
+
+.game__audio-game {
+  background-image: url('../../../assets/images/4289830.jpg');
+  @include game-background;
+}
+.rating-score_block {
+  @include block-color;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+}
+.audio-call_image,
+.audio-call_next-button {
+  display: flex;
+  justify-content: center;
+}
+.audio-call_word-sound-block {
+  display: flex;
+  justify-content: space-between;
+}
+.audio-call_word-answers {
+  button {
+    margin-right: 5px;
+  }
+}
+.audio-call_next-button {
+  margin-top: 20px;
+}

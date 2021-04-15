@@ -1,0 +1,31 @@
+{
+  "name": "rslang",
+  "version": "1.0.0",
+  "description": "Final task of RSS React course",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npm start --prefix client",
+    "install-client": "cd client && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SlavaJSFE/rslang.git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "rslang team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SlavaJSFE/rslang/issues"
+  },
+  "homepage": "https://github.com/SlavaJSFE/rslang#readme",
+  "devDependencies": {
+    "concurrently": "^6.0.0"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react-chartjs-2": "^2.11.1"
+  },
+  "proxy": "https://localhost:3030/"
+}

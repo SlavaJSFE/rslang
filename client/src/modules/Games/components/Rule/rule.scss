@@ -1,0 +1,15 @@
+@import '../../../../styles/common.scss';
+
+.game__rule {
+  @include block-color;
+  max-width: 600px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &-text {
+    font-size: 18px;
+  }
+}

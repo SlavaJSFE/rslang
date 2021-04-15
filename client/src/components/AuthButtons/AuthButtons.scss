@@ -1,0 +1,20 @@
+.auth-buttons {
+  padding: 30px 0;
+  text-align: right;
+
+  button {
+    margin-left: 20px;
+    border-radius: 10px;
+  }
+}
+.profile-links,
+.avatar-name {
+  display: flex;
+
+  img {
+    padding-top: 8px;
+  }
+}
+.user-name {
+  padding: 10px 0 0 10px;
+}

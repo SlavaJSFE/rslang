@@ -1,0 +1,45 @@
+@import '../../styles/colors.scss';
+
+.vocabulary-tabs {
+  color: $secondary-color;
+}
+.vocabulary-results{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: 3rem;
+  align-items: center;
+  &__values{
+    background-color: antiquewhite;
+    padding: 0.7rem;
+    border-radius: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  &__valuesNumber{
+    color: red;
+  }
+}
+
+.vocabulary-resultsStudy{
+  display: flex;
+  margin-top: .5rem;
+  column-gap: 10px;
+  &__values{
+    border: 2px solid $secondary-color;
+    padding: 7px;
+    border-radius: 10px;
+    width: fit-content;
+  }
+  &__valuesNumber{
+    color: red;
+  }
+}
+.cardWordVocabulary{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.paginationVocabulary{
+  display: flex;
+  justify-content: center;
+}

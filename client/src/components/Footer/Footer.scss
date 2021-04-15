@@ -1,0 +1,80 @@
+@import '../../styles/colors.scss';
+
+.footer {
+  background-color: $primary-color;
+  color: $tertiary-color;
+  padding: 10px 0;
+}
+.footer-info {
+  padding-top: 4px;
+  display: flex;
+  justify-content: space-between;
+}
+.authors {
+  display: flex;
+  color: #ffffff;
+
+  p {
+    line-height: 0;
+  }
+}
+.author {
+  display: flex;
+  margin-left: 20px;
+
+  img{
+    height: 32px;
+  }
+  a {
+    text-decoration: none;
+    color: #ffffff;
+    margin-left: 8px;
+    padding-top: 4px;
+  }
+}
+.rss-logo {
+  width: 90px;
+}
+
+@media (max-width: 809px) {
+  .author {
+    font-size: 14px;
+
+    img {
+      height: 25px;
+    }
+    a {
+      padding-top: 2px;
+    }
+  }
+  .year {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 767px) {
+  .authors {
+    font-size: 14px;
+  }
+  .author {
+
+    img {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 629px) {
+  .authors {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 180px;
+  }
+  .year {
+    grid-row: span 4;
+  }
+  .rss-logo {
+    width: 100px;
+    margin: 20px;
+  }
+}

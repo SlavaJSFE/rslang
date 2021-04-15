@@ -1,0 +1,25 @@
+@import '../../styles/colors.scss';
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  
+  img {
+    width: 65px;
+    margin: 0;
+  }
+}
+.logo-title {
+  color: $primary-color;
+  margin: 0;
+  line-height: 0.4;
+  padding-bottom: 10px;
+  font-family: 'Fredoka One', cursive;
+  font-size: 34px;
+  -webkit-text-stroke: 2px $primary-color;
+  -webkit-text-fill-color: #ac70a2;
+}

@@ -1,0 +1,43 @@
+@import '../../styles/common.scss';
+.statistic__graphics{
+display: flex;
+justify-content: center;
+}
+.statistic__graphics__content {
+  text-align: center;
+  width: 45rem;
+  // background-color:$tertiary-color; 
+  background-color: #ffffffa6;
+  margin-bottom: 1rem;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.graphics-line{
+  height: 1rem;
+  background-color: #f8c01a;
+}
