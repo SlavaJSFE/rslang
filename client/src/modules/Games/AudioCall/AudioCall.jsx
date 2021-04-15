@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useSound from 'use-sound';
 import { useDispatch } from 'react-redux';
 import { Box } from '@material-ui/core';
+import Rating from '@material-ui/lab/Rating';
 import SetWords from '../components/WordsSet/WordsSet';
 import SoundBtn from '../../../components/SoundBtnComponent/SoundBtn';
 import NextBtn from '../components/NextBtn/NextBtn';
@@ -28,6 +29,7 @@ export default function AudioGame({ data }) {
   const [coefficient, setCoefficient] = useState(1);
   const [lives, setLives] = useState(5);
   const [gameOver, setGameOver] = useState(false);
+  const [shouldAddScore, changeShouldAddScore] = useState(true);
 
   const playAudio = async (audioSrc) => {
     const audio = new Audio(audioSrc);
@@ -63,22 +65,27 @@ export default function AudioGame({ data }) {
     e.preventDefault();
 
     if (word === activeWord.wordTranslate) {
-      dispatch(setRightAnswer(activeWord, 'audiocall'));
       playCorrect();
       setShouldOpen(true);
-      setCorrectAnswers(correctAnswers + 1);
-      if (correctAnswers % 4 === 0 && correctAnswers !== 0) {
-        setCoefficient(coefficient + 1);
+      if (shouldAddScore) {
+        dispatch(setRightAnswer(activeWord, 'audiocall'));
+        setCorrectAnswers(correctAnswers + 1);
+        if (correctAnswers % 4 === 0 && correctAnswers !== 0) {
+          setCoefficient(coefficient + 1);
+        }
+        setScore(score + basicScore * coefficient);
       }
-      setScore(score + basicScore * coefficient);
     } else {
-      dispatch(setWrongAnswer(activeWord, 'audiocall'));
       playError();
       setShouldOpen(true);
-      setCorrectAnswers(1);
-      setCoefficient(1);
-      setLives(lives - 1);
+      if (shouldAddScore) {
+        dispatch(setWrongAnswer(activeWord, 'audiocall'));
+        setCorrectAnswers(1);
+        setCoefficient(1);
+        setLives(lives - 1);
+      }
     }
+    changeShouldAddScore(false);
   };
 
   const turnNext = (e, idx) => {
@@ -87,52 +94,62 @@ export default function AudioGame({ data }) {
     const word = data.find((el) => el.id === idx);
     const wordIdx = data.indexOf(word);
 
+    changeShouldAddScore(true);
+    setShouldOpen(false);
+
     if (data[wordIdx + 1]) {
       setActiveWord(data[wordIdx + 1]);
     } else {
       setGameOver(true);
     }
-    setShouldOpen(false);
   };
 
   const checkCorrect = (e) => {
     e.preventDefault();
+    changeShouldAddScore(true);
     setShouldOpen(true);
   };
 
   return (
     <div className="game__audio-game">
-      {gameOver ? (
+      {gameOver || !lives ? (
         <Box className="game-results">
           <h3 className="center">{GAME_OVER}</h3>
           <div>{`${YOUR_SCORE_IS}: ${score} ${POINTS}`}</div>
         </Box>
       ) : (
-        <div>
-          <Display text={score} />
-          {shouldOpen ? (
-            <>
-              <ImageComponent image={activeWord.image} />
-              <SoundBtn audioSrc={activeWord ? activeWord.audio : null} />
-              <h2>{activeWord.word}</h2>
-            </>
-          ) : (
+        <div className="audio-call_game-field">
+          <div className="rating-score_block">
+            <div className="sprint_rating">
+              <Rating name="stars" value={lives} readOnly />
+            </div>
+            <Display text={score} />
+          </div>
+          <Box className={`audio-call_image ${shouldOpen ? '' : 'hidden'}`}>
+            <ImageComponent image={activeWord.image} />
+          </Box>
+          <Box className="audio-call_word-sound-block">
+            <h2 className={shouldOpen ? '' : 'hidden'}>{activeWord.word}</h2>
             <SoundBtn audioSrc={activeWord ? activeWord.audio : null} />
-          )}
-          <SetWords
-            handleClick={handleClick}
-            words={randomWords}
-            game="audio-game"
-          />
-          {shouldOpen ? (
-            <NextBtn
-              handleClick={turnNext}
-              id={activeWord ? activeWord.id : null}
-              text="Далее"
+          </Box>
+          <Box className="audio-call_word-answers">
+            <SetWords
+              handleClick={handleClick}
+              words={randomWords}
+              game="audio-game"
             />
-          ) : (
-            <NextBtn handleClick={checkCorrect} text="Не знаю" />
-          )}
+          </Box>
+          <Box className="audio-call_next-button">
+            {shouldOpen ? (
+              <NextBtn
+                handleClick={turnNext}
+                id={activeWord ? activeWord.id : null}
+                text="Далее"
+              />
+            ) : (
+              <NextBtn handleClick={checkCorrect} text="Не знаю" />
+            )}
+          </Box>
         </div>
       )}
     </div>

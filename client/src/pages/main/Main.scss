@@ -34,3 +34,14 @@
 .app-properties_title {
   color: $secondary-color;
 }
+.gh-link {
+  font-size: 25px;
+  font-weight: bold;
+  line-height: 2px;
+  margin-bottom: 50px;
+
+  img {
+    margin: 0 20px;
+    transform: translateY(7px);
+  }
+}

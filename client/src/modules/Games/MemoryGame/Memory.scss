@@ -4,6 +4,13 @@
   background-image: url('../../../assets/images/spring.jpg');
   @include game-background;
 }
+.time-score_block {
+  @include block-color;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+}
 .memory_game-field {
   height: calc(100% - 80px);
   display: flex;

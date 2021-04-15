@@ -4,19 +4,13 @@
       margin-right: 10px;
     }
   }
-
-  &__audio-game {
-    // display: flex;
-    // flex-direction: column;
-    // align-items: center;
-    // justify-content: center;
-  }
 }
 
 .game {
     &__savannah,
     &__audio-game,
-    &__sprint {
+    &__sprint,
+    &__memory-game {
         position: relative;
         display: flex;
         flex-direction: column;
