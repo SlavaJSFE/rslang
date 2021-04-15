@@ -1,6 +1,6 @@
 import React from 'react';
-
 import './rule.scss';
+import { Box } from '@material-ui/core';
 import OptionsBtn from '../NextBtn/NextBtn';
 
 export default function Rule({ setShowRule, setStartTimer, rule }) {
@@ -11,9 +11,10 @@ export default function Rule({ setShowRule, setStartTimer, rule }) {
   };
 
   return (
-    <div className="game__rule">
-      <div className="game__rule-text">{rule}</div>
+    <Box className="game__rule">
+      <h2>Правила игры:</h2>
+      <p className="game__rule-text">{rule}</p>
       <OptionsBtn handleClick={handleClick} text="Далее" />
-    </div>
+    </Box>
   );
 }

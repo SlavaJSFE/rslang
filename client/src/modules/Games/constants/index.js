@@ -10,3 +10,4 @@ export const GAME_OVER = 'Конец игры';
 export const YOUR_SCORE_IS = 'Ваш результат';
 export const POINTS = 'очков';
 export const SCORE = 'Счёт';
+export const ONE_SECOND = '6000';

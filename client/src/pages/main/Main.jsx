@@ -5,6 +5,7 @@ import { Box, Button, Container } from '@material-ui/core';
 import './Main.scss';
 import Footer from '../../components/Footer/Footer';
 import mainImage from '../../assets/images/students-textbooksss.png';
+import gitHubLogo from '../../assets/images/icons/GitHub-Mark-32px.png';
 import Header from '../../components/Header';
 
 import { setGameWords } from '../../redux/miniGameWords/actions';
@@ -70,6 +71,15 @@ export default function MainPage() {
               </p>
             </div>
           </div>
+        </Box>
+        <Box>
+          <p className="gh-link center">
+            Ссылка на GitHub ресурс приложения
+            <a href="https://github.com/SlavaJSFE/rslang" target="blank">
+              <img src={gitHubLogo} alt="GitHub Logo" />
+              <span>RS Lang</span>
+            </a>
+          </p>
         </Box>
       </Container>
       <Footer />

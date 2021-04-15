@@ -8,15 +8,15 @@ import correctSound from '../../../../assets/sounds/correct.mp3';
 import Card from '../Card';
 
 import './index.scss';
+import { ONE_SECOND } from '../../constants';
 
 const Field = ({
-  cards, isPlaying, setIsPlaying,
-  // score, setScore, level, isFinished, setIsFinished, isReseted, isAutoplaying, finish,
+  cards, isPlaying, setIsPlaying, score, setScore, setGameOver,
 }) => {
   const [cardsArr, setCardsArr] = useState([]);
   const [openedCards, setOpenedCards] = useState([]);
   const [matchedArr, setMatchedArr] = useState([]);
-
+  const basicScore = 10;
   const [playSwap] = useSound(swapSound);
   const [playCorrect] = useSound(correctSound);
 
@@ -43,19 +43,6 @@ const Field = ({
     onStart();
   }, [onStart]);
 
-  const onFinish = useCallback(() => {
-    cardsArr.forEach((el) => {
-      el.isFlipped = false;
-    });
-    setTimeout(() => {
-      cardsArr.forEach((el) => {
-        el.isFlipped = false;
-      });
-    }, 800);
-
-    setMatchedArr([]);
-  }, [cardsArr]);
-
   useEffect(() => {
     if (openedCards.length === 2) {
       const [a, b] = openedCards;
@@ -64,14 +51,8 @@ const Field = ({
           playCorrect();
         }, 400);
 
-        // if (a.clickedTimes === b.clickedTimes && a.clickedTimes === 1) {
-        //   setScore(score + 5);
-        // } else {
-        //   setScore(score + 1);
-        // }
-
+        setScore(score + basicScore);
         setMatchedArr([...matchedArr, a, b]);
-
         setOpenedCards([]);
       } else {
         setTimeout(() => {
@@ -90,8 +71,12 @@ const Field = ({
   useEffect(() => {
     const { length } = cards;
 
-    if (length === matchedArr.length && isPlaying) setTimeout(() => onFinish(), 1000);
-  }, [matchedArr.length, onFinish, cards, isPlaying]);
+    if (length === matchedArr.length && isPlaying) {
+      setTimeout(() => {
+        setGameOver(true);
+      }, ONE_SECOND);
+    }
+  }, [matchedArr.length, cards, isPlaying]);
 
   return (
     <div className="memory_cards">
