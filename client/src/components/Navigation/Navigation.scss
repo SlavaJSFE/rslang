@@ -6,10 +6,19 @@
   width: max-content;
   border-radius: 10px;
   padding: 15px 20px;
+
+  .active {
+    border-bottom: 2px solid $tertiary-color;
+  }
 }
 .menu-item {
-  padding: 0 15px;
+  padding: 0 15px 5px;
   color: $tertiary-color;
   font-size: 16px;
   font-weight: bold;
+  transition: 0.1s;
+}
+.menu-item:hover {
+  transform: scale(1.05);
+  transition: 0.1s;
 }

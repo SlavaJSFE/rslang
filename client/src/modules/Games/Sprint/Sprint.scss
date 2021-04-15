@@ -22,9 +22,7 @@
   }
 }
 .time-rating-score_block {
-  background-color: $tertiary-color;
-  border: 2px solid $secondary-color;
-  border-radius: 10px;
+  @include block-color;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
@@ -32,9 +30,7 @@
   padding: 10px 0;
 }
 .sprint_words {
-  background-color: $tertiary-color;
-  border: 2px solid $secondary-color;
-  border-radius: 10px;
+  @include block-color;
   margin: 20px 0;
 
   h2 {

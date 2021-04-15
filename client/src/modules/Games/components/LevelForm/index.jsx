@@ -5,12 +5,9 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-
-import {
-  setLevel,
-  fetchGrupWords,
-} from '../../../../redux/miniGameWords/actions';
+import { setLevel, fetchGrupWords } from '../../../../redux/miniGameWords/actions';
 import { DEFAULT_LEVEL } from '../../../../constants/constants';
+import './LevelForm.scss';
 
 export default function LevelForm() {
   const value = useSelector((state) => state.game.level);
@@ -28,12 +25,15 @@ export default function LevelForm() {
 
   return (
     <FormControl component="fieldset">
-      <FormLabel component="legend">Выберите уровень игры</FormLabel>
+      <FormLabel className="radio-level-title center" component="legend">
+        Выберите уровень игры
+      </FormLabel>
       <RadioGroup
         aria-label="level"
         name="game-level"
         value={value}
         onChange={handleChange}
+        className="radio-level center"
       >
         <FormControlLabel value={0} control={<Radio />} label="1" />
         <FormControlLabel value={1} control={<Radio />} label="2" />

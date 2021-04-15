@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { Container } from '@material-ui/core';
+import { Box, Container } from '@material-ui/core';
 import Timer from '../components/Timer';
 import LevelForm from '../components/LevelForm';
 import Rule from '../components/Rule';
@@ -32,9 +32,13 @@ export default function GameStart({
 
   return (
     <div className={classes.root}>
-      <Container>
+      <Container className={classes.choiceLevel}>
         {showForm && <LevelForm />}
-        {showForm && <NextBtn handleClick={handleFormBtnClick} text="Далее" />}
+        {showForm && (
+          <Box className="center">
+            <NextBtn handleClick={handleFormBtnClick} text="Далее" />
+          </Box>
+        )}
         {showRule && (
           <Rule
             rule={rule}
