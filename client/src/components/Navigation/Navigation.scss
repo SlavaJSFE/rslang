@@ -22,3 +22,9 @@
   transform: scale(1.05);
   transition: 0.1s;
 }
+
+@media screen and (max-width: 1099px) {
+  .navigation {
+    padding: 15px 10px;
+  }
+}

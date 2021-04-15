@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import MainPage from './pages/main/Main';
 import TextbookPage from './pages/textbook/Textbook';
 import GamesPage from './pages/games/Games';
-import StatisticsPage from './pages/statisticsPage/StatisticsPage';
+import StatisticsPage from './pages/statistics/Statistics';
 import TeamPage from './pages/team/Team';
 import LoginPage from './pages/login/Login';
 import RegistrationPage from './pages/registration/Registration';

@@ -36,10 +36,6 @@ export default function MainPage() {
             <img className="image" src={mainImage} alt="" />
           </Box>
         </Box>
-        <Box className="video center">
-          <h2>Как это работает</h2>
-          <div className="video-block" />
-        </Box>
         <Box className="center">
           <h2>Особенности приложения</h2>
           <div className="app-properties_wrapper">

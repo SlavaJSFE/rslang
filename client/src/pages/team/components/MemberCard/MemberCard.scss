@@ -20,6 +20,9 @@
 }
 .member-description {
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .member-name,
 .member-role {
