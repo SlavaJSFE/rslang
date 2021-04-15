@@ -4,6 +4,7 @@ import useSound from 'use-sound';
 import { connect, useDispatch } from 'react-redux';
 import Rating from '@material-ui/lab/Rating';
 
+import { Box } from '@material-ui/core';
 import ActiveWord from './ActiveWord/ActiveWord';
 import WordsSet from '../components/WordsSet/WordsSet';
 import { getRandomWords } from '../utils';
@@ -16,8 +17,7 @@ import {
   setWrongAnswer,
 } from '../../../redux/miniGameWords/actions';
 import { gameNames } from '../../../constants/constants';
-import { setMessage } from '../../../redux/user/actions';
-import { GAME_OVER } from '../constants';
+import { GAME_OVER, POINTS, YOUR_SCORE_IS } from '../constants';
 
 function popActiveWord(wordsForGame, activeWord) {
   return wordsForGame.filter(
@@ -26,6 +26,7 @@ function popActiveWord(wordsForGame, activeWord) {
 }
 
 function Savannah({ data }) {
+  const basicScore = 10;
   const gameName = gameNames.savannah;
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -34,7 +35,10 @@ function Savannah({ data }) {
   const [clientY, setClientY] = useState(0);
   const [isFail, setIsFail] = useState(false);
   const [wordsForGame, setWordsForGame] = useState(data);
-  const [hp, setHp] = useState(5);
+  const [lives, setLives] = useState(5);
+  const [score, setScore] = useState(0);
+  const [correctAnswers, setCorrectAnswers] = useState(1);
+  const [coefficient, setCoefficient] = useState(1);
 
   const wordsContainer = useRef();
 
@@ -45,10 +49,17 @@ function Savannah({ data }) {
     if (word === activeWordForCheck.wordTranslate) {
       playCorrect();
       dispatch(setRightAnswer(activeWordForCheck, gameName));
+      setCorrectAnswers(correctAnswers + 1);
+      if (correctAnswers % 4 === 0 && correctAnswers !== 0) {
+        setCoefficient(coefficient + 1);
+      }
+      setScore(score + basicScore * coefficient);
     } else {
       playError();
       dispatch(setWrongAnswer(activeWordForCheck, gameName));
-      setHp(hp - 1);
+      setLives(lives - 1);
+      setCorrectAnswers(1);
+      setCoefficient(1);
     }
   }
 
@@ -61,8 +72,6 @@ function Savannah({ data }) {
   useEffect(() => {
     if (wordsForGame.length) {
       setActiveWord(wordsForGame[0]);
-    } else {
-      dispatch(setMessage('конец игры'));
     }
   }, [wordsForGame]);
 
@@ -72,9 +81,12 @@ function Savannah({ data }) {
 
   useEffect(() => {
     if (isFail) {
+      dispatch(setWrongAnswer(activeWord, gameName));
       playError();
       setNewRound();
-      setHp(hp - 1);
+      setLives(lives - 1);
+      setCorrectAnswers(1);
+      setCoefficient(1);
     }
     setIsFail(false);
   }, [isFail]);
@@ -94,10 +106,17 @@ function Savannah({ data }) {
 
   return (
     <div className="game__savannah">
-      {hp === 0 ? (
-        <div>{GAME_OVER}</div>
+      {lives === 0 || !wordsForGame.length ? (
+        <Box className="game-results">
+          <h3 className="center">{GAME_OVER}</h3>
+          <div>{`${YOUR_SCORE_IS}: ${score} ${POINTS}`}</div>
+        </Box>
       ) : (
-        <div>
+        <div className="savannah_game-field">
+          <div className="lives-score_block">
+            <Rating name="stars" value={lives} className={classes.root} readOnly />
+            <div className="savannah_score">{score}</div>
+          </div>
           <ActiveWord
             text={activeWord ? activeWord.word : null}
             breakPoint={clientY}
@@ -105,14 +124,13 @@ function Savannah({ data }) {
             isFail={isFail}
             wordsForGame={wordsForGame}
           />
-          <WordsSet
-            handleClick={handleClick}
-            words={randomWords}
-            container={wordsContainer}
-            game="savanna"
-          />
-          <div className="">
-            <Rating name="stars" value={hp} className={classes.root} readOnly />
+          <div className="word-set-wrapper">
+            <WordsSet
+              handleClick={handleClick}
+              words={randomWords}
+              container={wordsContainer}
+              game="savanna"
+            />
           </div>
         </div>
       )}

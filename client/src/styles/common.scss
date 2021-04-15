@@ -5,6 +5,11 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+@mixin block-color {
+  background-color: $tertiary-color;
+  border: 2px solid $secondary-color;
+  border-radius: 10px;
+}
 
 h1 {
   color: $primary-color;

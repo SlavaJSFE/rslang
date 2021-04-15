@@ -36,6 +36,7 @@ export default function ActiveWord({
       style={{
         position: 'absolute',
         top: `${progress}px`,
+        left: '48%',
       }}
     >
       {text}

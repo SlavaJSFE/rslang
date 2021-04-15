@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import Rating from '@material-ui/lab/Rating';
 import useSound from 'use-sound';
+import { Box } from '@material-ui/core';
 import NextBtn from '../components/NextBtn/NextBtn';
 import ImageComponent from '../../../components/ImageComponent/ImageComponent';
 import Display from '../components/Display';
@@ -11,7 +12,9 @@ import { makeRandomSprintData } from '../utils';
 import correctSound from '../../../assets/sounds/correct.mp3';
 import errorSound from '../../../assets/sounds/error.mp3';
 import './Sprint.scss';
-import { CORRECT, GAME_OVER, WRONG } from '../constants';
+import {
+  CORRECT, GAME_OVER, POINTS, WRONG, YOUR_SCORE_IS,
+} from '../constants';
 
 export default function Sprint({ data }) {
   const [activeWord, setActiveWord] = useState('');
@@ -53,7 +56,7 @@ export default function Sprint({ data }) {
       setScore(score + basicScore * coefficient);
     } else {
       playError();
-      setCorrectAnswers(0);
+      setCorrectAnswers(1);
       setCoefficient(1);
       setLives(lives - 1);
     }
@@ -65,10 +68,10 @@ export default function Sprint({ data }) {
   return (
     <div className="game__sprint">
       {lives === 0 || !activeWord || !timing ? (
-        <div>
-          <div>{GAME_OVER}</div>
-          <div>{`Your score is ${score}`}</div>
-        </div>
+        <Box className="game-results">
+          <h3 className="center">{GAME_OVER}</h3>
+          <div>{`${YOUR_SCORE_IS}: ${score} ${POINTS}`}</div>
+        </Box>
       ) : (
         <div className="sprint_game-field">
           <div className="time-rating-score_block">

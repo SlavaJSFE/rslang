@@ -1,10 +1,14 @@
-import SlavaImage from '../assets/images/team/panda.jpg';
+import SlavaImage from '../assets/images/team/slava.jpg';
+import NastiaImage from '../assets/images/team/nastia.jpg';
+import MashaImage from '../assets/images/team/masha.jpg';
+import ZheniaImage from '../assets/images/team/zhenia.jpg';
+import MaksimImage from '../assets/images/team/panda.jpg';
 
 const team = [
   {
     image: SlavaImage,
     name: 'Слава Шпилевский',
-    role: 'супергерой',
+    role: 'Team Lead',
     location: 'Минск, Беларусь',
     email: 'viachaslau.shpileuski@gmail.com',
     telegram: 'https://t.me/vaslauski',
@@ -14,9 +18,9 @@ const team = [
     contribution: '',
   },
   {
-    image: SlavaImage,
+    image: NastiaImage,
     name: 'Настя Сташевская',
-    role: 'супергерой',
+    role: 'Front-End Developer',
     location: 'Москва, Россия',
     email: 'stashevskayaaa@gmail.com',
     telegram: 'https://t.me/AStashevskaya',
@@ -25,9 +29,9 @@ const team = [
     contribution: '',
   },
   {
-    image: SlavaImage,
+    image: MashaImage,
     name: 'Маша Францева',
-    role: 'супергерой',
+    role: 'Front-End Developer',
     location: 'Минск, Беларусь',
     email: 'mariya.frantsava7@gmail.com',
     telegram: 'https://t.me/MariyaFrantsava',
@@ -36,9 +40,9 @@ const team = [
     contribution: '',
   },
   {
-    image: SlavaImage,
+    image: ZheniaImage,
     name: 'Женя Бандюкевич',
-    role: 'супергерой',
+    role: 'Front-End Developer',
     location: 'Минск, Беларусь',
     email: 'zhenya.bandyukevich@mail.ru',
     telegram: 'https://t.me/zhenya_band',
@@ -47,9 +51,9 @@ const team = [
     contribution: '',
   },
   {
-    image: SlavaImage,
+    image: MaksimImage,
     name: 'Максим Сава',
-    role: 'супергерой',
+    role: 'Front-End Developer',
     location: 'Харьков, Украина',
     email: 'minoreat@gmail.com',
     telegram: 'https://t.me/simax_saab',

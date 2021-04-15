@@ -20,6 +20,14 @@ export const UNIT_5 = 'Раздел 5';
 export const UNIT_6 = 'Раздел 6';
 export const DEFAULT_LEVEL = 0;
 
+export const MAIN = 'main';
+export const TEXTBOOK = 'textbook';
+export const STATISTIC = 'statistic';
+export const GAMES = 'games';
+export const TEAM = 'team';
+export const LOGIN = 'login';
+export const REGISTRATION = 'registration';
+
 export const gameNames = {
   savannah: 'savannah',
   audioCall: 'audiocall',
@@ -61,7 +69,3 @@ export const games = [
     rule: 'bla bla mem',
   },
 ];
-
-// export {
-//   games, gameNames,
-// };

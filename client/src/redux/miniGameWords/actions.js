@@ -36,6 +36,7 @@ const setWordsFailure = (err) => ({
 const fetchGrupWords = (currentGroup = 0) => async (dispatch, getState) => {
   const { user } = getState().user;
   dispatch(setWordsStarted());
+
   try {
     const data = await api.getGrupWords(+currentGroup, user);
     dispatch(setWordsSuccess(data));

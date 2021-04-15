@@ -25,6 +25,13 @@ export default function getAppropriateStyles(game) {
       backgroundSize: 'cover',
       height: '100vh',
     },
+    choiceLevel: {
+      width: 'max-content',
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+    },
   });
   const classes = useStyles();
 

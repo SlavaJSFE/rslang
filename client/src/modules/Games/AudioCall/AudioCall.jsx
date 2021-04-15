@@ -1,45 +1,33 @@
 import React, { useEffect, useState } from 'react';
-
 import useSound from 'use-sound';
 import { useDispatch } from 'react-redux';
-
+import { Box } from '@material-ui/core';
 import SetWords from '../components/WordsSet/WordsSet';
 import SoundBtn from '../../../components/SoundBtnComponent/SoundBtn';
 import NextBtn from '../components/NextBtn/NextBtn';
 import ImageComponent from '../../../components/ImageComponent/ImageComponent';
 import Display from '../components/Display';
-
 import { getRandomWords } from '../utils';
 import { server } from '../../../constants/constants';
-
 import correctSound from '../../../assets/sounds/correct.mp3';
 import errorSound from '../../../assets/sounds/error.mp3';
 import './AudioCall.scss';
-
+import { setRightAnswer, setWrongAnswer } from '../../../redux/miniGameWords/actions';
 import {
-  setRightAnswer,
-  // setWrongAnswer, //!Unused var
-} from '../../../redux/miniGameWords/actions';
+  GAME_OVER, POINTS, YOUR_SCORE_IS,
+} from '../constants';
 
 export default function AudioGame({ data }) {
+  const basicScore = 10;
   const dispatch = useDispatch();
   const [activeWord, setActiveWord] = useState('');
   const [randomWords, setRandomWords] = useState([]);
   const [shouldOpen, setShouldOpen] = useState(false);
   const [score, setScore] = useState(0);
   const [correctAnswers, setCorrectAnswers] = useState(1);
-  const [coeff, setCoeff] = useState(1);
-
-  const onScoreChange = () => {
-    let addScore = 10;
-
-    // if (correctAnswers % 4 === 0 && correctAnswers !== 0) setCoeff(coeff + 1);
-
-    if (!correctAnswers) setCoeff(1);
-
-    addScore *= coeff;
-    return addScore;
-  };
+  const [coefficient, setCoefficient] = useState(1);
+  const [lives, setLives] = useState(5);
+  const [gameOver, setGameOver] = useState(false);
 
   const playAudio = async (audioSrc) => {
     const audio = new Audio(audioSrc);
@@ -79,14 +67,17 @@ export default function AudioGame({ data }) {
       playCorrect();
       setShouldOpen(true);
       setCorrectAnswers(correctAnswers + 1);
-      if (correctAnswers % 4 === 0 && correctAnswers !== 0) setCoeff(coeff + 1);
-      setScore(score + onScoreChange());
+      if (correctAnswers % 4 === 0 && correctAnswers !== 0) {
+        setCoefficient(coefficient + 1);
+      }
+      setScore(score + basicScore * coefficient);
     } else {
+      dispatch(setWrongAnswer(activeWord, 'audiocall'));
       playError();
       setShouldOpen(true);
       setCorrectAnswers(1);
-      setCoeff(1);
-      setScore(score + onScoreChange());
+      setCoefficient(1);
+      setLives(lives - 1);
     }
   };
 
@@ -95,7 +86,12 @@ export default function AudioGame({ data }) {
 
     const word = data.find((el) => el.id === idx);
     const wordIdx = data.indexOf(word);
-    setActiveWord(data[wordIdx + 1]);
+
+    if (data[wordIdx + 1]) {
+      setActiveWord(data[wordIdx + 1]);
+    } else {
+      setGameOver(true);
+    }
     setShouldOpen(false);
   };
 
@@ -106,29 +102,38 @@ export default function AudioGame({ data }) {
 
   return (
     <div className="game__audio-game">
-      <Display text={score} />
-      {shouldOpen ? (
-        <>
-          <ImageComponent image={activeWord.image} />
-          <SoundBtn audioSrc={activeWord ? activeWord.audio : null} />
-          <h2>{activeWord.word}</h2>
-        </>
+      {gameOver ? (
+        <Box className="game-results">
+          <h3 className="center">{GAME_OVER}</h3>
+          <div>{`${YOUR_SCORE_IS}: ${score} ${POINTS}`}</div>
+        </Box>
       ) : (
-        <SoundBtn audioSrc={activeWord ? activeWord.audio : null} />
-      )}
-      <SetWords
-        handleClick={handleClick}
-        words={randomWords}
-        game="audio-game"
-      />
-      {shouldOpen ? (
-        <NextBtn
-          handleClick={turnNext}
-          id={activeWord ? activeWord.id : null}
-          text="Далее"
-        />
-      ) : (
-        <NextBtn handleClick={checkCorrect} text="Не знаю" />
+        <div>
+          <Display text={score} />
+          {shouldOpen ? (
+            <>
+              <ImageComponent image={activeWord.image} />
+              <SoundBtn audioSrc={activeWord ? activeWord.audio : null} />
+              <h2>{activeWord.word}</h2>
+            </>
+          ) : (
+            <SoundBtn audioSrc={activeWord ? activeWord.audio : null} />
+          )}
+          <SetWords
+            handleClick={handleClick}
+            words={randomWords}
+            game="audio-game"
+          />
+          {shouldOpen ? (
+            <NextBtn
+              handleClick={turnNext}
+              id={activeWord ? activeWord.id : null}
+              text="Далее"
+            />
+          ) : (
+            <NextBtn handleClick={checkCorrect} text="Не знаю" />
+          )}
+        </div>
       )}
     </div>
   );

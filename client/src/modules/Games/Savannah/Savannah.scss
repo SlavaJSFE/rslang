@@ -4,3 +4,21 @@
   background-image: url('../../../assets/images/534657.jpg');
   @include game-background;
 }
+.savannah_game-field {
+  width: 100%;
+}
+.word-set-wrapper {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.lives-score_block {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 50px;
+}
+.game-results {
+  @include block-color;
+  padding: 20px 50px 50px;
+}

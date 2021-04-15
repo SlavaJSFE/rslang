@@ -139,7 +139,7 @@ export const getWordsWithOutAuth = async (currentGroup, currentPage) => {
 
 export const getGrupWords = async (currentGroup, userData) => {
   try {
-    if (!userData) {
+    if (!userData.id) {
       return await getWordsWithOutAuth(currentGroup);
     }
     const url = `${server}/users/${userData.userId}/aggregatedWords?group=${currentGroup}&wordsPerPage=20&}`;
@@ -182,20 +182,26 @@ export const setRightAnswer = async (word, gameName, userData) => {
         },
       },
     };
-  const headers = {
-    Authorization: `Bearer ${token}`,
-  };
+
   const data = { difficulty, optional: statistics };
-  // storage.setRightAnswer(word, reqBody);
-  try {
-    await axios({
-      method: word?.userWord ? 'put' : 'post',
-      url: `${server}/users/${userId}/words/${word.id}`,
-      headers,
-      data,
-    });
-  } catch (error) {
-    throw new Error(error);
+
+  if (userId) {
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    try {
+      await axios({
+        method: word?.userWord ? 'put' : 'post',
+        url: `${server}/users/${userId}/words/${word.id}`,
+        headers,
+        data,
+      });
+    } catch (error) {
+      throw new Error(error);
+    }
+  } else {
+    // storage.setRightAnswer(word, reqBody);
   }
 };
 
@@ -227,19 +233,25 @@ export const setWrongAnswer = async (word, gameName, userData) => {
         },
       },
     };
-  const headers = {
-    Authorization: `Bearer ${token}`,
-  };
+
   const data = { difficulty, optional: statistics };
-  // storage.setRightAnswer(word, reqBody);
-  try {
-    await axios({
-      method: word?.userWord ? 'put' : 'post',
-      url: `${server}/users/${userId}/words/${word.id}`,
-      headers,
-      data,
-    });
-  } catch (error) {
-    throw new Error(error);
+
+  if (userId) {
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    try {
+      await axios({
+        method: word?.userWord ? 'put' : 'post',
+        url: `${server}/users/${userId}/words/${word.id}`,
+        headers,
+        data,
+      });
+    } catch (error) {
+      throw new Error(error);
+    }
+  } else {
+    // storage.setRightAnswer(word, reqBody);
   }
 };

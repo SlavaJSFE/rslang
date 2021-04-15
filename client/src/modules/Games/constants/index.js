@@ -7,3 +7,6 @@ export const MEMORY = 'memory';
 export const CORRECT = 'верно';
 export const WRONG = 'неверно';
 export const GAME_OVER = 'Конец игры';
+export const YOUR_SCORE_IS = 'Ваш результат';
+export const POINTS = 'очков';
+export const SCORE = 'Счёт';
